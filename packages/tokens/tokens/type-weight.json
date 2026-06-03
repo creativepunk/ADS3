@@ -1,0 +1,32 @@
+{
+  "typeWeight": {
+    "100": {
+      "$type": "number",
+      "$value": 100
+    },
+    "200": {
+      "$type": "number",
+      "$value": 200
+    },
+    "300": {
+      "$type": "number",
+      "$value": 300
+    },
+    "400": {
+      "$type": "number",
+      "$value": 400
+    },
+    "500": {
+      "$type": "number",
+      "$value": 500
+    },
+    "600": {
+      "$type": "number",
+      "$value": 600
+    },
+    "700": {
+      "$type": "number",
+      "$value": 700
+    }
+  }
+}

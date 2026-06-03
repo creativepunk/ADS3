@@ -1,0 +1,16 @@
+/* Dark-only design system — force the preview iframe background to the
+   elevation/default token everywhere (story canvas, docs canvas, root). */
+html,
+body,
+#storybook-root,
+#storybook-docs,
+.sb-show-main,
+.docs-story {
+  background: var(--ds-elevation-default) !important;
+  color: var(--ds-text-text-default);
+  font-family: var(--ds-typography-cozy-body-md-font-family);
+}
+
+.sb-show-main {
+  padding: 24px !important;
+}

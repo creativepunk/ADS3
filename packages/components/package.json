@@ -1,0 +1,46 @@
+{
+  "name": "@my-ds/components",
+  "version": "0.1.0",
+  "description": "Lit Web Components for My Design System",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./src/*": "./src/*"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsc -p tsconfig.json --watch",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "clean": "rimraf dist storybook-static",
+    "storybook": "storybook dev -p 6006",
+    "storybook:build": "storybook build"
+  },
+  "dependencies": {
+    "@fontsource/inter": "^5.2.8",
+    "@material-symbols/svg-400": "^0.44.10",
+    "@my-ds/tokens": "workspace:*",
+    "lit": "^3.1.2"
+  },
+  "devDependencies": {
+    "@storybook/addon-a11y": "^8.6.0",
+    "@storybook/addon-docs": "^8.6.0",
+    "@storybook/addon-essentials": "^8.6.0",
+    "@storybook/blocks": "^8.6.0",
+    "@storybook/web-components": "^8.6.0",
+    "@storybook/web-components-vite": "^8.6.0",
+    "rimraf": "^5.0.5",
+    "storybook": "^8.6.0",
+    "typescript": "^5.3.3",
+    "vite": "^5.4.0"
+  },
+  "customElements": "custom-elements.json"
+}

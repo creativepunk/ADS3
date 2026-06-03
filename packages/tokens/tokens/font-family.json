@@ -1,0 +1,12 @@
+{
+  "fontFamily": {
+    "normal": {
+      "$type": "string",
+      "$value": "Inter"
+    },
+    "mono": {
+      "$type": "string",
+      "$value": "IBM Plex Mono"
+    }
+  }
+}

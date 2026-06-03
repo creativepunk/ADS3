@@ -1,0 +1,26 @@
+{
+  "name": "my-ds",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Enterprise Design System monorepo",
+  "scripts": {
+    "build": "pnpm --filter './packages/**' build",
+    "build:tokens": "pnpm --filter @my-ds/tokens build",
+    "build:components": "pnpm --filter @my-ds/components build",
+    "build:react": "pnpm --filter @my-ds/react build",
+    "storybook": "pnpm --filter @my-ds/components storybook",
+    "storybook:build": "pnpm --filter @my-ds/components storybook:build",
+    "dev": "pnpm --filter './packages/**' dev",
+    "lint": "pnpm --filter './packages/**' lint",
+    "typecheck": "pnpm --filter './packages/**' typecheck",
+    "clean": "pnpm --filter './packages/**' clean && rimraf node_modules"
+  },
+  "devDependencies": {
+    "rimraf": "^5.0.5",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  }
+}

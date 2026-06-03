@@ -1,0 +1,125 @@
+{/* ds-tooltip — Overview docs */}
+
+import { Meta, Canvas, ArgTypes } from '@storybook/blocks';
+import * as TooltipStories from './ds-tooltip.stories';
+
+<Meta of={TooltipStories} name="Overview" />
+
+# Tooltip
+
+`<ds-tooltip>` is a floating, non-actionable label used to explain a UI element
+or feature. It manages its own show/hide timing, positioning, and accessibility
+wiring — just provide a `slot="trigger"` element and the tooltip text.
+
+> **Use sparingly.** Do not put essential information in a tooltip. Tooltips
+> have low discoverability and usability issues on devices without hover.
+
+<Canvas of={TooltipStories.Default} />
+
+## Usage
+
+```html
+<ds-tooltip align="top">
+  <button slot="trigger">Settings</button>
+  Manage your account settings
+</ds-tooltip>
+```
+
+The `trigger` slot accepts any element. The component automatically sets
+`aria-describedby` on the trigger to point at the tooltip bubble.
+
+## Alignment
+
+The `align` prop controls which side of the trigger the bubble appears on, and
+how it aligns to the trigger's edge. Hover each button to preview.
+
+<Canvas of={TooltipStories.ShowcaseAlignments} />
+
+| Value          | Bubble position                            |
+| -------------- | ------------------------------------------ |
+| `top`          | Centered above the trigger                 |
+| `top-start`    | Above, left-aligned to the trigger         |
+| `top-end`      | Above, right-aligned to the trigger        |
+| `bottom`       | Centered below the trigger                 |
+| `bottom-start` | Below, left-aligned                        |
+| `bottom-end`   | Below, right-aligned                       |
+| `left`         | Left of the trigger, vertically centered   |
+| `left-start`   | Left, top-aligned to the trigger           |
+| `left-end`     | Left, bottom-aligned                       |
+| `right`        | Right of the trigger, vertically centered  |
+| `right-start`  | Right, top-aligned                         |
+| `right-end`    | Right, bottom-aligned                      |
+
+## Truncate modes
+
+<Canvas of={TooltipStories.ShowcaseModes} />
+
+## Timing
+
+`enterDelayMs` (default 100ms) and `leaveDelayMs` (default 300ms) control the
+show/hide delays. The leave delay gives the user a moment to re-enter the
+trigger before the tooltip closes. Set both to 0 for instant behavior:
+
+<Canvas of={TooltipStories.NoDelay} />
+
+## Close on activation
+
+When `closeOnActivation` is true, clicking the trigger — or pressing Enter or
+Space while focused on it — closes the tooltip immediately. Useful for icon
+buttons where the action and the hover label are the same control.
+
+<Canvas of={TooltipStories.CloseOnActivation} />
+
+The Escape key always closes the tooltip regardless of this setting.
+
+## API
+
+### Properties
+
+<ArgTypes of={TooltipStories} />
+
+### Slots
+
+| Slot        | Purpose                                                                   |
+| ----------- | ------------------------------------------------------------------------- |
+| `trigger`   | The element that triggers show/hide. Receives `aria-describedby` automatically. |
+| _(default)_ | The tooltip label text. Plain text or inline nodes.                       |
+
+### CSS parts
+
+| Part      | Element                                                                 |
+| --------- | ----------------------------------------------------------------------- |
+| `tooltip` | The bubble surface — target with `::part(tooltip)` for style overrides. |
+
+### Attribute names
+
+| Property            | Attribute              |
+| ------------------- | ---------------------- |
+| `closeOnActivation` | `close-on-activation`  |
+| `enterDelayMs`      | `enter-delay-ms`       |
+| `leaveDelayMs`      | `leave-delay-ms`       |
+
+## Accessibility
+
+- The tooltip sets `aria-describedby` on the `slot="trigger"` element
+  automatically, pointing at the bubble's generated `id`.
+- The bubble carries `role="tooltip"`.
+- Escape always dismisses the tooltip immediately.
+- `closeOnActivation` dismisses on Enter, Space, or click.
+- The bubble has `pointer-events: none` — it cannot be hovered or focused.
+
+## React usage
+
+```tsx
+import { DsTooltip } from '@my-ds/react';
+
+<DsTooltip align="top" enterDelayMs={100} leaveDelayMs={300}>
+  <button slot="trigger">Settings</button>
+  Manage your account settings
+</DsTooltip>
+
+<DsTooltip align="bottom" closeOnActivation>
+  <button slot="trigger">Delete</button>
+  Permanently remove this item
+</DsTooltip>
+```

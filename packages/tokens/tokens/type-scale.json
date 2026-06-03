@@ -1,0 +1,44 @@
+{
+  "typeScale": {
+    "y0": {
+      "$type": "number",
+      "$value": 12
+    },
+    "y1": {
+      "$type": "number",
+      "$value": 14
+    },
+    "y2": {
+      "$type": "number",
+      "$value": 16
+    },
+    "y3": {
+      "$type": "number",
+      "$value": 20
+    },
+    "y4": {
+      "$type": "number",
+      "$value": 24
+    },
+    "y5": {
+      "$type": "number",
+      "$value": 28
+    },
+    "y6": {
+      "$type": "number",
+      "$value": 32
+    },
+    "y7": {
+      "$type": "number",
+      "$value": 40
+    },
+    "y8": {
+      "$type": "number",
+      "$value": 48
+    },
+    "y9": {
+      "$type": "number",
+      "$value": 56
+    }
+  }
+}

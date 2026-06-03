@@ -1,0 +1,4 @@
+# The exported Figma variables JSON lives here.
+# Keep this file out of git if it's large; check in only if your team needs it tracked.
+ads3_variables.json
+*.prev.json

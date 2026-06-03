@@ -1,0 +1,133 @@
+{/* ds-icon — Overview docs */}
+
+import { Meta, Canvas, ArgTypes } from '@storybook/blocks';
+import * as IconStories from './ds-icon.stories';
+
+<Meta of={IconStories} name="Overview" />
+
+# Icon
+
+`<ds-icon>` renders a single icon — either a **Google Material Symbol** (by name from `@material-symbols/svg-400`) or a **custom SVG** passed via the default slot. It sizes via CSS, inherits color from its parent via `currentColor`, and caches loaded symbols in memory.
+
+<Canvas of={IconStories.Default} />
+
+## Material Symbols
+
+Pass the icon name directly as the `name` attribute. The name maps 1:1 to the filename in `@material-symbols/svg-400` (e.g. `add` → `outlined/add.svg`).
+
+Before any `<ds-icon name="...">` renders, register the resolver once at app startup:
+
+```typescript
+import { setIconResolver, createMaterialSymbolsResolver } from '@my-ds/components';
+
+setIconResolver(createMaterialSymbolsResolver()); // defaults to 'outlined'
+```
+
+In Storybook, this is already wired in `.storybook/preview.ts`.
+
+## Custom SVGs via slot
+
+When `name` is not set, the default slot is rendered. Drop in any inline SVG or `<img>`. The element will size it to 100% of the icon's outer dimensions.
+
+<Canvas of={IconStories.CustomSlot} />
+
+## Sizes
+
+Three sizes: `sm` (16px), `md` (20px, default), `lg` (24px). Sizes use design tokens so they stay in sync with the spacing and type scale.
+
+<Canvas of={IconStories.ShowcaseSizes} />
+
+## Styles
+
+Material Symbols ships three style variants. Set `icon-style` to switch between them. All three are at weight 400; the style affects corner geometry.
+
+| Style      | Character                                |
+| ---------- | ---------------------------------------- |
+| `outlined` | Thin strokes, open counters. Default.    |
+| `rounded`  | Rounded terminals and corners.           |
+| `sharp`    | Angular, geometric strokes.              |
+
+<Canvas of={IconStories.ShowcaseStyles} />
+
+## Fill
+
+Set the `fill` boolean to load the filled variant of the icon (`star-fill.svg` instead of `star.svg`). Not all icons have a fill variant — the component falls back to an empty render if the file doesn't exist.
+
+<Canvas of={IconStories.ShowcaseFill} />
+
+## Color
+
+`<ds-icon>` sets `color: inherit` on the host, so the icon automatically matches its surrounding text color. Use any `--ds-*` color token on the parent element.
+
+<Canvas of={IconStories.ShowcaseInContext} />
+
+## Sample icons
+
+<Canvas of={IconStories.ShowcaseSwatch} />
+
+## API
+
+### Properties
+
+<ArgTypes of={IconStories} />
+
+### Slots
+
+| Slot        | Purpose                                                                 |
+| ----------- | ----------------------------------------------------------------------- |
+| _(default)_ | Custom SVG or `<img>` when `name` is not set (or while the icon loads). |
+
+### CSS parts
+
+| Part | Element |
+| ---- | ------- |
+| _(none)_ | The SVG is injected into the shadow root — style via `color` on the host. |
+
+### Attribute names
+
+| Property    | Attribute    | Notes                                            |
+| ----------- | ------------ | ------------------------------------------------ |
+| `iconStyle` | `icon-style` | Avoids collision with the built-in `style` attr. |
+| `fill`      | `fill`       | Boolean — presence = true.                       |
+
+## Setup
+
+### Storybook / Vite app
+
+```typescript
+// main.ts or .storybook/preview.ts
+import { setIconResolver, createMaterialSymbolsResolver } from '@my-ds/components';
+
+setIconResolver(createMaterialSymbolsResolver('outlined'));
+```
+
+`createMaterialSymbolsResolver` uses Vite's dynamic `import()?raw` to load SVG files from `@material-symbols/svg-400` at runtime. Each icon is cached after its first load.
+
+### Custom resolver (non-Vite or custom icon set)
+
+```typescript
+setIconResolver(async (name, style) => {
+  const res = await fetch(`/icons/${style}/${name}.svg`);
+  if (!res.ok) throw new Error(`Icon not found: ${name}`);
+  return res.text();
+});
+```
+
+## React usage
+
+```tsx
+import { DsIcon } from '@my-ds/react';
+
+// Set up once at app root:
+import { setIconResolver, createMaterialSymbolsResolver } from '@my-ds/components';
+setIconResolver(createMaterialSymbolsResolver());
+
+// Then use anywhere:
+<DsIcon name="add" size="md" />
+<DsIcon name="star" fill />
+
+// Custom SVG:
+<DsIcon>
+  <svg viewBox="0 0 16 16" width="16" height="16">…</svg>
+</DsIcon>
+```

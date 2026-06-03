@@ -1,0 +1,35 @@
+{
+  "name": "@my-ds/tokens",
+  "version": "0.1.0",
+  "description": "Design tokens for the My Design System — sourced from Figma variables",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./css": "./dist/tokens.css",
+    "./css/base": "./dist/base.css",
+    "./css/semantic": "./dist/semantic-dark.css",
+    "./css/typography": "./dist/typography.css"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "figma:sync": "tsx scripts/figma-to-sd.ts",
+    "sd:build": "tsx scripts/sd-build.ts",
+    "build": "pnpm figma:sync && pnpm sd:build && tsc -p tsconfig.json",
+    "dev": "tsx watch scripts/figma-to-sd.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "clean": "rimraf dist tokens"
+  },
+  "devDependencies": {
+    "rimraf": "^5.0.5",
+    "style-dictionary": "^4.4.0",
+    "tsx": "^4.22.3",
+    "typescript": "^5.9.3"
+  }
+}

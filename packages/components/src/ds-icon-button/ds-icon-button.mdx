@@ -1,0 +1,136 @@
+{/* ds-icon-button — Overview docs */}
+
+import { Meta, Canvas, ArgTypes } from '@storybook/blocks';
+import * as IconButtonStories from './ds-icon-button.stories';
+
+<Meta of={IconButtonStories} name="Overview" />
+
+# Icon Button
+
+Icon buttons trigger a single action using only an icon — no visible label.
+Use `<ds-icon-button>` for compact, space-constrained UIs such as toolbars,
+table row actions, and toggle controls. For text-led actions with optional
+flanking icons, use `<ds-button>` instead.
+
+<Canvas of={IconButtonStories.Default} />
+
+## Variants
+
+Three variants, each carrying a different level of visual weight.
+
+| Variant      | When to use                                                          |
+| ------------ | -------------------------------------------------------------------- |
+| **Primary**  | The most prominent action in a group. Use sparingly.                 |
+| **Tertiary** | Subdued action with a visible border — works on busy backgrounds.    |
+| **Ghost**    | No chrome until hovered. The default for dense toolbars and lists.   |
+
+<Canvas of={IconButtonStories.ShowcaseVariants} />
+
+## Sizes
+
+Four sizes — `xs` (20px), `sm` (24px), `md` (32px, default), and `lg` (40px).
+The button is always square; only the outer dimension changes. The inner icon
+is always 16×16 regardless of size.
+
+<Canvas of={IconButtonStories.ShowcaseSizes} />
+
+## Shape
+
+The `shape` prop switches between a square with rounded corners (`default`,
+4px radius) and a fully circular button (`circle`). All variants and sizes
+support both shapes.
+
+<Canvas of={IconButtonStories.ShowcaseShapes} />
+
+## States
+
+Icon buttons support `isDisabled` and `isSelected`. Hover and pressed states
+are handled by CSS; you do not set them manually.
+
+<Canvas of={IconButtonStories.ShowcaseStates} />
+
+### Selected (toggle-on appearance)
+
+`isSelected` adds the selected-bold background and `--ds-border-border-selected`
+inset ring, and emits `aria-pressed="true"`. Use for toggle buttons (e.g. bold,
+favorite, pin); leave unset for stateless actions.
+
+<Canvas of={IconButtonStories.Selected} />
+
+## Full matrix
+
+Every variant at every size, default shape and state.
+
+<Canvas of={IconButtonStories.ShowcaseMatrix} />
+
+## API
+
+### Properties
+
+<ArgTypes of={IconButtonStories} />
+
+### Slots
+
+| Slot        | Purpose                                                              |
+| ----------- | -------------------------------------------------------------------- |
+| _(default)_ | The icon. Accepts an inline SVG or `<img>`. Constrained to 16×16px. |
+
+### Events
+
+| Event      | Detail                                | When                              |
+| ---------- | ------------------------------------- | --------------------------------- |
+| `ds-click` | `{ originalEvent: MouseEvent }`       | Click on an enabled button.       |
+
+The event is `composed: true` and `bubbles: true`, so it crosses the shadow
+boundary. In React, listen with `onDsClick`.
+
+### CSS parts
+
+| Part     | Element                                                              |
+| -------- | -------------------------------------------------------------------- |
+| `button` | Inner `<button>` element — style overrides via `::part(button)`.    |
+
+### Attribute names
+
+Boolean props map to kebab-case attributes when set in HTML:
+
+| Property     | Attribute      |
+| ------------ | -------------- |
+| `isDisabled` | `is-disabled`  |
+| `isSelected` | `is-selected`  |
+
+```html
+<ds-icon-button variant="ghost" is-disabled aria-label="Add">…</ds-icon-button>
+<ds-icon-button variant="tertiary" is-selected aria-label="Bold">…</ds-icon-button>
+```
+
+## Accessibility
+
+- Renders a native `<button>` inside the shadow root. No visible label text
+  exists, so **`aria-label` is required** on every instance. The element
+  will have no accessible name without it.
+- `aria-pressed="true"` is emitted only while `isSelected` is true.
+- The native `disabled` attribute is the source of truth — `aria-disabled`
+  is not used.
+- Focus ring renders 2px outside the button using a `::after` pseudo-element
+  so the button's own corner radius is never mutated on focus. The ring
+  matches the button's shape — rounded for `default`, circular for `circle`.
+- `Enter` and `Space` activate the button (native browser behavior).
+
+## React usage
+
+```tsx
+import { DsIconButton } from '@my-ds/react';
+
+<DsIconButton
+  variant="ghost"
+  size="md"
+  shape="default"
+  ariaLabel="Add item"
+  onDsClick={(e) => console.log(e.detail)}
+>
+  <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <path d="M8 3v10M3 8h10" strokeLinecap="round" />
+  </svg>
+</DsIconButton>
+```

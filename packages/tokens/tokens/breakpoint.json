@@ -1,0 +1,64 @@
+{
+  "breakpoint": {
+    "xl": {
+      "min": {
+        "$type": "number",
+        "$value": 1768
+      },
+      "max": {
+        "$type": "number",
+        "$value": 9999
+      }
+    },
+    "l": {
+      "min": {
+        "$type": "number",
+        "$value": 1440
+      },
+      "max": {
+        "$type": "number",
+        "$value": 1767
+      }
+    },
+    "m": {
+      "min": {
+        "$type": "number",
+        "$value": 1024
+      },
+      "max": {
+        "$type": "number",
+        "$value": 1439
+      }
+    },
+    "s": {
+      "min": {
+        "$type": "number",
+        "$value": 768
+      },
+      "max": {
+        "$type": "number",
+        "$value": 1023
+      }
+    },
+    "xs": {
+      "min": {
+        "$type": "number",
+        "$value": 480
+      },
+      "max": {
+        "$type": "number",
+        "$value": 767
+      }
+    },
+    "xxs": {
+      "min": {
+        "$type": "number",
+        "$value": 320
+      },
+      "max": {
+        "$type": "number",
+        "$value": 479
+      }
+    }
+  }
+}

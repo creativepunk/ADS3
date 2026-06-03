@@ -1,0 +1,162 @@
+{/* ds-calendar — Overview docs */}
+
+import { Meta, Canvas, ArgTypes } from '@storybook/blocks';
+import * as CalendarStories from './ds-calendar.stories';
+
+<Meta of={CalendarStories} name="Overview" />
+
+# Calendar
+
+`<ds-calendar>` is a single-month date picker. It renders a navigable month
+grid, a localized weekday header, and an optional **Today** shortcut. Clicking
+the month label flips the calendar into a **year / month picker** so users can
+jump across the calendar quickly. The component is keyboard-navigable and
+follows the WAI-ARIA grid pattern.
+
+<Canvas of={CalendarStories.Default} />
+
+## Anatomy
+
+The component is assembled from the building blocks in the Figma spec:
+
+| Block            | Role                                                                |
+| ---------------- | ------------------------------------------------------------------- |
+| **Month header** | `« ‹ May 2026 › »` — prev/next month (`‹ ›`) and year (`« »`).      |
+| **Week header**  | Localized weekday labels (`Sun … Sat`), ordered by `weekStartDay`.  |
+| **Day**          | A single day cell. Supports default, today, selected, and disabled. |
+| **Marker**       | A 2px pill under a day to flag events (red / yellow / blue / white).|
+| **Today button** | Footer shortcut that jumps to and focuses the current date.         |
+
+## Day states
+
+| State           | Treatment                                                       |
+| --------------- | --------------------------------------------------------------- |
+| **Default**     | Transparent, `--ds-color-text-default`.                         |
+| **Hover**       | `--ds-color-background-neutralSubtle-hovered`.                  |
+| **Today**       | Blue ring (`--ds-color-border-selected`), transparent fill.     |
+| **Selected**    | Filled navy (`--ds-color-background-selectedBold-default`).     |
+| **Outside**     | Days from adjacent months dim to `--ds-color-text-disabled`.    |
+| **Disabled**    | Out-of-range / filtered days are non-interactive and dimmed.    |
+
+## Week start
+
+`weekStartDay` controls the first column. `0` = Sunday (default), `1` = Monday.
+
+<Canvas of={CalendarStories.MondayStart} />
+
+## Localization
+
+Weekday and month names are produced with `Intl.DateTimeFormat` using the
+`locale` prop, so the calendar adapts to the user's language automatically.
+
+<Canvas of={CalendarStories.Localized} />
+
+## Min / max & disabled dates
+
+Bound the selectable range with `min` / `max` (ISO `YYYY-MM-DD`). For
+non-contiguous rules, pass an array of `disabledDates` or a
+`disabledDateFilter(iso) => boolean` predicate.
+
+<Canvas of={CalendarStories.WithMinMax} />
+
+<Canvas of={CalendarStories.ShowcaseDisabledDates} />
+
+## Markers
+
+Provide a `markers` map of ISO date → color to flag days with events.
+
+<Canvas of={CalendarStories.ShowcaseMarkers} />
+
+## Year / month picker
+
+Clicking the month label opens a two-column year + month picker. While open,
+the `‹ ›` buttons page the year list by one and `« »` page by seven. Selecting
+a month closes the picker and returns to the grid.
+
+## Composition
+
+The **month label** and **Today** controls reuse the shared `<ds-button>`
+(`variant="ghost"`). The month label uses `is-selected` to show the
+open/active state while the picker is showing. The `‹ › « »` arrows are
+currently native icon-only buttons and will be migrated to a dedicated
+`<ds-icon-button>` once that component exists. Day and picker cells stay native
+to the calendar because they carry grid / listbox semantics that a generic
+button doesn't model.
+
+## API
+
+### Properties
+
+<ArgTypes of={CalendarStories} />
+
+In addition to the controls above, these properties are set in JavaScript
+(they take object/function values, so they have no HTML attribute):
+
+| Property             | Type                          | Purpose                                            |
+| -------------------- | ----------------------------- | -------------------------------------------------- |
+| `disabledDates`      | `string[]`                    | Explicit list of disabled ISO dates.               |
+| `disabledDateFilter` | `(iso: string) => boolean`    | Returns `true` for any date that should disable.   |
+| `markers`            | `Record<string, MarkerColor>` | ISO date → `'red' \| 'yellow' \| 'blue' \| 'white'`. |
+
+### Events
+
+| Event         | Detail                                                  | When                                      |
+| ------------- | ------------------------------------------------------- | ----------------------------------------- |
+| `ds-select`   | `{ value, day, month, year, date, originalEvent? }`     | A day is clicked or activated.            |
+| `ds-navigate` | `{ day, month, year, iso, originalEvent? }`             | The displayed month / year changes.       |
+
+Both events are `composed` and `bubbles`, so they cross the shadow boundary.
+In React, listen with `onDsSelect` / `onDsNavigate`.
+
+### CSS parts
+
+| Part       | Element                  |
+| ---------- | ------------------------ |
+| `calendar` | The outer surface panel. |
+
+### Attribute names
+
+| Property          | Attribute            |
+| ----------------- | -------------------- |
+| `weekStartDay`    | `week-start-day`     |
+| `isDisabled`      | `is-disabled`        |
+| `showTodayButton` | `show-today-button`  |
+| `previousMonthLabel` | `previous-month-label` |
+| `nextMonthLabel`     | `next-month-label`     |
+| `previousYearLabel`  | `previous-year-label`  |
+| `nextYearLabel`      | `next-year-label`      |
+| `todayLabel`         | `today-label`          |
+
+## Accessibility
+
+- The day grid uses `role="grid"` with `columnheader` weekday cells and
+  `gridcell` days. A **roving `tabindex`** keeps a single tab stop; arrow keys
+  move focus.
+- **Keyboard:** `←/→` move by a day, `↑/↓` by a week, `Home`/`End` to the start
+  / end of the week, `PageUp`/`PageDown` change month (`+Shift` = year), and
+  `Enter`/`Space` select the focused day.
+- Today carries `aria-current="date"`; the selected day carries
+  `aria-selected="true"`.
+- The arrow buttons have configurable `aria-label`s
+  (`previousMonthLabel`, etc.). The month-label `ds-button` exposes its open
+  state via `aria-pressed` (from `is-selected`).
+- Focus rings use `--ds-color-focus-default` and never mutate the control's own
+  corner radius.
+
+## React usage
+
+```tsx
+import { DsCalendar } from '@my-ds/react';
+
+<DsCalendar
+  year={2026}
+  month={5}
+  value="2026-05-26"
+  weekStartDay={1}
+  min="2026-05-01"
+  max="2026-12-31"
+  markers={{ '2026-05-14': 'blue' }}
+  onDsSelect={(e) => console.log(e.detail.value)}
+  onDsNavigate={(e) => console.log(e.detail.iso)}
+/>
+```

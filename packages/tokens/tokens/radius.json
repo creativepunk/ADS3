@@ -1,0 +1,52 @@
+{
+  "radiusSemantic": {
+    "radius-none": {
+      "$type": "number",
+      "$value": "{radius.radius00}"
+    },
+    "radius-pill": {
+      "$type": "number",
+      "$value": "{radius.radius9999}"
+    },
+    "radius-xs": {
+      "$type": "number",
+      "$value": "{radius.radius02}"
+    },
+    "radius-sm": {
+      "$type": "number",
+      "$value": "{radius.radius04}"
+    },
+    "radius-md": {
+      "$type": "number",
+      "$value": "{radius.radius06}"
+    },
+    "radius-lg": {
+      "$type": "number",
+      "$value": "{radius.radius08}"
+    },
+    "radius-xl": {
+      "$type": "number",
+      "$value": "{radius.radius12}"
+    },
+    "radius-focus-xs": {
+      "$type": "number",
+      "$value": "{radius.radius04}"
+    },
+    "radius-focus-sm": {
+      "$type": "number",
+      "$value": "{radius.radius06}"
+    },
+    "radius-focus-md": {
+      "$type": "number",
+      "$value": "{radius.radius08}"
+    },
+    "radius-focus-lg": {
+      "$type": "number",
+      "$value": "{radius.radius10}"
+    },
+    "radius-focus-xl": {
+      "$type": "number",
+      "$value": "{radius.radius14}"
+    }
+  }
+}

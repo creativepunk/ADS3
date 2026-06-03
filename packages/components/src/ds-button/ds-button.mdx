@@ -1,0 +1,158 @@
+{/* ds-button — Overview docs */}
+
+import { Meta, Canvas, ArgTypes } from '@storybook/blocks';
+import * as ButtonStories from './ds-button.stories';
+
+<Meta of={ButtonStories} name="Overview" />
+
+# Button
+
+Buttons trigger an action — submitting a form, opening a dialog, navigating,
+or toggling state. `<ds-button>` is the canonical interactive primitive in
+this design system. It wraps a native `<button>` inside its shadow root so
+it participates in forms, keyboard navigation, and assistive tech the same
+way the platform does.
+
+<Canvas of={ButtonStories.Default} />
+
+## Variants
+
+There are five variants, each tied to a level of emphasis.
+
+| Variant       | When to use                                                              |
+| ------------- | ------------------------------------------------------------------------ |
+| **Primary**   | The main action on a screen. One per area, ideally.                      |
+| **Secondary** | A second-tier action paired with a primary (e.g. Cancel next to Submit). |
+| **Tertiary**  | Low-emphasis with a visible border — works on busy backgrounds.          |
+| **Ghost**     | Subtle action with no chrome until hovered. For dense toolbars.          |
+| **Danger**    | Destructive actions (delete, remove, archive). Use sparingly.            |
+
+<Canvas of={ButtonStories.ShowcaseVariants} />
+
+## Sizes
+
+Three sizes — `sm` (24px), `md` (32px, default), and `lg` (40px). Horizontal
+padding is constant; only the height changes.
+
+<Canvas of={ButtonStories.ShowcaseSizes} />
+
+## States
+
+Buttons support `isDisabled`, `isLoading`, and `isSelected` states. Hover and
+pressed states are handled by the variant CSS; you don't toggle them
+manually.
+
+<Canvas of={ButtonStories.ShowcaseStates} />
+
+### Loading keeps the variant color, shrinks to the spinner
+
+The loading state preserves the variant background and overlays a spinner.
+The label and any icons collapse out of the layout so the button width hugs
+the spinner — matching the Figma loading width. `aria-busy="true"` is set
+and pointer events are suppressed.
+
+<Canvas of={ButtonStories.ShowcaseLoading} />
+
+### Selected (toggle-on appearance)
+
+`isSelected` adds the `--ds-color-border-selected` inset ring and emits
+`aria-pressed="true"`. Use for toggle buttons; leave unset for stateless
+ones.
+
+<Canvas of={ButtonStories.ShowcaseSelected} />
+
+## Icons
+
+Icons go in the `icon-before` or `icon-after` slots. Drop in an inline SVG
+(16×16). Icon-only buttons live in a separate component
+(`ds-icon-button`) — `ds-button` is for text-led actions, with optional
+flanking icons.
+
+<Canvas of={ButtonStories.ShowcaseWithIcons} />
+
+## Form integration
+
+`ds-button` is form-associated via `ElementInternals`. When `type="submit"`
+or `type="reset"`, clicks reach the closest `<form>` even though the inner
+`<button>` lives in a shadow root.
+
+<Canvas of={ButtonStories.FormExample} />
+
+## Full matrix
+
+Every variant at every size, default state.
+
+<Canvas of={ButtonStories.ShowcaseMatrix} />
+
+## API
+
+### Properties
+
+<ArgTypes of={ButtonStories} />
+
+### Slots
+
+| Slot          | Purpose                                          |
+| ------------- | ------------------------------------------------ |
+| _(default)_   | The button's label. Plain text or inline nodes.  |
+| `icon-before` | 16×16 icon before the label. Hidden when empty.  |
+| `icon-after`  | 16×16 icon after the label. Hidden when empty.   |
+
+### Events
+
+| Event      | Detail                                | When                                            |
+| ---------- | ------------------------------------- | ----------------------------------------------- |
+| `ds-click` | `{ originalEvent: MouseEvent }`       | Click on an enabled, non-loading button.        |
+
+The event is `composed: true` and `bubbles: true`, so it crosses the shadow
+boundary. In React, listen with `onDsClick`.
+
+### CSS parts
+
+| Part     | Element        |
+| -------- | -------------- |
+| `button` | Inner `<button>` element — style overrides via `::part(button)`. |
+
+### Attribute names
+
+Boolean props map to kebab-case attributes when set in HTML:
+
+| Property     | Attribute       |
+| ------------ | --------------- |
+| `isDisabled` | `is-disabled`   |
+| `isLoading`  | `is-loading`    |
+| `isSelected` | `is-selected`   |
+
+```html
+<ds-button variant="primary" is-disabled>Disabled</ds-button>
+<ds-button variant="primary" is-loading>Loading</ds-button>
+```
+
+## Accessibility
+
+- Renders a native `<button>` inside the shadow root. The native
+  `disabled` attribute is the source of truth — `aria-disabled` is not
+  used.
+- `aria-busy="true"` is emitted only while `isLoading` is true.
+- `aria-pressed="true"` is emitted only while `isSelected` is true —
+  non-toggle buttons report nothing, so AT doesn't infer toggle semantics.
+- Focus ring uses `--ds-color-focus-default` and renders 2px outside the
+  button. The button's own corner radius (`--ds-radius-sm`, 4px) is never
+  mutated on focus; the ring radius is controlled independently by
+  `--ds-radius-focus-sm`.
+- A `prefers-reduced-motion: reduce` media query slows the spinner.
+- `Enter` and `Space` activate the button (native browser behavior).
+
+## React usage
+
+```tsx
+import { DsButton } from '@my-ds/react';
+
+<DsButton
+  variant="primary"
+  isDisabled={false}
+  onDsClick={(e) => console.log(e.detail)}
+>
+  Save
+</DsButton>
+```
