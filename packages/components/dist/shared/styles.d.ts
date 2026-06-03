@@ -19,6 +19,13 @@ export declare const focusRingStyles: import("lit").CSSResult;
  */
 export declare const innerFocusRingStyles: import("lit").CSSResult;
 /**
+ * Inset focus ring for elements that sit inside a bordered container (e.g.
+ * text inputs) where an outset ring would be clipped by the parent.
+ * Mirrors ADS Focusable isInset: uses --ds-focus-focus-inset (gray-100) and
+ * a negative offset so the ring renders inside the element boundary.
+ */
+export declare const insetFocusRingStyles: import("lit").CSSResult;
+/**
  * Visually hidden — accessible but invisible.
  * For screen-reader-only text.
  */

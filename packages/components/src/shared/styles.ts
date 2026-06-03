@@ -56,6 +56,23 @@ export const innerFocusRingStyles = css`
 `;
 
 /**
+ * Inset focus ring for elements that sit inside a bordered container (e.g.
+ * text inputs) where an outset ring would be clipped by the parent.
+ * Mirrors ADS Focusable isInset: uses --ds-focus-focus-inset (gray-100) and
+ * a negative offset so the ring renders inside the element boundary.
+ */
+export const insetFocusRingStyles = css`
+  :focus-visible {
+    outline: 2px solid var(--ds-focus-focus);
+    outline-offset: -2px;
+  }
+
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+`;
+
+/**
  * Visually hidden — accessible but invisible.
  * For screen-reader-only text.
  */

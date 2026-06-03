@@ -11,6 +11,8 @@ import { resetStyles, typographyBaseStyles, srOnlyStyles, } from '../shared/styl
 import { dispatch } from '../shared/events.js';
 // Register <ds-button> — used for the month-label and Today controls.
 import '../ds-button/ds-button.js';
+// Register <ds-icon-button> — used for the nav arrow controls.
+import '../ds-icon-button/ds-icon-button.js';
 const DAYS_IN_WEEK = 7;
 const WEEKS_SHOWN = 6;
 /* ── Date helpers (timezone-safe, calendar-local) ──────────────────────────── */
@@ -323,51 +325,43 @@ let DsCalendar = class DsCalendar extends LitElement {
         const label = this._monthLabel();
         return html `
       <div class="header">
-        <button
-          class="nav-btn"
-          type="button"
+        <ds-icon-button
+          variant="ghost"
+          size="sm"
           aria-label=${this.previousYearLabel}
-          @click=${() => { if (!this._pickerOpen)
-            this._shiftYear(-1); }}
-        >
-          ${chevronsLeft}
-        </button>
-        <button
-          class="nav-btn"
-          type="button"
+          ?is-disabled=${this._pickerOpen}
+          @ds-click=${() => this._shiftYear(-1)}
+        >${chevronsLeft}</ds-icon-button>
+        <ds-icon-button
+          variant="ghost"
+          size="sm"
           aria-label=${this.previousMonthLabel}
-          @click=${() => { if (!this._pickerOpen)
-            this._shiftMonth(-1); }}
-        >
-          ${chevronLeft}
-        </button>
+          ?is-disabled=${this._pickerOpen}
+          @ds-click=${() => this._shiftMonth(-1)}
+        >${chevronLeft}</ds-icon-button>
         <ds-button
           class="label-btn"
           variant="ghost"
-          size="md"
+          size="sm"
           ?is-selected=${this._pickerOpen}
           @ds-click=${this._onLabelClick}
         >
           ${label}
         </ds-button>
-        <button
-          class="nav-btn"
-          type="button"
+        <ds-icon-button
+          variant="ghost"
+          size="sm"
           aria-label=${this.nextMonthLabel}
-          @click=${() => { if (!this._pickerOpen)
-            this._shiftMonth(1); }}
-        >
-          ${chevronRight}
-        </button>
-        <button
-          class="nav-btn"
-          type="button"
+          ?is-disabled=${this._pickerOpen}
+          @ds-click=${() => this._shiftMonth(1)}
+        >${chevronRight}</ds-icon-button>
+        <ds-icon-button
+          variant="ghost"
+          size="sm"
           aria-label=${this.nextYearLabel}
-          @click=${() => { if (!this._pickerOpen)
-            this._shiftYear(1); }}
-        >
-          ${chevronsRight}
-        </button>
+          ?is-disabled=${this._pickerOpen}
+          @ds-click=${() => this._shiftYear(1)}
+        >${chevronsRight}</ds-icon-button>
       </div>
     `;
     }
@@ -541,37 +535,12 @@ DsCalendar.styles = [
       .header {
         display: flex;
         align-items: center;
-        gap: var(--ds-spacing-spacing-00); /* 0px */
+        gap: var(--ds-spacing-spacing-04); /* 8px */
         width: 300px;
         padding-inline: var(--ds-spacing-spacing-04); /* 8px */
         padding-bottom: var(--ds-spacing-spacing-05);
       }
 
-      /* Native nav arrows (icon-only). To be replaced by <ds-icon-button>
-         once that component exists. */
-      .nav-btn {
-        all: unset;
-        box-sizing: border-box;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: var(--ds-type-scale-y6); /* 32px square */
-        height: var(--ds-type-scale-y6);
-        flex: 0 0 auto;
-        border-radius: var(--ds-radius-semantic-radius-sm);
-        background: var(--ds-background-neutral-subtle-default);
-        color: var(--ds-icon-icon-default);
-        cursor: pointer;
-        position: relative;
-        transition: background-color 120ms ease;
-      }
-      .nav-btn:hover {
-        background: var(--ds-background-neutral-subtle-hovered);
-      }
-      .nav-btn:active {
-        background: var(--ds-background-neutral-subtle-pressed);
-      }
-      .nav-btn svg,
       .check-icon {
         width: var(--ds-spacing-spacing-06); /* 16px */
         height: var(--ds-spacing-spacing-06);
@@ -588,22 +557,18 @@ DsCalendar.styles = [
         width: 100%;
       }
 
-      /* Shared focus ring rendered as a pseudo element so corner radius
-         of the control itself is never mutated. */
-      .nav-btn::after,
-      .day::after,
-      .picker-item::after {
-        content: '';
-        position: absolute;
-        inset: -2px;
-        border: 2px solid transparent;
-        border-radius: var(--ds-radius-semantic-radius-focus-sm);
-        pointer-events: none;
+      /* Focus rings — scoped selectors beat all: unset (higher specificity). */
+      .picker-item:focus-visible {
+        outline: 2px solid var(--ds-focus-focus);
+        outline-offset: 2px;
       }
-      .nav-btn:focus-visible::after,
-      .day:focus-visible::after,
-      .picker-item:focus-visible::after {
-        border-color: var(--ds-focus-focus);
+      .day:focus-visible {
+        outline: 2px solid var(--ds-focus-focus);
+        outline-offset: -2px;
+      }
+      .day:focus:not(:focus-visible),
+      .picker-item:focus:not(:focus-visible) {
+        outline: none;
       }
 
       /* ── Weekday header row ─────────────────────────────────────────────── */

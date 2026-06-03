@@ -1,5 +1,6 @@
 import { LitElement, type PropertyValues } from 'lit';
 import '../ds-button/ds-button.js';
+import '../ds-icon-button/ds-icon-button.js';
 export type DsCalendarMarkerColor = 'red' | 'yellow' | 'blue' | 'white';
 /** Map of ISO date (`YYYY-MM-DD`) → marker color shown under the day. */
 export type DsCalendarMarkers = Record<string, DsCalendarMarkerColor>;
