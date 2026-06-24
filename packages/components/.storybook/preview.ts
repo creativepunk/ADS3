@@ -4,10 +4,12 @@ import { setIconResolver, createMaterialSymbolsResolver } from '../src/ds-icon/d
 // Register the Material Symbols resolver once so any <ds-icon name="...">
 // in stories and docs can lazy-load from @material-symbols/svg-400.
 setIconResolver(createMaterialSymbolsResolver());
-// Self-hosted Inter — loaded at document level so it reaches every component's
-// shadow DOM. Tokens reference `Inter` (no generic fallback), so without this
-// the canvas falls back to the browser default serif. Weights match the
-// typography tokens: 300 / 400 / 500 / 600.
+// Variable Inter — registers under the family name 'Inter Variable'.
+// The @font-face below in preview.css aliases it to 'Inter' so all
+// --ds-font-family-normal references resolve to the variable font,
+// enabling cv05 (tailed l), cv08, and zero (slashed 0) OpenType features.
+import '@fontsource-variable/inter';
+// Static slices kept as fallback for weights outside the variable range.
 import '@fontsource/inter/300.css';
 import '@fontsource/inter/400.css';
 import '@fontsource/inter/500.css';

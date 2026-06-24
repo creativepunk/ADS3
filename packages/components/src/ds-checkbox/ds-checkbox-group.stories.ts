@@ -207,6 +207,44 @@ export const WithHelperText: Story = {
   `,
 };
 
+export const InlineVertical: Story = {
+  args: { type: 'inline', orientation: 'vertical' },
+  render: (args) => html`
+    <ds-checkbox-group
+      label=${args.label}
+      ?is-required=${args.isRequired}
+      orientation="vertical"
+      type="inline"
+      helper-text=${args.helperText}
+      error-text=${args.errorText}
+    >
+      <ds-checkbox label="Option 1"></ds-checkbox>
+      <ds-checkbox label="Option 2"></ds-checkbox>
+      <ds-checkbox label="Option 3"></ds-checkbox>
+      <ds-checkbox label="Option 4"></ds-checkbox>
+    </ds-checkbox-group>
+  `,
+};
+
+export const InlineHorizontal: Story = {
+  args: { type: 'inline', orientation: 'horizontal' },
+  render: (args) => html`
+    <ds-checkbox-group
+      label=${args.label}
+      ?is-required=${args.isRequired}
+      orientation="horizontal"
+      type="inline"
+      helper-text=${args.helperText}
+      error-text=${args.errorText}
+    >
+      <ds-checkbox label="Option 1"></ds-checkbox>
+      <ds-checkbox label="Option 2"></ds-checkbox>
+      <ds-checkbox label="Option 3"></ds-checkbox>
+      <ds-checkbox label="Option 4"></ds-checkbox>
+    </ds-checkbox-group>
+  `,
+};
+
 export const ShowcaseMatrix: Story = {
   tags: ['!dev'],
   parameters: { controls: { disable: true } },
@@ -243,6 +281,20 @@ export const ShowcaseMatrix: Story = {
         <ds-checkbox label="Option 1" is-checked></ds-checkbox>
         <ds-checkbox label="Option 2"></ds-checkbox>
         <ds-checkbox label="Option 3" is-checked></ds-checkbox>
+      </ds-checkbox-group>
+
+      <ds-checkbox-group label="Inline vertical" is-required type="inline" helper-text="Optional helper text">
+        <ds-checkbox label="Option 1"></ds-checkbox>
+        <ds-checkbox label="Option 2"></ds-checkbox>
+        <ds-checkbox label="Option 3"></ds-checkbox>
+        <ds-checkbox label="Option 4"></ds-checkbox>
+      </ds-checkbox-group>
+
+      <ds-checkbox-group label="Inline horizontal" is-required type="inline" orientation="horizontal" helper-text="Optional helper text">
+        <ds-checkbox label="Option 1"></ds-checkbox>
+        <ds-checkbox label="Option 2"></ds-checkbox>
+        <ds-checkbox label="Option 3"></ds-checkbox>
+        <ds-checkbox label="Option 4"></ds-checkbox>
       </ds-checkbox-group>
     </div>
   `,

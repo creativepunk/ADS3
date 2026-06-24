@@ -1,4 +1,4 @@
-import { create } from 'storybook/internal/theming/create';
+import { create } from 'storybook/theming/create';
 
 /**
  * Storybook theme keyed to the design system's dark tokens. The DS is

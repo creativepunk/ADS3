@@ -21,6 +21,13 @@ export class DsCheckboxGroup extends LitElement {
         gap: 0;
       }
 
+      /* ── Inline layout: label sits to the left of the values group ───────── */
+      :host([type='inline']) {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: var(--ds-spacing-spacing-04); /* 8px between label and values */
+      }
+
       /* ── Values container ────────────────────────────────────────────────── */
       .values {
         display: flex;
@@ -41,6 +48,15 @@ export class DsCheckboxGroup extends LitElement {
 
       :host([type='inline'][orientation='vertical']) .values {
         gap: var(--ds-spacing-spacing-04);
+      }
+
+      /* ── Inline value+message wrapper ───────────────────────────────────── */
+      .value-message {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        flex: 1 0 0;
+        min-width: 1px;
       }
 
       /* ── State pass-through via CSS — reacts to property changes instantly ── */
@@ -125,18 +141,21 @@ export class DsCheckboxGroup extends LitElement {
 
   render() {
     const messageType = this.hasError ? 'error' : 'helper';
+    const isInline = this.type === 'inline';
 
-    return html`
-      ${this.label
-        ? html`
-            <ds-form-label
-              label=${this.label}
-              ?is-required=${this.isRequired}
-              ?has-info-tip=${this.hasInfoTip}
-            ></ds-form-label>
-          `
-        : nothing}
+    const label = this.label
+      ? html`
+          <ds-form-label
+            label=${this.label}
+            ?is-required=${this.isRequired}
+            ?has-info-tip=${this.hasInfoTip}
+            type=${isInline ? 'inline' : 'stacked'}
+            style=${isInline ? '--ds-form-label-padding-top: var(--ds-spacing-spacing-02); height: 24px;' : nothing}
+          ></ds-form-label>
+        `
+      : nothing;
 
+    const values = html`
       <div
         class="values"
         role="group"
@@ -146,13 +165,24 @@ export class DsCheckboxGroup extends LitElement {
       >
         <slot @slotchange=${this._onSlotChange}></slot>
       </div>
+    `;
 
+    const message = html`
       <ds-form-message
         type=${messageType}
         helper-text=${this.helperText}
         error-text=${this.errorText}
       ></ds-form-message>
     `;
+
+    if (isInline) {
+      return html`
+        ${label}
+        <div class="value-message">${values}${message}</div>
+      `;
+    }
+
+    return html`${label}${values}${message}`;
   }
 }
 

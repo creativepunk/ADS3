@@ -97,6 +97,7 @@ export const srOnlyStyles = css`
 export const typographyBaseStyles = css`
   :host {
     font-family: var(--ds-font-family-normal, 'Inter', sans-serif);
+    font-feature-settings: 'cv08' 1, 'cv05' 1, 'zero' 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }

@@ -65,7 +65,7 @@ export type {
 } from './ds-multi-select-menu.js';
 
 export { DsFormLabel } from './ds-form-label.js';
-export type { DsFormLabelProps } from './ds-form-label.js';
+export type { DsFormLabelProps, DsFormLabelType } from './ds-form-label.js';
 
 export { DsFormMessage } from './ds-form-message.js';
 export type { DsFormMessageProps, DsFormMessageType } from './ds-form-message.js';

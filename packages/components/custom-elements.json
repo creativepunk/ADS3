@@ -310,6 +310,38 @@
             "name": "DsFormMessageType",
             "module": "./ds-form-message/ds-form-message.js"
           }
+        },
+        {
+          "kind": "js",
+          "name": "DsCheckbox",
+          "declaration": {
+            "name": "DsCheckbox",
+            "module": "./ds-checkbox/ds-checkbox.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "DsCheckboxGroup",
+          "declaration": {
+            "name": "DsCheckboxGroup",
+            "module": "./ds-checkbox/ds-checkbox-group.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "DsCheckboxGroupOrientation",
+          "declaration": {
+            "name": "DsCheckboxGroupOrientation",
+            "module": "./ds-checkbox/ds-checkbox-group.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "DsCheckboxGroupType",
+          "declaration": {
+            "name": "DsCheckboxGroupType",
+            "module": "./ds-checkbox/ds-checkbox-group.js"
+          }
         }
       ]
     },
@@ -329,7 +361,7 @@
                 "text": "array"
               },
               "static": true,
-              "default": "[ resetStyles, typographyBaseStyles, innerFocusRingStyles, css` :host { display: block; /* Set color on the host so slotted ds-icon elements inherit it via the light DOM cascade (color: inherit on ds-icon's :host). */ color: var(--ds-icon-icon-default); } /* ── Indent/check column ──────────────────────────────────── */ .indent-wrap { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 24px; height: 24px; padding: var(--ds-spacing-spacing-02); color: var(--ds-icon-icon-default); } :host([variant='danger']) { color: var(--ds-icon-icon-danger); } /* ── Base item ───────────────────────────────────────────── */ .item { all: unset; box-sizing: border-box; display: flex; align-items: center; gap: var(--ds-spacing-spacing-06); width: 100%; padding: var(--ds-spacing-spacing-04) var(--ds-spacing-spacing-06); min-height: 40px; background: transparent; color: var(--ds-text-text-default); font-family: var(--ds-typography-cozy-regular-body-md-font-family); font-size: var(--ds-typography-cozy-regular-body-md-font-size); font-weight: var(--ds-typography-cozy-regular-body-md-font-weight); line-height: var(--ds-typography-cozy-regular-body-md-line-height); letter-spacing: var(--ds-typography-cozy-regular-body-md-letter-spacing); font-feature-settings: 'cv08' 1; cursor: pointer; user-select: none; transition: background 80ms ease; } :host([size='sm']) .item { padding: var(--ds-spacing-spacing-03) var(--ds-spacing-spacing-06); min-height: 32px; } /* ── Default interactive states ──────────────────────────── */ .item:hover { background: var(--ds-background-neutral-subtle-hovered); } .item:active { background: var(--ds-background-neutral-subtle-pressed); } .item:focus-visible { outline: 2px solid var(--ds-focus-focus); outline-offset: -2px; } /* ── Danger variant ──────────────────────────────────────── */ :host([variant='danger']) .item { color: var(--ds-text-text-danger); } :host([variant='danger']) .icon-wrap { color: var(--ds-icon-icon-danger); } /* Full red background on hover/active */ :host([variant='danger']) .item:hover { background: var(--ds-background-danger-default); color: var(--ds-text-text-default); } :host([variant='danger']) .item:hover .icon-wrap, :host([variant='danger']) .item:hover .trailing-caret { color: var(--ds-icon-icon-default); } :host([variant='danger']) .item:hover .shortcut { color: var(--ds-text-text-default); } :host([variant='danger']) .item:active { background: var(--ds-background-danger-pressed); color: var(--ds-text-text-default); } :host([variant='danger']) .item:active .icon-wrap, :host([variant='danger']) .item:active .trailing-caret { color: var(--ds-icon-icon-default); } :host([variant='danger']) .item:active .shortcut { color: var(--ds-text-text-default); } /* ── Disabled ─────────────────────────────────────────────── */ :host([disabled]) { pointer-events: none; opacity: 0.4; } /* ── Left group ───────────────────────────────────────────── */ .left-group { display: flex; align-items: center; gap: var(--ds-spacing-spacing-02); flex: 1 0 0; min-width: 0; } .icon-wrap { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 24px; height: 24px; padding: var(--ds-spacing-spacing-02); color: var(--ds-icon-icon-default); } .label { display: block; flex: 1 0 0; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } /* ── Slotted icon color for interactive states ────────────── */ /* On hover/active reset both text and slotted icon to default */ .item:hover ::slotted(ds-icon), .item:active ::slotted(ds-icon) { color: var(--ds-icon-icon-default); } /* Danger hover/active: icon resets to default alongside text */ :host([variant='danger']) .item:hover ::slotted(ds-icon), :host([variant='danger']) .item:active ::slotted(ds-icon) { color: var(--ds-icon-icon-default); } /* ── Trailing: sub-menu chevron ───────────────────────────── */ .trailing-caret { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 24px; height: 24px; padding: var(--ds-spacing-spacing-02); color: var(--ds-icon-icon-default); } /* ── Trailing: keyboard shortcut ──────────────────────────── */ .shortcut { flex-shrink: 0; font-family: var(--ds-typography-cozy-helper-helper-regular-font-family); font-size: var(--ds-typography-cozy-helper-helper-regular-font-size); font-weight: var(--ds-typography-cozy-helper-helper-regular-font-weight); line-height: var(--ds-typography-cozy-helper-helper-regular-line-height); letter-spacing: var(--ds-typography-cozy-helper-helper-regular-letter-spacing); color: var(--ds-text-text-subtle); font-feature-settings: 'cv08' 1; white-space: nowrap; } /* ── Sub-menu flyout holder ──────────────────────────────── Always fixed-position; hidden by default. JS sets left/top and display: block when opening. Using fixed breaks out of any parent overflow:hidden that would clip the sub-menu. */ .sub-menu-holder { display: none; overflow: visible; } `, ]"
+              "default": "[ resetStyles, typographyBaseStyles, typographyStyles, innerFocusRingStyles, css` :host { display: block; /* Set color on the host so slotted ds-icon elements inherit it via the light DOM cascade (color: inherit on ds-icon's :host). */ color: var(--ds-icon-icon-default); } /* ── Indent/check column ──────────────────────────────────── */ .indent-wrap { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 24px; height: 24px; padding: var(--ds-spacing-spacing-02); color: var(--ds-icon-icon-default); } /* ── Base item ───────────────────────────────────────────── */ .item { all: unset; box-sizing: border-box; display: flex; align-items: center; gap: var(--ds-spacing-spacing-06); width: 100%; padding: var(--ds-spacing-spacing-04) var(--ds-spacing-spacing-06); min-height: 40px; background: transparent; color: var(--ds-text-text-default); font-feature-settings: 'cv08' 1; cursor: pointer; user-select: none; transition: background 80ms ease; } :host([size='sm']) .item { padding: var(--ds-spacing-spacing-03) var(--ds-spacing-spacing-06); min-height: 32px; } /* ── Default interactive states ──────────────────────────── */ .item:hover { background: var(--ds-background-neutral-subtle-hovered); } .item:active { background: var(--ds-background-neutral-subtle-pressed); } .item:focus-visible { outline: 2px solid var(--ds-focus-focus); outline-offset: -2px; } /* ── Danger variant ──────────────────────────────────────── */ /* Default state: neutral colors — same as default variant */ /* Full red background on hover/active; text/icons reset to default */ :host([variant='danger']) .item:hover { background: var(--ds-background-danger-default); color: var(--ds-text-text-default); } :host([variant='danger']) .item:hover .icon-wrap, :host([variant='danger']) .item:hover .trailing-caret { color: var(--ds-icon-icon-default); } :host([variant='danger']) .item:hover .shortcut { color: var(--ds-text-text-default); } :host([variant='danger']) .item:active { background: var(--ds-background-danger-pressed); color: var(--ds-text-text-default); } :host([variant='danger']) .item:active .icon-wrap, :host([variant='danger']) .item:active .trailing-caret { color: var(--ds-icon-icon-default); } :host([variant='danger']) .item:active .shortcut { color: var(--ds-text-text-default); } /* ── Disabled ─────────────────────────────────────────────── */ :host([disabled]) { pointer-events: none; cursor: not-allowed; } :host([disabled]) .label { color: var(--ds-text-text-disabled); } /* ── Left group ───────────────────────────────────────────── */ .left-group { display: flex; align-items: center; gap: var(--ds-spacing-spacing-02); flex: 1 0 0; min-width: 0; } .icon-wrap { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 24px; height: 24px; padding: var(--ds-spacing-spacing-02); color: var(--ds-icon-icon-default); } .label { display: block; flex: 1 0 0; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } /* ── Slotted icon color for interactive states ────────────── */ /* On hover/active reset both text and slotted icon to default */ .item:hover ::slotted(ds-icon), .item:active ::slotted(ds-icon) { color: var(--ds-icon-icon-default); } /* Danger hover/active: icon resets to default alongside text */ :host([variant='danger']) .item:hover ::slotted(ds-icon), :host([variant='danger']) .item:active ::slotted(ds-icon) { color: var(--ds-icon-icon-default); } /* ── Trailing: sub-menu chevron ───────────────────────────── */ .trailing-caret { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 24px; height: 24px; padding: var(--ds-spacing-spacing-02); color: var(--ds-icon-icon-default); } /* ── Trailing: keyboard shortcut ──────────────────────────── */ .shortcut { flex-shrink: 0; color: var(--ds-text-text-subtle); font-feature-settings: 'cv08' 1; white-space: nowrap; } /* ── Sub-menu flyout holder ──────────────────────────────── Always fixed-position; hidden by default. JS sets left/top and display: block when opening. Using fixed breaks out of any parent overflow:hidden that would clip the sub-menu. */ .sub-menu-holder { display: none; overflow: visible; } `, ]"
             },
             {
               "kind": "field",
@@ -412,10 +444,10 @@
               "kind": "field",
               "name": "selectionType",
               "type": {
-                "text": "'checkbox' | 'radio'"
+                "text": "'none' | 'checkbox' | 'radio'"
               },
-              "default": "'checkbox'",
-              "description": "How selection behaves — set automatically by the parent\n`<ds-action-menu-group>` based on its own selection-type.\nDrives the ARIA role: menuitemcheckbox vs menuitemradio."
+              "default": "'none'",
+              "description": "How selection behaves — set automatically by the parent\n`<ds-action-menu-group>` based on its own selection-type.\nDrives the ARIA role: menuitemcheckbox vs menuitemradio vs menuitem."
             },
             {
               "kind": "field",
@@ -575,7 +607,7 @@
         },
         {
           "kind": "class",
-          "description": "Logical grouping of items inside a <ds-action-menu>.\n\n- Provides role=\"group\" for assistive technology.\n- has-separator — draws a divider line above the group.\n- title — renders a section label above the items (aria-label on the group).\n- selection-type=\"checkbox\" — items toggle independently (default when any item is checked).\n- selection-type=\"radio\" — selecting one item unchecks all others in the group.",
+          "description": "Logical grouping of items inside a <ds-action-menu>.\n\n- Provides role=\"group\" for assistive technology.\n- title — renders a section label above the items (aria-label on the group).\n- selection-type=\"checkbox\" — items toggle independently.\n- selection-type=\"radio\" — selecting one item unchecks all others in the group.\n- selection-type=\"none\" (default) — purely action group; no check state.\n\nThe separator and title visibility are managed automatically by the parent\n<ds-action-menu> once it knows how many groups exist.",
           "name": "DsActionMenuGroup",
           "members": [
             {
@@ -585,23 +617,15 @@
                 "text": "array"
               },
               "static": true,
-              "default": "[ resetStyles, typographyBaseStyles, css` :host { display: block; } .separator { width: 100%; height: 1px; background: var(--ds-border-border-default); margin: var(--ds-spacing-spacing-02) 0; } .title { display: block; padding: var(--ds-spacing-spacing-04) var(--ds-spacing-spacing-06) var(--ds-spacing-spacing-02); font-family: var(--ds-typography-cozy-helper-helper-regular-font-family); font-size: var(--ds-typography-cozy-helper-helper-regular-font-size); font-weight: var(--ds-typography-cozy-helper-helper-regular-font-weight); line-height: var(--ds-typography-cozy-helper-helper-regular-line-height); letter-spacing: var(--ds-typography-cozy-helper-helper-regular-letter-spacing); color: var(--ds-text-text-subtlest); font-feature-settings: 'cv08' 1; white-space: nowrap; } `, ]"
+              "default": "[ resetStyles, css` :host { display: block; } `, ]"
             },
             {
               "kind": "field",
               "name": "selectionType",
               "type": {
-                "text": "'checkbox' | 'radio'"
+                "text": "'none' | 'checkbox' | 'radio'"
               },
-              "default": "'checkbox'"
-            },
-            {
-              "kind": "field",
-              "name": "hasSeparator",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false"
+              "default": "'none'"
             },
             {
               "kind": "field",
@@ -613,11 +637,19 @@
             },
             {
               "kind": "field",
-              "name": "_items",
+              "name": "hasSeparator",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Automatically set by <ds-action-menu>. True for every group except the first."
+            },
+            {
+              "kind": "field",
+              "name": "items",
               "type": {
                 "text": "DsActionMenuItem[]"
               },
-              "privacy": "private",
               "default": "[]"
             },
             {
@@ -662,7 +694,7 @@
                 "text": "array"
               },
               "static": true,
-              "default": "[ resetStyles, typographyBaseStyles, css` :host { display: block; min-width: 144px; } .container { display: flex; flex-direction: column; overflow: hidden; background: var(--ds-elevation-surface-overlay-default); /* ⚠ no shadow token — raw fallback */ box-shadow: 0px 0px 1px 0px rgba(1, 4, 4, 0.5), 0px 8px 12px 0px rgba(1, 4, 4, 0.36), inset 0px 0px 0px 1px rgba(189, 189, 189, 0.12); } [hidden] { display: none !important; } .header { display: flex; flex-direction: column; gap: var(--ds-spacing-spacing-05); padding: var(--ds-spacing-spacing-05) var(--ds-spacing-spacing-06); flex-shrink: 0; overflow: hidden; } .body { padding: var(--ds-spacing-spacing-02) 0; } .footer { display: flex; align-items: center; justify-content: flex-end; gap: var(--ds-spacing-spacing-04); padding: var(--ds-spacing-spacing-05) var(--ds-spacing-spacing-06); border-top: 1px solid var(--ds-border-border-default); flex-shrink: 0; overflow: hidden; } `, ]"
+              "default": "[ resetStyles, typographyBaseStyles, typographyStyles, css` :host { display: block; min-width: 144px; } .container { display: flex; flex-direction: column; overflow: hidden; background: var(--ds-elevation-surface-overlay-default); border-radius: var(--ds-radius-semantic-radius-sm); /* ⚠ no shadow token — raw fallback */ box-shadow: 0px 0px 1px 0px rgba(1, 4, 4, 0.5), 0px 8px 12px 0px rgba(1, 4, 4, 0.36), inset 0px 0px 0px 1px rgba(189, 189, 189, 0.12); } [hidden] { display: none !important; } .header { display: flex; flex-direction: column; gap: var(--ds-spacing-spacing-05); padding: var(--ds-spacing-spacing-05) var(--ds-spacing-spacing-06); flex-shrink: 0; overflow: hidden; } .body { padding: var(--ds-spacing-spacing-04) 0; } .footer { display: flex; align-items: center; justify-content: flex-end; gap: var(--ds-spacing-spacing-04); padding: var(--ds-spacing-spacing-05) var(--ds-spacing-spacing-06); border-top: 1px solid var(--ds-border-border-default); flex-shrink: 0; overflow: hidden; } `, ]"
             },
             {
               "kind": "field",
@@ -715,6 +747,30 @@
               "description": "Returns all ds-action-menu-item elements that belong to this menu —\nboth direct children and those inside ds-action-menu-group elements —\nwhile excluding items that belong to nested sub-menus."
             },
             {
+              "kind": "method",
+              "name": "_getOwnGroups",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "DsActionMenuGroup[]"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "_configureGroups",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "groups",
+                  "type": {
+                    "text": "DsActionMenuGroup[]"
+                  }
+                }
+              ],
+              "description": "Auto-assigns hasSeparator to groups: first group never gets one,\nevery subsequent group does."
+            },
+            {
               "kind": "field",
               "name": "_onMenuAction",
               "privacy": "private"
@@ -743,7 +799,8 @@
                     "text": "DsActionMenuItem[]"
                   }
                 }
-              ]
+              ],
+              "description": "If any group in the menu has a selection-type (checkbox/radio), all items\nacross the entire menu get the indent column for visual alignment.\nWithin each group, only checked items show the checkmark."
             },
             {
               "kind": "method",
@@ -864,7 +921,7 @@
                 "text": "array"
               },
               "static": true,
-              "default": "[ resetStyles, typographyBaseStyles, innerFocusRingStyles, srOnlyStyles, css` :host { display: inline-flex; vertical-align: middle; } :host([is-disabled]), :host([is-loading]) { pointer-events: none; } button { all: unset; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; gap: var(--ds-spacing-spacing-04); padding: 0 var(--ds-spacing-spacing-05); border-radius: var(--ds-radius-semantic-radius-sm); /* Figma text style: Body/Medium/Body-sm */ font-family: var(--ds-typography-cozy-medium-body-sm-font-family); font-size: var(--ds-typography-cozy-medium-body-sm-font-size); font-weight: var(--ds-typography-cozy-medium-body-sm-font-weight); line-height: var(--ds-typography-cozy-medium-body-sm-line-height); letter-spacing: var(--ds-typography-cozy-medium-body-sm-letter-spacing); font-feature-settings: 'cv08' 1; color: var(--ds-text-text-default); cursor: pointer; user-select: none; white-space: nowrap; position: relative; transition: background-color 120ms ease, box-shadow 120ms ease, color 120ms ease; } /* ── Size ─────────────────────────────────────────────────────────── */ :host([size='sm']) button { height: var(--ds-type-scale-y4); /* 24px */ } :host([size='md']) button, :host(:not([size])) button { height: var(--ds-type-scale-y6); /* 32px */ } :host([size='lg']) button { height: var(--ds-type-scale-y7); /* 40px */ } /* Interactive states only apply when the button is enabled. Chaining :not([is-disabled]) into the selectors makes the rules immune to the specificity quirk where a variant+:hover would outrank disabled. */ /* ── Variant: primary ─────────────────────────────────────────────── */ :host([variant='primary']) button, :host(:not([variant])) button { background: var(--ds-background-brand-default); } :host([variant='primary']:not([is-disabled]):not([is-selected])) button:hover, :host(:not([variant]):not([is-disabled]):not([is-selected])) button:hover { background: var(--ds-background-brand-hovered); } :host([variant='primary']:not([is-disabled]):not([is-selected])) button:active, :host(:not([variant]):not([is-disabled]):not([is-selected])) button:active { background: var(--ds-background-brand-pressed); } /* ── Variant: secondary ───────────────────────────────────────────── */ :host([variant='secondary']) button { background: var(--ds-background-neutral-default); } :host([variant='secondary']:not([is-disabled]):not([is-selected])) button:hover { background: var(--ds-background-neutral-hovered); } :host([variant='secondary']:not([is-disabled]):not([is-selected])) button:active { background: var(--ds-background-neutral-pressed); } /* ── Variant: tertiary ────────────────────────────────────────────── */ :host([variant='tertiary']) button { background: var(--ds-background-neutral-subtle-default); box-shadow: inset 0 0 0 1px var(--ds-border-border-bold); } :host([variant='tertiary']:not([is-disabled]):not([is-selected])) button:hover { background: var(--ds-background-neutral-subtle-hovered); } :host([variant='tertiary']:not([is-disabled]):not([is-selected])) button:active { background: var(--ds-background-neutral-subtle-pressed); } /* ── Variant: ghost ───────────────────────────────────────────────── */ :host([variant='ghost']) button { background: var(--ds-background-neutral-subtle-default); } :host([variant='ghost']:not([is-disabled]):not([is-selected])) button:hover { background: var(--ds-background-neutral-subtle-hovered); } :host([variant='ghost']:not([is-disabled]):not([is-selected])) button:active { background: var(--ds-background-neutral-subtle-pressed); } /* ── Variant: danger ──────────────────────────────────────────────── */ :host([variant='danger']) button { background: var(--ds-background-danger-default); } :host([variant='danger']:not([is-disabled]):not([is-selected])) button:hover { background: var(--ds-background-danger-hovered); } :host([variant='danger']:not([is-disabled]):not([is-selected])) button:active { background: var(--ds-background-danger-pressed); } /* ── Selected (unified across variants) ───────────────────────────── */ /* When selected, the variant's own background and border are replaced with the selected-bold token + border-selected stroke. Variant hover and active are suppressed via :not([is-selected]) on those rules. */ :host([is-selected]) button { background: var(--ds-background-selected-bold-default); box-shadow: inset 0 0 0 1px var(--ds-border-border-selected); } :host([is-selected]:not([is-disabled])) button:hover { background: var(--ds-background-selected-bold-hovered); } :host([is-selected]:not([is-disabled])) button:active { background: var(--ds-background-selected-bold-pressed); } /* ── Disabled (overrides variant; loading keeps variant color) ────── */ :host([is-disabled]) button { background: var(--ds-background-disabled); color: var(--ds-text-text-disabled); cursor: not-allowed; box-shadow: none; } :host([is-loading]) button { cursor: progress; } /* ── Slots ────────────────────────────────────────────────────────── */ .icon-slot { display: inline-flex; align-items: center; justify-content: center; width: var(--ds-spacing-spacing-06); height: var(--ds-spacing-spacing-06); flex: 0 0 auto; color: var(--ds-icon-icon-default); } .icon-slot.empty { display: none; } ::slotted(svg), ::slotted(img) { width: 100%; height: 100%; display: block; } ::slotted(ds-icon) { flex-shrink: 0; } /* Built-in icon-after (shown when iconAfter=true) */ .icon-after { color: var(--ds-icon-icon-default); flex-shrink: 0; } :host([is-disabled]) .icon-slot, :host([is-disabled]) .icon-after { color: var(--ds-icon-icon-disabled); } /* ── Loading state ────────────────────────────────────────────────── */ /* When loading, the label and icons collapse out of the flex layout so the button shrinks to fit just the spinner — matching the Figma loading width (40px regardless of label length). */ :host([is-loading]) .label, :host([is-loading]) .icon-slot, :host([is-loading]) .icon-after { display: none; } .spinner { display: none; align-items: center; justify-content: center; width: var(--ds-spacing-spacing-06); height: var(--ds-spacing-spacing-06); flex: 0 0 auto; } :host([is-loading]) .spinner { display: inline-flex; } .spinner-ring { width: 100%; height: 100%; border-radius: 50%; border: 2px solid currentColor; border-top-color: transparent; animation: ds-button-spin 720ms linear infinite; } @keyframes ds-button-spin { to { transform: rotate(360deg); } } @media (prefers-reduced-motion: reduce) { .spinner-ring { animation-duration: 2400ms; } } `, ]"
+              "default": "[ resetStyles, typographyBaseStyles, typographyStyles, innerFocusRingStyles, srOnlyStyles, css` :host { display: inline-flex; vertical-align: middle; } :host([is-disabled]), :host([is-loading]) { pointer-events: none; } button { all: unset; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; gap: var(--ds-spacing-spacing-04); padding: 0 var(--ds-spacing-spacing-05); border-radius: var(--ds-radius-semantic-radius-sm); font-feature-settings: 'cv08' 1; color: var(--ds-text-text-default); cursor: pointer; user-select: none; white-space: nowrap; position: relative; transition: background-color 120ms ease, box-shadow 120ms ease, color 120ms ease; } /* ── Size ─────────────────────────────────────────────────────────── */ :host([size='sm']) button { height: var(--ds-type-scale-y4); /* 24px */ } :host([size='md']) button, :host(:not([size])) button { height: var(--ds-type-scale-y6); /* 32px */ } :host([size='lg']) button { height: var(--ds-type-scale-y7); /* 40px */ } /* Interactive states only apply when the button is enabled. Chaining :not([is-disabled]) into the selectors makes the rules immune to the specificity quirk where a variant+:hover would outrank disabled. */ /* ── Variant: primary ─────────────────────────────────────────────── */ :host([variant='primary']) button, :host(:not([variant])) button { background: var(--ds-background-brand-default); } :host([variant='primary']:not([is-disabled]):not([is-selected])) button:hover, :host(:not([variant]):not([is-disabled]):not([is-selected])) button:hover { background: var(--ds-background-brand-hovered); } :host([variant='primary']:not([is-disabled]):not([is-selected])) button:active, :host(:not([variant]):not([is-disabled]):not([is-selected])) button:active { background: var(--ds-background-brand-pressed); } /* ── Variant: secondary ───────────────────────────────────────────── */ :host([variant='secondary']) button { background: var(--ds-background-neutral-default); } :host([variant='secondary']:not([is-disabled]):not([is-selected])) button:hover { background: var(--ds-background-neutral-hovered); } :host([variant='secondary']:not([is-disabled]):not([is-selected])) button:active { background: var(--ds-background-neutral-pressed); } /* ── Variant: tertiary ────────────────────────────────────────────── */ :host([variant='tertiary']) button { background: var(--ds-background-neutral-subtle-default); box-shadow: inset 0 0 0 1px var(--ds-border-border-bold); } :host([variant='tertiary']:not([is-disabled]):not([is-selected])) button:hover { background: var(--ds-background-neutral-subtle-hovered); } :host([variant='tertiary']:not([is-disabled]):not([is-selected])) button:active { background: var(--ds-background-neutral-subtle-pressed); } /* ── Variant: ghost ───────────────────────────────────────────────── */ :host([variant='ghost']) button { background: var(--ds-background-neutral-subtle-default); } :host([variant='ghost']:not([is-disabled]):not([is-selected])) button:hover { background: var(--ds-background-neutral-subtle-hovered); } :host([variant='ghost']:not([is-disabled]):not([is-selected])) button:active { background: var(--ds-background-neutral-subtle-pressed); } /* ── Variant: danger ──────────────────────────────────────────────── */ :host([variant='danger']) button { background: var(--ds-background-danger-default); } :host([variant='danger']:not([is-disabled]):not([is-selected])) button:hover { background: var(--ds-background-danger-hovered); } :host([variant='danger']:not([is-disabled]):not([is-selected])) button:active { background: var(--ds-background-danger-pressed); } /* ── Selected (unified across variants) ───────────────────────────── */ /* When selected, the variant's own background and border are replaced with the selected-bold token + border-selected stroke. Variant hover and active are suppressed via :not([is-selected]) on those rules. */ :host([is-selected]) button { background: var(--ds-background-selected-bold-default); box-shadow: inset 0 0 0 1px var(--ds-border-border-selected); } :host([is-selected]:not([is-disabled])) button:hover { background: var(--ds-background-selected-bold-hovered); } :host([is-selected]:not([is-disabled])) button:active { background: var(--ds-background-selected-bold-pressed); } /* ── Disabled (overrides variant; loading keeps variant color) ────── */ :host([is-disabled]) button { background: var(--ds-background-disabled); color: var(--ds-text-text-disabled); cursor: not-allowed; box-shadow: none; } :host([is-loading]) button { cursor: progress; } /* ── Slots ────────────────────────────────────────────────────────── */ .icon-slot { display: inline-flex; align-items: center; justify-content: center; width: var(--ds-spacing-spacing-06); height: var(--ds-spacing-spacing-06); flex: 0 0 auto; color: var(--ds-icon-icon-default); } .icon-slot.empty { display: none; } ::slotted(svg), ::slotted(img) { width: 100%; height: 100%; display: block; } ::slotted(ds-icon) { flex-shrink: 0; } /* Built-in icon-after (shown when iconAfter=true) */ .icon-after { color: var(--ds-icon-icon-default); flex-shrink: 0; } :host([is-disabled]) .icon-slot, :host([is-disabled]) .icon-after { color: var(--ds-icon-icon-disabled); } /* ── Loading state ────────────────────────────────────────────────── */ /* When loading, the label and icons collapse out of the flex layout so the button shrinks to fit just the spinner — matching the Figma loading width (40px regardless of label length). */ :host([is-loading]) .label, :host([is-loading]) .icon-slot, :host([is-loading]) .icon-after { display: none; } .spinner { display: none; align-items: center; justify-content: center; width: var(--ds-spacing-spacing-06); height: var(--ds-spacing-spacing-06); flex: 0 0 auto; } :host([is-loading]) .spinner { display: inline-flex; } .spinner-ring { width: 100%; height: 100%; border-radius: 50%; border: 2px solid currentColor; border-top-color: transparent; animation: ds-button-spin 720ms linear infinite; } @keyframes ds-button-spin { to { transform: rotate(360deg); } } @media (prefers-reduced-motion: reduce) { .spinner-ring { animation-duration: 2400ms; } } `, ]"
             },
             {
               "kind": "field",
@@ -1007,7 +1064,7 @@
                 "text": "array"
               },
               "static": true,
-              "default": "[ resetStyles, typographyBaseStyles, srOnlyStyles, css` :host { display: inline-block; vertical-align: top; } :host([is-disabled]) { pointer-events: none; } :host([is-disabled]) .calendar { opacity: 0.4; } .calendar { box-sizing: border-box; width: 324px; background: var(--ds-elevation-surface-overlay-default); border-radius: var(--ds-radius-semantic-radius-md); padding: var(--ds-spacing-spacing-05); /* 12px */ box-shadow: inset 0 0 0 1px rgba(189, 189, 189, 0.12), 0 8px 12px rgba(1, 4, 4, 0.36), 0 0 1px rgba(1, 4, 4, 0.5); color: var(--ds-text-text-default); } /* ── Header (month / year navigation) ──────────────────────────────── */ .header { display: flex; align-items: center; gap: var(--ds-spacing-spacing-04); /* 8px */ width: 300px; padding-inline: var(--ds-spacing-spacing-04); /* 8px */ padding-bottom: var(--ds-spacing-spacing-05); } .label-wrap { flex: 1 1 auto; display: flex; justify-content: center; } .check-icon { width: var(--ds-spacing-spacing-06); /* 16px */ height: var(--ds-spacing-spacing-06); display: block; } .label-btn { flex: 0 0 auto; } /* Focus rings — scoped selectors beat all: unset (higher specificity). */ .picker-item:focus-visible { outline: 2px solid var(--ds-focus-focus); outline-offset: 2px; } .day:focus-visible { outline: 2px solid var(--ds-focus-focus); outline-offset: -2px; } .day:focus:not(:focus-visible), .picker-item:focus:not(:focus-visible) { outline: none; } /* ── Weekday header row ─────────────────────────────────────────────── */ .weekdays { display: grid; grid-template-columns: repeat(7, 1fr); width: 300px; margin-bottom: var(--ds-spacing-spacing-01); /* 2px gap to day grid */ } .weekday { display: flex; align-items: center; justify-content: center; padding: var(--ds-spacing-spacing-04) 0; /* Figma text style: Heading/xxs */ font-family: var(--ds-typography-cozy-heading-xxs-font-family); font-size: var(--ds-typography-cozy-heading-xxs-font-size); font-weight: var(--ds-typography-cozy-heading-xxs-font-weight); line-height: var(--ds-typography-cozy-heading-xxs-line-height); letter-spacing: var(--ds-typography-cozy-heading-xxs-letter-spacing); color: var(--ds-text-text-subtle); } /* ── Day grid ───────────────────────────────────────────────────────── */ .grid { display: grid; grid-template-columns: repeat(7, 1fr); width: 300px; row-gap: var(--ds-spacing-spacing-01); /* 2px vertical gap */ } .day { all: unset; box-sizing: border-box; position: relative; display: inline-flex; align-items: center; justify-content: center; height: var(--ds-type-scale-y7); /* 40px */ border-radius: var(--ds-radius-semantic-radius-sm); background: var(--ds-background-neutral-subtle-default); color: var(--ds-text-text-default); /* Figma text style: Body/md */ font-family: var(--ds-typography-cozy-regular-body-md-font-family); font-size: var(--ds-typography-cozy-regular-body-md-font-size); font-weight: var(--ds-typography-cozy-regular-body-md-font-weight); line-height: var(--ds-typography-cozy-regular-body-md-line-height); letter-spacing: var(--ds-typography-cozy-regular-body-md-letter-spacing); cursor: pointer; transition: background-color 120ms ease; } .day:hover { background: var(--ds-background-neutral-subtle-hovered); } .day:active { background: var(--ds-background-neutral-subtle-pressed); } /* Days outside the displayed month. */ .day.is-outside { color: var(--ds-text-text-disabled); } /* Today — blue ring, transparent fill (matches main component). */ .day.is-today { box-shadow: inset 0 0 0 2px var(--ds-border-border-selected); } /* Selected — filled navy, no stroke. Blue stroke is today only. */ .day.is-selected { background: var(--ds-background-selected-bold-default); color: var(--ds-text-text-default); } .day.is-selected:hover { background: var(--ds-background-selected-bold-hovered); } .day.is-selected:active { background: var(--ds-background-selected-bold-pressed); } /* Disabled / out of range. */ .day:disabled, .day.is-day-disabled { color: var(--ds-text-text-disabled); cursor: not-allowed; background: var(--ds-background-neutral-subtle-default); box-shadow: none; } /* Event marker under the number. */ .marker { position: absolute; bottom: 3px; left: 50%; transform: translateX(-50%); width: var(--ds-spacing-spacing-06); /* 16px */ height: 2px; border-radius: var(--ds-radius-semantic-radius-pill); } .marker.red { background: var(--ds-background-danger-default); } .marker.yellow { background: var(--ds-background-warning-default); } .marker.blue { background: var(--ds-background-brand-default); } .marker.white { background: var(--ds-color-default-neutral-white); } /* ── Today footer (wraps a ghost <ds-button>) ───────────────────────── */ .footer { display: flex; justify-content: center; padding-top: var(--ds-spacing-spacing-04); } /* ── Year / Month picker ────────────────────────────────────────────── */ .picker { display: grid; grid-template-columns: 1fr 1fr; padding-top: var(--ds-spacing-spacing-04); overflow: hidden; } .picker-col { display: flex; flex-direction: column; min-width: 0; overflow: hidden; } .picker-col + .picker-col { border-left: 1px solid var(--ds-border-border-default); } .picker-list { display: flex; flex-direction: column; max-height: 280px; overflow-y: auto; scrollbar-width: thin; padding: var(--ds-spacing-spacing-02) 0; } @media (prefers-reduced-motion: reduce) { .nav-btn, .day, .picker-item { transition: none; } } `, ]"
+              "default": "[ resetStyles, typographyBaseStyles, typographyStyles, srOnlyStyles, css` :host { display: inline-block; vertical-align: top; } :host([is-disabled]) { pointer-events: none; } :host([is-disabled]) .calendar { opacity: 0.4; } .calendar { box-sizing: border-box; width: 324px; background: var(--ds-elevation-surface-overlay-default); border-radius: var(--ds-radius-semantic-radius-md); padding: var(--ds-spacing-spacing-05); /* 12px */ box-shadow: inset 0 0 0 1px rgba(189, 189, 189, 0.12), 0 8px 12px rgba(1, 4, 4, 0.36), 0 0 1px rgba(1, 4, 4, 0.5); color: var(--ds-text-text-default); } /* ── Header (month / year navigation) ──────────────────────────────── */ .header { display: flex; align-items: center; gap: var(--ds-spacing-spacing-04); /* 8px */ width: 300px; padding-inline: var(--ds-spacing-spacing-04); /* 8px */ padding-bottom: var(--ds-spacing-spacing-05); } .label-wrap { flex: 1 1 auto; display: flex; justify-content: center; } .check-icon { width: var(--ds-spacing-spacing-06); /* 16px */ height: var(--ds-spacing-spacing-06); display: block; } .label-btn { flex: 0 0 auto; } /* Focus rings — scoped selectors beat all: unset (higher specificity). */ .picker-item:focus-visible { outline: 2px solid var(--ds-focus-focus); outline-offset: 2px; } .day:focus-visible { outline: 2px solid var(--ds-focus-focus); outline-offset: -2px; } .day:focus:not(:focus-visible), .picker-item:focus:not(:focus-visible) { outline: none; } /* ── Weekday header row ─────────────────────────────────────────────── */ .weekdays { display: grid; grid-template-columns: repeat(7, 1fr); width: 300px; margin-bottom: var(--ds-spacing-spacing-01); /* 2px gap to day grid */ } .weekday { display: flex; align-items: center; justify-content: center; padding: var(--ds-spacing-spacing-04) 0; color: var(--ds-text-text-subtle); } /* ── Day grid ───────────────────────────────────────────────────────── */ .grid { display: grid; grid-template-columns: repeat(7, 1fr); width: 300px; row-gap: var(--ds-spacing-spacing-01); /* 2px vertical gap */ } .day { all: unset; box-sizing: border-box; position: relative; display: inline-flex; align-items: center; justify-content: center; height: var(--ds-type-scale-y7); /* 40px */ border-radius: var(--ds-radius-semantic-radius-sm); background: var(--ds-background-neutral-subtle-default); color: var(--ds-text-text-default); cursor: pointer; transition: background-color 120ms ease; } .day:hover { background: var(--ds-background-neutral-subtle-hovered); } .day:active { background: var(--ds-background-neutral-subtle-pressed); } /* Days outside the displayed month. */ .day.is-outside { color: var(--ds-text-text-disabled); } /* Today — blue ring, transparent fill (matches main component). */ .day.is-today { box-shadow: inset 0 0 0 2px var(--ds-border-border-selected); } /* Selected — filled navy, no stroke. Blue stroke is today only. */ .day.is-selected { background: var(--ds-background-selected-bold-default); color: var(--ds-text-text-default); } .day.is-selected:hover { background: var(--ds-background-selected-bold-hovered); } .day.is-selected:active { background: var(--ds-background-selected-bold-pressed); } /* Disabled / out of range. */ .day:disabled, .day.is-day-disabled { color: var(--ds-text-text-disabled); cursor: not-allowed; background: var(--ds-background-neutral-subtle-default); box-shadow: none; } /* Event marker under the number. */ .marker { position: absolute; bottom: 3px; left: 50%; transform: translateX(-50%); width: var(--ds-spacing-spacing-06); /* 16px */ height: 2px; border-radius: var(--ds-radius-semantic-radius-pill); } .marker.red { background: var(--ds-background-danger-default); } .marker.yellow { background: var(--ds-background-warning-default); } .marker.blue { background: var(--ds-background-brand-default); } .marker.white { background: var(--ds-color-default-neutral-white); } /* ── Today footer (wraps a ghost <ds-button>) ───────────────────────── */ .footer { display: flex; justify-content: center; padding-top: var(--ds-spacing-spacing-04); } /* ── Year / Month picker ────────────────────────────────────────────── */ .picker { display: grid; grid-template-columns: 1fr 1fr; padding-top: var(--ds-spacing-spacing-04); overflow: hidden; } .picker-col { display: flex; flex-direction: column; min-width: 0; overflow: hidden; } .picker-col + .picker-col { border-left: 1px solid var(--ds-border-border-default); } .picker-list { display: flex; flex-direction: column; max-height: 280px; overflow-y: auto; scrollbar-width: thin; padding: var(--ds-spacing-spacing-02) 0; } @media (prefers-reduced-motion: reduce) { .nav-btn, .day, .picker-item { transition: none; } } `, ]"
             },
             {
               "kind": "field",
@@ -1565,6 +1622,388 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/ds-checkbox/ds-checkbox-group.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "DsCheckboxGroup",
+          "members": [
+            {
+              "kind": "field",
+              "name": "styles",
+              "type": {
+                "text": "array"
+              },
+              "static": true,
+              "default": "[ resetStyles, typographyBaseStyles, css` :host { display: flex; flex-direction: column; gap: 0; } /* ── Inline layout: label sits to the left of the values group ───────── */ :host([type='inline']) { flex-direction: row; align-items: flex-start; gap: var(--ds-spacing-spacing-04); /* 8px between label and values */ } /* ── Values container ────────────────────────────────────────────────── */ .values { display: flex; flex-direction: column; gap: var(--ds-spacing-spacing-04); /* 8px vertical gap between items */ } :host([orientation='horizontal']) .values { flex-direction: row; flex-wrap: wrap; gap: var(--ds-spacing-spacing-04); } /* inline type: items have no extra gap beyond the natural inline gap */ :host([type='inline'][orientation='horizontal']) .values { gap: var(--ds-spacing-spacing-04); } :host([type='inline'][orientation='vertical']) .values { gap: var(--ds-spacing-spacing-04); } /* ── Inline value+message wrapper ───────────────────────────────────── */ .value-message { display: flex; flex-direction: column; align-items: flex-start; flex: 1 0 0; min-width: 1px; } /* ── State pass-through via CSS — reacts to property changes instantly ── */ :host([is-disabled]) ::slotted(ds-checkbox) { pointer-events: none; } :host([is-read-only]) ::slotted(ds-checkbox) { pointer-events: none; } `, ]"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Text label for the whole group."
+            },
+            {
+              "kind": "field",
+              "name": "isRequired",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Appends a red asterisk to the group label."
+            },
+            {
+              "kind": "field",
+              "name": "hasInfoTip",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Shows info tip icon on the group label."
+            },
+            {
+              "kind": "field",
+              "name": "hasError",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Puts the entire group in an error state."
+            },
+            {
+              "kind": "field",
+              "name": "isDisabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Disables all child checkboxes."
+            },
+            {
+              "kind": "field",
+              "name": "isReadOnly",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Makes all child checkboxes read-only."
+            },
+            {
+              "kind": "field",
+              "name": "orientation",
+              "type": {
+                "text": "DsCheckboxGroupOrientation"
+              },
+              "default": "'vertical'",
+              "description": "Lays items out horizontally or vertically."
+            },
+            {
+              "kind": "field",
+              "name": "type",
+              "type": {
+                "text": "DsCheckboxGroupType"
+              },
+              "default": "'default'",
+              "description": "`default` = standard spacing; `inline` = compact, same layout rules."
+            },
+            {
+              "kind": "field",
+              "name": "helperText",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Optional helper text'",
+              "description": "Helper text shown below the group when there is no error."
+            },
+            {
+              "kind": "field",
+              "name": "errorText",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Field is required'",
+              "description": "Error text shown below the group when hasError is true."
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "HTML form field name propagated to all child checkboxes."
+            },
+            {
+              "kind": "method",
+              "name": "_getCheckboxes",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "Element[]"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "_syncChildren",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "updated"
+            },
+            {
+              "kind": "field",
+              "name": "_onSlotChange",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "render"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "ds-checkbox-group",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "DsCheckboxGroup",
+          "declaration": {
+            "name": "DsCheckboxGroup",
+            "module": "src/ds-checkbox/ds-checkbox-group.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/ds-checkbox/ds-checkbox.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "DsCheckbox",
+          "members": [
+            {
+              "kind": "field",
+              "name": "formAssociated",
+              "type": {
+                "text": "boolean"
+              },
+              "static": true,
+              "default": "true"
+            },
+            {
+              "kind": "field",
+              "name": "_internals",
+              "type": {
+                "text": "ElementInternals"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "styles",
+              "type": {
+                "text": "array"
+              },
+              "static": true,
+              "default": "[ resetStyles, typographyBaseStyles, typographyStyles, css` :host { display: inline-flex; flex-direction: column; align-items: flex-start; gap: 0; position: relative; } :host([is-disabled]) { pointer-events: none; } :host([is-read-only]) { pointer-events: none; } /* ── Clickable row (box + label) ─────────────────────────────────────── */ label { display: inline-flex; align-items: flex-start; gap: var(--ds-spacing-spacing-02); /* 4px between box and label text */ cursor: pointer; } :host([is-disabled]) label { cursor: not-allowed; } :host([is-read-only]) label { cursor: default; } /* ── Touch target wrapper ────────────────────────────────────────────── */ .checkbox-wrap { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; flex-shrink: 0; padding: 1px; } /* ── Native input (visually hidden, used for form association) ────────── */ input[type='checkbox'] { position: absolute; inset: 0; opacity: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; z-index: 1; } :host([is-disabled]) input[type='checkbox'] { cursor: not-allowed; } /* ── Visual box ──────────────────────────────────────────────────────── */ .box { position: relative; width: 14px; height: 14px; border-radius: var(--ds-radius-semantic-radius-xs); /* 2px */ flex-shrink: 0; transition: background-color 100ms ease, border-color 100ms ease, box-shadow 100ms ease; display: inline-flex; align-items: center; justify-content: center; } /* Default / unchecked */ .box { background: var(--ds-background-input-default); box-shadow: inset 0 0 0 1px var(--ds-border-border-bolder); } /* Hover */ :host(:not([is-disabled]):not([is-read-only])) input:hover ~ .box, :host(:not([is-disabled]):not([is-read-only])):hover .box { background: var(--ds-background-input-hovered); box-shadow: inset 0 0 0 1px var(--ds-border-border-bolder); } /* Active / pressed */ :host(:not([is-disabled]):not([is-read-only])) input:active ~ .box { background: var(--ds-background-input-pressed); box-shadow: inset 0 0 0 1px var(--ds-border-border-bolder); } /* Checked */ :host([is-checked]) .box { background: var(--ds-color-default-neutral-white); box-shadow: none; } :host([is-checked]:not([is-disabled]):not([is-read-only])) input:hover ~ .box, :host([is-checked]:not([is-disabled]):not([is-read-only])):hover .box { background: var(--ds-color-default-gray-10); box-shadow: none; } :host([is-checked]:not([is-disabled]):not([is-read-only])) input:active ~ .box { background: var(--ds-color-default-gray-20); box-shadow: none; } /* Indeterminate */ :host([is-indeterminate]) .box { background: var(--ds-color-default-neutral-white); box-shadow: none; } :host([is-indeterminate]:not([is-disabled]):not([is-read-only])) input:hover ~ .box, :host([is-indeterminate]:not([is-disabled]):not([is-read-only])):hover .box { background: var(--ds-color-default-gray-10); box-shadow: none; } :host([is-indeterminate]:not([is-disabled]):not([is-read-only])) input:active ~ .box { background: var(--ds-color-default-gray-20); box-shadow: none; } /* Error */ :host([has-error]) .box { box-shadow: inset 0 0 0 1px var(--ds-border-border-danger); } :host([has-error]:not([is-disabled])) input:hover ~ .box, :host([has-error]:not([is-disabled])):hover .box { background: var(--ds-background-input-hovered); box-shadow: inset 0 0 0 1px var(--ds-border-border-danger); } :host([has-error][is-checked]) .box, :host([has-error][is-indeterminate]) .box { background: var(--ds-color-default-neutral-white); box-shadow: inset 0 0 0 1px var(--ds-border-border-danger); } :host([has-error][is-checked]:not([is-disabled])) input:hover ~ .box, :host([has-error][is-checked]:not([is-disabled])):hover .box, :host([has-error][is-indeterminate]:not([is-disabled])) input:hover ~ .box, :host([has-error][is-indeterminate]:not([is-disabled])):hover .box { background: var(--ds-color-default-gray-10); box-shadow: inset 0 0 0 1px var(--ds-border-border-danger); } /* Disabled — unchecked */ :host([is-disabled]) .box { background: var(--ds-background-disabled); box-shadow: none; } /* Disabled — checked / indeterminate */ :host([is-disabled][is-checked]) .box, :host([is-disabled][is-indeterminate]) .box { background: var(--ds-background-disabled); box-shadow: none; } /* Read-only */ :host([is-read-only]) .box { background: var(--ds-background-input-default); box-shadow: inset 0 0 0 1px var(--ds-border-border-default); } :host([is-read-only][is-checked]) .box, :host([is-read-only][is-indeterminate]) .box { background: transparent; box-shadow: inset 0 0 0 1px var(--ds-border-border-default); } /* ── Checkmark / dash icons ───────────────────────────────────────────── */ .icon { display: none; width: 10px; height: 10px; color: var(--ds-icon-icon-inverse); pointer-events: none; position: absolute; inset: 0; margin: auto; } .icon svg { display: block; width: 100%; height: 100%; } :host([is-checked]) .icon-check { display: block; } :host([is-indeterminate]) .icon-dash { display: block; } :host([is-disabled][is-checked]) .icon, :host([is-disabled][is-indeterminate]) .icon { color: var(--ds-icon-icon-disabled); } :host([is-read-only][is-checked]) .icon, :host([is-read-only][is-indeterminate]) .icon { color: var(--ds-icon-icon-subtlest); } /* ── Focus ring ──────────────────────────────────────────────────────── */ input:focus-visible ~ .focus-ring { display: block; } .focus-ring { display: none; position: absolute; inset: -1px; border-radius: var(--ds-radius-semantic-radius-sm); /* 4px */ outline: 2px solid var(--ds-focus-focus); outline-offset: 0; pointer-events: none; } /* ── Label text area ─────────────────────────────────────────────────── */ .label-area { display: flex; flex-direction: column; gap: var(--ds-spacing-spacing-02); /* 4px */ padding-top: 2px; min-height: 24px; } .value-row { display: inline-flex; align-items: center; gap: var(--ds-spacing-spacing-01); /* 2px */ } .label-text { font-feature-settings: 'cv08' 1, 'zero' 1, 'cv05' 1; color: var(--ds-text-text-default); white-space: nowrap; max-width: 180px; word-break: break-word; } :host([is-disabled]) .label-text { color: var(--ds-text-text-disabled); } :host([is-read-only]) .label-text { color: var(--ds-text-text-subtle); } .required-mark { color: var(--ds-text-text-danger); } .description { font-feature-settings: 'cv08' 1, 'zero' 1, 'cv05' 1; color: var(--ds-text-text-subtlest); max-width: 320px; white-space: nowrap; word-break: break-word; } :host([is-disabled]) .description { color: var(--ds-text-text-disabled); } /* ── Child options slot ──────────────────────────────────────────────── */ .children-slot { padding-left: 28px; /* 24px box + 4px gap */ } `, ]"
+            },
+            {
+              "kind": "field",
+              "name": "isChecked",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Controlled checked state."
+            },
+            {
+              "kind": "field",
+              "name": "isIndeterminate",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Shows a dash instead of a checkmark; used by parent group for partial selection."
+            },
+            {
+              "kind": "field",
+              "name": "isDisabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Prevents interaction and dims the control."
+            },
+            {
+              "kind": "field",
+              "name": "isReadOnly",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Prevents interaction; retains opacity but shows a read-only appearance."
+            },
+            {
+              "kind": "field",
+              "name": "hasError",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Renders the border in danger color."
+            },
+            {
+              "kind": "field",
+              "name": "isRequired",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Appends a red asterisk after the label."
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Label text. Alternatively, use the default slot."
+            },
+            {
+              "kind": "field",
+              "name": "description",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Optional helper/description text rendered beneath the label."
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Form field name."
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "'on'",
+              "description": "Form field value."
+            },
+            {
+              "kind": "field",
+              "name": "inputId",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "ID forwarded to the native input; useful for external <label for=\"...\"> or aria-describedby."
+            },
+            {
+              "kind": "field",
+              "name": "title",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Tooltip set on the <label> element."
+            },
+            {
+              "kind": "field",
+              "name": "_hasDefaultSlot",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "_hasChildrenSlot",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "_onDefaultSlotChange",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "_onChildrenSlotChange",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "_handleChange",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "_handleKeyDown",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "_checkIcon",
+              "privacy": "private",
+              "default": "svg` <svg viewBox=\"0 0 10 10\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\"> <path d=\"M1.5 5L4 7.5L8.5 2.5\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/> </svg> `"
+            },
+            {
+              "kind": "field",
+              "name": "_dashIcon",
+              "privacy": "private",
+              "default": "svg` <svg viewBox=\"0 0 10 10\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\"> <path d=\"M2 5H8\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\"/> </svg> `"
+            },
+            {
+              "kind": "method",
+              "name": "render"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "ds-checkbox",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "DsCheckbox",
+          "declaration": {
+            "name": "DsCheckbox",
+            "module": "src/ds-checkbox/ds-checkbox.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/ds-form-label/ds-form-label.ts",
       "declarations": [
         {
@@ -1579,7 +2018,7 @@
                 "text": "array"
               },
               "static": true,
-              "default": "[ resetStyles, typographyBaseStyles, css` :host { display: inline-flex; align-items: flex-start; gap: var(--ds-spacing-spacing-01); padding-bottom: var(--ds-spacing-spacing-04); /* 8px → 16px row + 8px = 24px total */ } label { display: inline-flex; align-items: center; gap: var(--ds-spacing-spacing-01); } .text-group { display: inline-flex; align-items: center; gap: var(--ds-spacing-spacing-01); } .label-text { font-family: var(--ds-typography-cozy-regular-body-sm-font-family); font-size: var(--ds-typography-cozy-regular-body-sm-font-size); font-weight: var(--ds-typography-cozy-regular-body-sm-font-weight); line-height: var(--ds-typography-cozy-regular-body-sm-line-height); letter-spacing: var(--ds-typography-cozy-regular-body-sm-letter-spacing); font-feature-settings: 'cv08' 1, 'cv05' 1, 'zero' 1; color: var(--ds-text-text-subtle); } .required-mark { font-family: var(--ds-typography-cozy-medium-body-sm-font-family); font-size: var(--ds-typography-cozy-medium-body-sm-font-size); font-weight: var(--ds-typography-cozy-medium-body-sm-font-weight); line-height: var(--ds-typography-cozy-medium-body-sm-line-height); letter-spacing: var(--ds-typography-cozy-medium-body-sm-letter-spacing); font-feature-settings: 'cv08' 1, 'zero' 1, 'cv05' 1; color: var(--ds-text-text-danger); } .info-icon { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--ds-icon-icon-subtle); } `, ]"
+              "default": "[ resetStyles, typographyBaseStyles, typographyStyles, css` /* ── Stacked (default) ─────────────────────────────────────────────── Top-left aligned, 8px bottom padding so the field sits below it. */ :host { display: block; padding-bottom: var(--ds-spacing-spacing-04); /* 8px */ } /* ── Inline ────────────────────────────────────────────────────────── Fixed 180px, center-left aligned. --ds-form-label-padding-top lets parent form components override the top padding to optically center against their field height: checkbox group → 4px (24px field, 16px text: (24-16)/2 = 4px) text field/select → 8px (32px field, 16px text: (32-16)/2 = 8px) */ :host([type='inline']) { width: 180px; flex-shrink: 0; padding-bottom: 0; padding-top: var(--ds-form-label-padding-top, var(--ds-spacing-spacing-04)); /* default 8px */ align-self: flex-start; } label { display: block; width: 100%; cursor: default; } /* * .label-text and .required-mark are plain inline spans so the * sits * exactly 2px after the last character — not the text box edge. * The block label container provides the width for text to wrap into. */ .label-text { color: var(--ds-text-text-subtle); } .required-mark { margin-left: var(--ds-spacing-spacing-01); /* 2px — hugs text end */ color: var(--ds-text-text-danger); } .info-icon { display: inline-flex; align-items: center; justify-content: center; vertical-align: middle; margin-left: var(--ds-spacing-spacing-02); /* 4px gap after text+* */ color: var(--ds-icon-icon-subtle); } `, ]"
             },
             {
               "kind": "field",
@@ -1588,7 +2027,7 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "Text content for the label. Alternatively use the default slot."
+              "description": "Label text. Alternatively use the default slot."
             },
             {
               "kind": "field",
@@ -1610,12 +2049,21 @@
             },
             {
               "kind": "field",
+              "name": "type",
+              "type": {
+                "text": "DsFormLabelType"
+              },
+              "default": "'stacked'",
+              "description": "stacked — grows to fill the parent container (default).\ninline  — fixed 180px width, for side-by-side form layouts."
+            },
+            {
+              "kind": "field",
               "name": "for",
               "type": {
                 "text": "string"
               },
               "default": "''",
-              "description": "Associates this label with a form control via its id. Maps to the `for` attribute on an inner <label>."
+              "description": "Associates this label with a form control via its id."
             },
             {
               "kind": "method",
@@ -1657,7 +2105,7 @@
                 "text": "array"
               },
               "static": true,
-              "default": "[ resetStyles, typographyBaseStyles, css` :host { display: flex; align-items: flex-start; gap: var(--ds-spacing-spacing-04); padding-top: var(--ds-spacing-spacing-04); } /* Helper has no gap (no icon) */ :host([type='helper']) { gap: 0; } .icon { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; } :host([type='error']) .icon { color: var(--ds-icon-icon-danger); } :host([type='success']) .icon { color: var(--ds-icon-icon-success); } /* Hide icon slot in helper mode */ :host([type='helper']) .icon { display: none; } .text { flex: 1 0 0; min-width: 1px; font-family: var(--ds-typography-cozy-helper-helper-regular-font-family); font-size: var(--ds-typography-cozy-helper-helper-regular-font-size); font-weight: var(--ds-typography-cozy-helper-helper-regular-font-weight); line-height: var(--ds-typography-cozy-helper-helper-regular-line-height); letter-spacing: var(--ds-typography-cozy-helper-helper-regular-letter-spacing); font-feature-settings: 'cv08' 1, 'zero' 1, 'cv05' 1; word-break: break-word; } :host([type='error']) .text, :host(:not([type])) .text { color: var(--ds-text-text-danger); } :host([type='success']) .text { color: var(--ds-text-text-success); } :host([type='helper']) .text { color: var(--ds-text-text-subtlest); } `, ]"
+              "default": "[ resetStyles, typographyBaseStyles, typographyStyles, css` :host { display: flex; align-items: flex-start; gap: var(--ds-spacing-spacing-04); padding-top: var(--ds-spacing-spacing-04); } /* Helper has no gap (no icon) */ :host([type='helper']) { gap: 0; } .icon { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; } :host([type='error']) .icon { color: var(--ds-icon-icon-danger); } :host([type='success']) .icon { color: var(--ds-icon-icon-success); } /* Hide icon slot in helper mode */ :host([type='helper']) .icon { display: none; } .text { flex: 1 0 0; min-width: 1px; font-feature-settings: 'cv08' 1, 'zero' 1, 'cv05' 1; word-break: break-word; } :host([type='error']) .text, :host(:not([type])) .text { color: var(--ds-text-text-danger); } :host([type='success']) .text { color: var(--ds-text-text-success); } :host([type='helper']) .text { color: var(--ds-text-text-subtlest); } `, ]"
             },
             {
               "kind": "field",
@@ -1666,16 +2114,40 @@
                 "text": "DsFormMessageType"
               },
               "default": "'error'",
-              "description": "Visual / semantic type of the message."
+              "description": "Visual and semantic type — controls which text prop is displayed."
             },
             {
               "kind": "field",
-              "name": "message",
+              "name": "helperText",
               "type": {
                 "text": "string"
               },
               "default": "''",
-              "description": "Message text. When set, renders as text content instead of the default slot."
+              "description": "Text shown when type=\"helper\"."
+            },
+            {
+              "kind": "field",
+              "name": "errorText",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Text shown when type=\"error\"."
+            },
+            {
+              "kind": "field",
+              "name": "successText",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Text shown when type=\"success\"."
+            },
+            {
+              "kind": "field",
+              "name": "_resolvedText",
+              "privacy": "private",
+              "readonly": true
             },
             {
               "kind": "method",
@@ -2021,7 +2493,7 @@
                 "text": "array"
               },
               "static": true,
-              "default": "[ resetStyles, typographyBaseStyles, css` :host { display: block; } .label { display: block; padding: var(--ds-spacing-spacing-04) var(--ds-spacing-spacing-06) var(--ds-spacing-spacing-02); font-family: var(--ds-typography-cozy-helper-helper-regular-font-family); font-size: var(--ds-typography-cozy-helper-helper-regular-font-size); font-weight: var(--ds-typography-cozy-helper-helper-regular-font-weight); line-height: var(--ds-typography-cozy-helper-helper-regular-line-height); letter-spacing: var(--ds-typography-cozy-helper-helper-regular-letter-spacing); color: var(--ds-text-text-subtlest); font-feature-settings: 'cv08' 1; white-space: nowrap; } `, ]"
+              "default": "[ resetStyles, typographyBaseStyles, typographyStyles, css` :host { display: block; } .label { display: block; padding: var(--ds-spacing-spacing-04) var(--ds-spacing-spacing-06) var(--ds-spacing-spacing-02); color: var(--ds-text-text-subtlest); font-feature-settings: 'cv08' 1; white-space: nowrap; } `, ]"
             },
             {
               "kind": "method",
@@ -2049,6 +2521,107 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/ds-menu-category/ds-menu-separator.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "DsMenuSeparator",
+          "members": [
+            {
+              "kind": "field",
+              "name": "styles",
+              "type": {
+                "text": "array"
+              },
+              "static": true,
+              "default": "[ resetStyles, css` :host { display: block; padding: var(--ds-spacing-spacing-02) 0; } .line { width: 100%; height: 1px; background: var(--ds-border-border-default); } `, ]"
+            },
+            {
+              "kind": "method",
+              "name": "render"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "ds-menu-separator",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "DsMenuSeparator",
+          "declaration": {
+            "name": "DsMenuSeparator",
+            "module": "src/ds-menu-category/ds-menu-separator.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/ds-multi-select-menu/ds-multi-select-menu-group.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Logical grouping of items inside a <ds-multi-select-menu>.\n\n- title — optional section label rendered above the items.\n- has-separator — automatically set by the parent menu on every group\n  except the first.",
+          "name": "DsMultiSelectMenuGroup",
+          "members": [
+            {
+              "kind": "field",
+              "name": "styles",
+              "type": {
+                "text": "array"
+              },
+              "static": true,
+              "default": "[resetStyles]"
+            },
+            {
+              "kind": "field",
+              "name": "title",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "kind": "field",
+              "name": "hasSeparator",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Automatically set by <ds-multi-select-menu>. True for every group except the first."
+            },
+            {
+              "kind": "method",
+              "name": "render"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "ds-multi-select-menu-group",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "DsMultiSelectMenuGroup",
+          "declaration": {
+            "name": "DsMultiSelectMenuGroup",
+            "module": "src/ds-multi-select-menu/ds-multi-select-menu-group.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/ds-multi-select-menu/ds-multi-select-menu-item.ts",
       "declarations": [
         {
@@ -2063,7 +2636,7 @@
                 "text": "array"
               },
               "static": true,
-              "default": "[ resetStyles, typographyBaseStyles, innerFocusRingStyles, css` :host { display: block; } /* ── Base item ───────────────────────────────────────────── */ .item { display: flex; align-items: center; gap: var(--ds-spacing-spacing-06); width: 100%; padding: var(--ds-spacing-spacing-04) var(--ds-spacing-spacing-06); min-height: 40px; box-sizing: border-box; background: transparent; color: var(--ds-text-text-default); font-family: var(--ds-typography-cozy-regular-body-md-font-family); font-size: var(--ds-typography-cozy-regular-body-md-font-size); font-weight: var(--ds-typography-cozy-regular-body-md-font-weight); line-height: var(--ds-typography-cozy-regular-body-md-line-height); letter-spacing: var(--ds-typography-cozy-regular-body-md-letter-spacing); font-feature-settings: 'cv08' 1; cursor: pointer; user-select: none; transition: background 80ms ease; outline: none; } :host([size='sm']) .item { padding: var(--ds-spacing-spacing-03) var(--ds-spacing-spacing-06); min-height: 32px; } .item:hover { background: var(--ds-background-neutral-subtle-hovered); } .item:active { background: var(--ds-background-neutral-subtle-pressed); } .item:focus-visible { outline: 2px solid var(--ds-focus-focus); outline-offset: -2px; } /* ── Selected ─────────────────────────────────────────────── */ :host([selected]) .item:hover { background: var(--ds-background-selected-hovered); } :host([selected]) .item:active { background: var(--ds-background-selected-pressed); } :host([selected]) .checkbox-box { background: var(--ds-background-selected-bolder-default, #0168de); border-color: var(--ds-background-selected-bolder-default, #0168de); } /* ── Disabled ─────────────────────────────────────────────── */ :host([disabled]) { pointer-events: none; opacity: 0.4; } /* ── Left group: checkbox + text ─────────────────────────── */ .left-group { display: flex; align-items: center; gap: var(--ds-spacing-spacing-02); flex: 1 0 0; min-width: 0; } .checkbox { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 24px; height: 24px; padding: 1px; } .checkbox-box { display: flex; align-items: center; justify-content: center; width: 14px; height: 14px; border-radius: 2px; border: 1px solid var(--ds-border-border-bolder); background: var(--ds-background-input-default); flex-shrink: 0; transition: background 80ms ease, border-color 80ms ease; } /* ── Text group ───────────────────────────────────────────── */ .text-group { display: flex; flex-direction: column; gap: var(--ds-spacing-spacing-01); flex: 1 0 0; min-width: 0; overflow: hidden; } .label { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } .desc-wrap { display: block; } ::slotted([slot='description']) { display: block; font-family: var(--ds-typography-cozy-helper-helper-regular-font-family); font-size: var(--ds-typography-cozy-helper-helper-regular-font-size); font-weight: var(--ds-typography-cozy-helper-helper-regular-font-weight); line-height: var(--ds-typography-cozy-helper-helper-regular-line-height); letter-spacing: var(--ds-typography-cozy-helper-helper-regular-letter-spacing); color: var(--ds-text-text-subtle); font-feature-settings: 'cv08' 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } `, ]"
+              "default": "[ resetStyles, typographyBaseStyles, typographyStyles, innerFocusRingStyles, css` :host { display: block; } [hidden] { display: none !important; } /* ── Base item ───────────────────────────────────────────── */ .item { display: flex; align-items: center; gap: var(--ds-spacing-spacing-06); width: 100%; padding: var(--ds-spacing-spacing-04) var(--ds-spacing-spacing-06); min-height: 40px; box-sizing: border-box; background: transparent; color: var(--ds-text-text-default); font-feature-settings: 'cv08' 1; cursor: pointer; user-select: none; transition: background 80ms ease; outline: none; } :host([size='sm']) .item { padding: var(--ds-spacing-spacing-03) var(--ds-spacing-spacing-06); min-height: 32px; } .item:hover { background: var(--ds-background-neutral-subtle-hovered); } .item:active { background: var(--ds-background-neutral-subtle-pressed); } .item:focus-visible { outline: 2px solid var(--ds-focus-focus); outline-offset: -2px; } /* ── Selected ─────────────────────────────────────────────── */ :host([selected]) .item:hover { background: var(--ds-background-selected-hovered); } :host([selected]) .item:active { background: var(--ds-background-selected-pressed); } /* ── Disabled ─────────────────────────────────────────────── */ :host([disabled]) { pointer-events: none; cursor: not-allowed; } :host([disabled]) .label, :host([disabled]) ::slotted([slot='description']) { color: var(--ds-text-text-disabled); } /* ── Left group: checkbox + text ─────────────────────────── */ .left-group { display: flex; align-items: center; gap: var(--ds-spacing-spacing-02); flex: 1 0 0; min-width: 0; } .checkbox { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 24px; height: 24px; padding: 1px; } /* ── Text group ───────────────────────────────────────────── */ .text-group { display: flex; flex-direction: column; gap: var(--ds-spacing-spacing-01); flex: 1 0 0; min-width: 0; overflow: hidden; } .label { display: block; box-sizing: border-box; min-height: 24px; padding-top: var(--ds-spacing-spacing-01); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } .desc-wrap { display: block; } ::slotted([slot='description']) { display: block; font-family: var(--ds-typography-cozy-helper-helper-regular-font-family); font-size: var(--ds-typography-cozy-helper-helper-regular-font-size); font-weight: var(--ds-typography-cozy-helper-helper-regular-font-weight); line-height: var(--ds-typography-cozy-helper-helper-regular-line-height); letter-spacing: var(--ds-typography-cozy-helper-helper-regular-letter-spacing); color: var(--ds-text-text-subtle); font-feature-settings: 'cv08' 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } `, ]"
             },
             {
               "kind": "field",
@@ -2185,7 +2758,7 @@
                 "text": "array"
               },
               "static": true,
-              "default": "[ resetStyles, typographyBaseStyles, css` :host { display: block; min-width: 144px; } .container { display: flex; flex-direction: column; overflow: hidden; background: var(--ds-elevation-surface-overlay-default); /* ⚠ no shadow token — raw fallback */ box-shadow: 0px 0px 1px 0px rgba(1, 4, 4, 0.5), 0px 8px 12px 0px rgba(1, 4, 4, 0.36), inset 0px 0px 0px 1px rgba(189, 189, 189, 0.12); } [hidden] { display: none !important; } .header { display: flex; flex-direction: column; gap: var(--ds-spacing-spacing-05); padding: var(--ds-spacing-spacing-05) var(--ds-spacing-spacing-06); flex-shrink: 0; overflow: hidden; } .body { padding: var(--ds-spacing-spacing-02) 0; overflow-y: auto; max-height: 320px; } .state-panel { display: flex; align-items: center; justify-content: center; min-height: 120px; padding: var(--ds-spacing-spacing-03) var(--ds-spacing-spacing-05); } .spinner { width: 16px; height: 16px; border: 1.5px solid rgba(255, 255, 255, 0.2); border-top-color: rgba(255, 255, 255, 0.8); border-radius: 50%; animation: ds-multi-spin 0.75s linear infinite; flex-shrink: 0; } @keyframes ds-multi-spin { to { transform: rotate(360deg); } } .empty-text { font-family: var(--ds-typography-cozy-helper-helper-regular-font-family); font-size: var(--ds-typography-cozy-helper-helper-regular-font-size); font-weight: var(--ds-typography-cozy-helper-helper-regular-font-weight); line-height: var(--ds-typography-cozy-helper-helper-regular-line-height); letter-spacing: var(--ds-typography-cozy-helper-helper-regular-letter-spacing); color: var(--ds-text-text-subtlest); font-feature-settings: 'cv08' 1; } .footer { display: flex; align-items: center; justify-content: flex-end; gap: var(--ds-spacing-spacing-04); padding: var(--ds-spacing-spacing-05) var(--ds-spacing-spacing-06); border-top: 1px solid var(--ds-border-border-default); flex-shrink: 0; overflow: hidden; } `, ]"
+              "default": "[ resetStyles, typographyBaseStyles, typographyStyles, css` :host { display: block; min-width: 144px; } .container { display: flex; flex-direction: column; overflow: hidden; background: var(--ds-elevation-surface-overlay-default); border-radius: var(--ds-radius-semantic-radius-sm); /* ⚠ no shadow token — raw fallback */ box-shadow: 0px 0px 1px 0px rgba(1, 4, 4, 0.5), 0px 8px 12px 0px rgba(1, 4, 4, 0.36), inset 0px 0px 0px 1px rgba(189, 189, 189, 0.12); } [hidden] { display: none !important; } .header { display: flex; flex-direction: column; gap: var(--ds-spacing-spacing-05); padding: var(--ds-spacing-spacing-05) var(--ds-spacing-spacing-06); flex-shrink: 0; overflow: hidden; } .body { padding: var(--ds-spacing-spacing-04) 0; overflow-y: auto; max-height: 320px; } .state-panel { display: flex; align-items: center; justify-content: center; min-height: 120px; padding: var(--ds-spacing-spacing-03) var(--ds-spacing-spacing-05); } .spinner { width: 16px; height: 16px; border: 1.5px solid rgba(255, 255, 255, 0.2); border-top-color: rgba(255, 255, 255, 0.8); border-radius: 50%; animation: ds-multi-spin 0.75s linear infinite; flex-shrink: 0; } @keyframes ds-multi-spin { to { transform: rotate(360deg); } } .empty-text { color: var(--ds-text-text-subtlest); font-feature-settings: 'cv08' 1; } .footer { display: flex; align-items: center; justify-content: flex-end; gap: var(--ds-spacing-spacing-04); padding: var(--ds-spacing-spacing-05) var(--ds-spacing-spacing-06); border-top: 1px solid var(--ds-border-border-default); flex-shrink: 0; overflow: hidden; } `, ]"
             },
             {
               "kind": "field",
@@ -2269,16 +2842,23 @@
             },
             {
               "kind": "method",
-              "name": "_onDefaultSlotChange",
+              "name": "_groups",
               "privacy": "private",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "Event"
-                  }
+              "return": {
+                "type": {
+                  "text": "import('./ds-multi-select-menu-group.js').DsMultiSelectMenuGroup[]"
                 }
-              ]
+              }
+            },
+            {
+              "kind": "method",
+              "name": "_configureGroups",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "_onDefaultSlotChange",
+              "privacy": "private"
             },
             {
               "kind": "method",
@@ -2338,10 +2918,77 @@
         },
         {
           "kind": "js",
+          "name": "DsMultiSelectMenuGroup",
+          "declaration": {
+            "name": "DsMultiSelectMenuGroup",
+            "module": "./ds-multi-select-menu-group.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "DsMultiSelectMenu",
           "declaration": {
             "name": "DsMultiSelectMenu",
             "module": "src/ds-multi-select-menu/ds-multi-select-menu.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/ds-single-select-menu/ds-single-select-menu-group.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Logical grouping of items inside a <ds-single-select-menu>.\n\n- title — optional section label rendered above the items.\n- has-separator — automatically set by the parent menu on every group\n  except the first.",
+          "name": "DsSingleSelectMenuGroup",
+          "members": [
+            {
+              "kind": "field",
+              "name": "styles",
+              "type": {
+                "text": "array"
+              },
+              "static": true,
+              "default": "[resetStyles]"
+            },
+            {
+              "kind": "field",
+              "name": "title",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "kind": "field",
+              "name": "hasSeparator",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Automatically set by <ds-single-select-menu>. True for every group except the first."
+            },
+            {
+              "kind": "method",
+              "name": "render"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "ds-single-select-menu-group",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "DsSingleSelectMenuGroup",
+          "declaration": {
+            "name": "DsSingleSelectMenuGroup",
+            "module": "src/ds-single-select-menu/ds-single-select-menu-group.ts"
           }
         }
       ]
@@ -2362,7 +3009,7 @@
                 "text": "array"
               },
               "static": true,
-              "default": "[ resetStyles, typographyBaseStyles, innerFocusRingStyles, css` :host { display: block; } /* ── Base item ───────────────────────────────────────────── */ .item { display: flex; align-items: center; gap: var(--ds-spacing-spacing-06); width: 100%; padding: var(--ds-spacing-spacing-04) var(--ds-spacing-spacing-06); min-height: 40px; box-sizing: border-box; background: transparent; color: var(--ds-text-text-default); font-family: var(--ds-typography-cozy-regular-body-md-font-family); font-size: var(--ds-typography-cozy-regular-body-md-font-size); font-weight: var(--ds-typography-cozy-regular-body-md-font-weight); line-height: var(--ds-typography-cozy-regular-body-md-line-height); letter-spacing: var(--ds-typography-cozy-regular-body-md-letter-spacing); font-feature-settings: 'cv08' 1; cursor: pointer; user-select: none; transition: background 80ms ease; outline: none; } :host([size='sm']) .item { padding: var(--ds-spacing-spacing-03) var(--ds-spacing-spacing-06); min-height: 32px; } .item:hover { background: var(--ds-background-neutral-subtle-hovered); } .item:active { background: var(--ds-background-neutral-subtle-pressed); } .item:focus-visible { outline: 2px solid var(--ds-focus-focus); outline-offset: -2px; } /* ── Selected ─────────────────────────────────────────────── */ :host([selected]) .item { background: var(--ds-background-selected-bold-default); } :host([selected]) .item:hover { background: var(--ds-background-selected-bold-hovered); } :host([selected]) .item:active { background: var(--ds-background-selected-bold-pressed); } /* ── Disabled ─────────────────────────────────────────────── */ :host([disabled]) { pointer-events: none; opacity: 0.4; } /* ── Text group ───────────────────────────────────────────── */ .text-group { display: flex; flex-direction: column; gap: var(--ds-spacing-spacing-01); flex: 1 0 0; min-width: 0; overflow: hidden; } .label { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } .desc-wrap { display: block; } ::slotted([slot='description']) { display: block; font-family: var(--ds-typography-cozy-helper-helper-regular-font-family); font-size: var(--ds-typography-cozy-helper-helper-regular-font-size); font-weight: var(--ds-typography-cozy-helper-helper-regular-font-weight); line-height: var(--ds-typography-cozy-helper-helper-regular-line-height); letter-spacing: var(--ds-typography-cozy-helper-helper-regular-letter-spacing); color: var(--ds-text-text-subtle); font-feature-settings: 'cv08' 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } /* ── Trailing checkmark ───────────────────────────────────── */ .check-wrap { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 16px; height: 16px; color: var(--ds-icon-icon-selected); } `, ]"
+              "default": "[ resetStyles, typographyBaseStyles, typographyStyles, innerFocusRingStyles, css` :host { display: block; } [hidden] { display: none !important; } /* ── Base item ───────────────────────────────────────────── */ .item { display: flex; align-items: center; gap: var(--ds-spacing-spacing-04); width: 100%; padding: var(--ds-spacing-spacing-04) var(--ds-spacing-spacing-06); min-height: 40px; box-sizing: border-box; background: transparent; color: var(--ds-text-text-default); font-feature-settings: 'cv08' 1; cursor: pointer; user-select: none; transition: background 80ms ease; outline: none; } :host([size='sm']) .item { padding: var(--ds-spacing-spacing-03) var(--ds-spacing-spacing-06); min-height: 32px; } .item:hover { background: var(--ds-background-neutral-subtle-hovered); } .item:active { background: var(--ds-background-neutral-subtle-pressed); } .item:focus-visible { outline: 2px solid var(--ds-focus-focus); outline-offset: -2px; } /* ── Selected ─────────────────────────────────────────────── */ :host([selected]) .item { background: var(--ds-background-selected-default); } :host([selected]) .item:hover { background: var(--ds-background-selected-hovered); } :host([selected]) .item:active { background: var(--ds-background-selected-pressed); } /* ── Disabled ─────────────────────────────────────────────── */ :host([disabled]) { pointer-events: none; cursor: not-allowed; } :host([disabled]) .label, :host([disabled]) ::slotted([slot='description']) { color: var(--ds-text-text-disabled); } /* ── Text group ───────────────────────────────────────────── */ .text-group { display: flex; flex-direction: column; gap: var(--ds-spacing-spacing-01); flex: 1 0 0; min-width: 0; overflow: hidden; } .label { display: block; box-sizing: border-box; min-height: 24px; padding-top: var(--ds-spacing-spacing-01); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } .desc-wrap { display: block; } ::slotted([slot='description']) { display: block; font-family: var(--ds-typography-cozy-helper-helper-regular-font-family); font-size: var(--ds-typography-cozy-helper-helper-regular-font-size); font-weight: var(--ds-typography-cozy-helper-helper-regular-font-weight); line-height: var(--ds-typography-cozy-helper-helper-regular-line-height); letter-spacing: var(--ds-typography-cozy-helper-helper-regular-letter-spacing); color: var(--ds-text-text-subtle); font-feature-settings: 'cv08' 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } /* ── Trailing checkmark ───────────────────────────────────── */ .check-wrap { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 24px; height: 24px; padding: var(--ds-spacing-spacing-02); box-sizing: border-box; color: var(--ds-icon-icon-default); } `, ]"
             },
             {
               "kind": "field",
@@ -2484,7 +3131,7 @@
                 "text": "array"
               },
               "static": true,
-              "default": "[ resetStyles, typographyBaseStyles, css` :host { display: block; min-width: 144px; } .container { display: flex; flex-direction: column; overflow: hidden; background: var(--ds-elevation-surface-overlay-default); /* ⚠ no shadow token — raw fallback */ box-shadow: 0px 0px 1px 0px rgba(1, 4, 4, 0.5), 0px 8px 12px 0px rgba(1, 4, 4, 0.36), inset 0px 0px 0px 1px rgba(189, 189, 189, 0.12); } [hidden] { display: none !important; } .header { display: flex; flex-direction: column; gap: var(--ds-spacing-spacing-05); padding: var(--ds-spacing-spacing-05) var(--ds-spacing-spacing-06); flex-shrink: 0; overflow: hidden; } .body { padding: var(--ds-spacing-spacing-02) 0; overflow-y: auto; max-height: 320px; } .state-panel { display: flex; align-items: center; justify-content: center; min-height: 120px; padding: var(--ds-spacing-spacing-03) var(--ds-spacing-spacing-05); } .spinner { width: 16px; height: 16px; border: 1.5px solid rgba(255, 255, 255, 0.2); border-top-color: rgba(255, 255, 255, 0.8); border-radius: 50%; animation: ds-single-spin 0.75s linear infinite; flex-shrink: 0; } @keyframes ds-single-spin { to { transform: rotate(360deg); } } .empty-text { font-family: var(--ds-typography-cozy-helper-helper-regular-font-family); font-size: var(--ds-typography-cozy-helper-helper-regular-font-size); font-weight: var(--ds-typography-cozy-helper-helper-regular-font-weight); line-height: var(--ds-typography-cozy-helper-helper-regular-line-height); letter-spacing: var(--ds-typography-cozy-helper-helper-regular-letter-spacing); color: var(--ds-text-text-subtlest); font-feature-settings: 'cv08' 1; } .footer { display: flex; align-items: center; justify-content: flex-end; gap: var(--ds-spacing-spacing-04); padding: var(--ds-spacing-spacing-05) var(--ds-spacing-spacing-06); border-top: 1px solid var(--ds-border-border-default); flex-shrink: 0; overflow: hidden; } `, ]"
+              "default": "[ resetStyles, typographyBaseStyles, typographyStyles, css` :host { display: block; min-width: 144px; } .container { display: flex; flex-direction: column; overflow: hidden; background: var(--ds-elevation-surface-overlay-default); border-radius: var(--ds-radius-semantic-radius-sm); /* ⚠ no shadow token — raw fallback */ box-shadow: 0px 0px 1px 0px rgba(1, 4, 4, 0.5), 0px 8px 12px 0px rgba(1, 4, 4, 0.36), inset 0px 0px 0px 1px rgba(189, 189, 189, 0.12); } [hidden] { display: none !important; } .header { display: flex; flex-direction: column; gap: var(--ds-spacing-spacing-05); padding: var(--ds-spacing-spacing-05) var(--ds-spacing-spacing-06); flex-shrink: 0; overflow: hidden; } .body { padding: var(--ds-spacing-spacing-04) 0; overflow-y: auto; max-height: 320px; } .state-panel { display: flex; align-items: center; justify-content: center; min-height: 120px; padding: var(--ds-spacing-spacing-03) var(--ds-spacing-spacing-05); } .spinner { width: 16px; height: 16px; border: 1.5px solid rgba(255, 255, 255, 0.2); border-top-color: rgba(255, 255, 255, 0.8); border-radius: 50%; animation: ds-single-spin 0.75s linear infinite; flex-shrink: 0; } @keyframes ds-single-spin { to { transform: rotate(360deg); } } .empty-text { color: var(--ds-text-text-subtlest); font-feature-settings: 'cv08' 1; } .footer { display: flex; align-items: center; justify-content: flex-end; gap: var(--ds-spacing-spacing-04); padding: var(--ds-spacing-spacing-05) var(--ds-spacing-spacing-06); border-top: 1px solid var(--ds-border-border-default); flex-shrink: 0; overflow: hidden; } `, ]"
             },
             {
               "kind": "field",
@@ -2568,16 +3215,23 @@
             },
             {
               "kind": "method",
-              "name": "_onDefaultSlotChange",
+              "name": "_groups",
               "privacy": "private",
-              "parameters": [
-                {
-                  "name": "e",
-                  "type": {
-                    "text": "Event"
-                  }
+              "return": {
+                "type": {
+                  "text": "import('./ds-single-select-menu-group.js').DsSingleSelectMenuGroup[]"
                 }
-              ]
+              }
+            },
+            {
+              "kind": "method",
+              "name": "_configureGroups",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "_onDefaultSlotChange",
+              "privacy": "private"
             },
             {
               "kind": "method",
@@ -2637,6 +3291,14 @@
         },
         {
           "kind": "js",
+          "name": "DsSingleSelectMenuGroup",
+          "declaration": {
+            "name": "DsSingleSelectMenuGroup",
+            "module": "./ds-single-select-menu-group.js"
+          }
+        },
+        {
+          "kind": "js",
           "name": "DsSingleSelectMenu",
           "declaration": {
             "name": "DsSingleSelectMenu",
@@ -2661,7 +3323,7 @@
                 "text": "array"
               },
               "static": true,
-              "default": "[ resetStyles, typographyBaseStyles, innerFocusRingStyles, css` :host { display: inline-flex; vertical-align: middle; } :host([is-disabled]) { pointer-events: none; } /* ── Outer wrapper ───────────────────────────────────────────────── */ /* primary: 1px gap acts as the visual divider between halves */ /* tertiary: no gap — border is applied per-half */ .root { display: inline-flex; } :host([variant='primary']) .root, :host(:not([variant])) .root { gap: 1px; } :host([variant='tertiary']) .root { gap: 0; } /* ── Shared button base ───────────────────────────────────────────── */ .action-btn, .menu-btn { all: unset; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; user-select: none; white-space: nowrap; position: relative; transition: background-color 120ms ease, box-shadow 120ms ease, color 120ms ease; } /* ── Action button (left half) ────────────────────────────────────── */ .action-btn { border-radius: var(--ds-radius-semantic-radius-sm) 0 0 var(--ds-radius-semantic-radius-sm); font-family: var(--ds-typography-cozy-medium-body-sm-font-family); font-size: var(--ds-typography-cozy-medium-body-sm-font-size); font-weight: var(--ds-typography-cozy-medium-body-sm-font-weight); line-height: var(--ds-typography-cozy-medium-body-sm-line-height); letter-spacing: var(--ds-typography-cozy-medium-body-sm-letter-spacing); font-feature-settings: 'cv08' 1; color: var(--ds-text-text-default); } /* ── Menu button (right half — always square) ─────────────────────── */ .menu-btn { border-radius: 0 var(--ds-radius-semantic-radius-sm) var(--ds-radius-semantic-radius-sm) 0; color: var(--ds-icon-icon-default); flex-shrink: 0; } /* ── Variant: primary ─────────────────────────────────────────────── */ :host([variant='primary']) .action-btn, :host(:not([variant])) .action-btn, :host([variant='primary']) .menu-btn, :host(:not([variant])) .menu-btn { background: var(--ds-background-brand-default); } :host([variant='primary']:not([is-disabled])) .action-btn:hover, :host(:not([variant]):not([is-disabled])) .action-btn:hover, :host([variant='primary']:not([is-disabled])) .menu-btn:hover, :host(:not([variant]):not([is-disabled])) .menu-btn:hover { background: var(--ds-background-brand-hovered); } :host([variant='primary']:not([is-disabled])) .action-btn:active, :host(:not([variant]):not([is-disabled])) .action-btn:active, :host([variant='primary']:not([is-disabled])) .menu-btn:active, :host(:not([variant]):not([is-disabled])) .menu-btn:active { background: var(--ds-background-brand-pressed); } /* ── Variant: tertiary ────────────────────────────────────────────── */ /* Left half: left + top + bottom border; right half: all sides */ :host([variant='tertiary']) .action-btn { background: var(--ds-background-neutral-subtle-default); box-shadow: inset 1px 0 0 0 var(--ds-border-border-bold), inset 0 1px 0 0 var(--ds-border-border-bold), inset 0 -1px 0 0 var(--ds-border-border-bold); } :host([variant='tertiary']) .menu-btn { background: var(--ds-background-neutral-subtle-default); box-shadow: inset 0 0 0 1px var(--ds-border-border-bold); } :host([variant='tertiary']:not([is-disabled])) .action-btn:hover, :host([variant='tertiary']:not([is-disabled])) .menu-btn:hover { background: var(--ds-background-neutral-subtle-hovered); } :host([variant='tertiary']:not([is-disabled])) .action-btn:active, :host([variant='tertiary']:not([is-disabled])) .menu-btn:active { background: var(--ds-background-neutral-subtle-pressed); } /* ── Sizes — text type (action-btn has padding) ───────────────────── */ :host([size='sm']) .action-btn:not(.action-btn--icon) { height: var(--ds-type-scale-y4); /* 24px */ padding: 0 var(--ds-spacing-spacing-04); /* 8px */ } :host([size='md']) .action-btn:not(.action-btn--icon), :host(:not([size])) .action-btn:not(.action-btn--icon) { height: var(--ds-type-scale-y6); /* 32px */ padding: 0 var(--ds-spacing-spacing-05); /* 12px */ } :host([size='lg']) .action-btn:not(.action-btn--icon) { height: var(--ds-type-scale-y7); /* 40px */ padding: 0 var(--ds-spacing-spacing-06); /* 16px */ } /* ── Sizes — icon type (action-btn is square) ─────────────────────── */ :host([size='sm']) .action-btn--icon { width: var(--ds-type-scale-y4); height: var(--ds-type-scale-y4); } :host([size='md']) .action-btn--icon, :host(:not([size])) .action-btn--icon { width: var(--ds-type-scale-y6); height: var(--ds-type-scale-y6); } :host([size='lg']) .action-btn--icon { width: var(--ds-type-scale-y7); height: var(--ds-type-scale-y7); } /* ── Menu button sizes (always square) ───────────────────────────── */ :host([size='sm']) .menu-btn { width: var(--ds-type-scale-y4); height: var(--ds-type-scale-y4); } :host([size='md']) .menu-btn, :host(:not([size])) .menu-btn { width: var(--ds-type-scale-y6); height: var(--ds-type-scale-y6); } :host([size='lg']) .menu-btn { width: var(--ds-type-scale-y7); height: var(--ds-type-scale-y7); } /* ── Disabled ─────────────────────────────────────────────────────── */ :host([is-disabled]) .action-btn, :host([is-disabled]) .menu-btn { background: var(--ds-background-disabled); box-shadow: none; color: var(--ds-text-text-disabled); cursor: not-allowed; } /* ── Focus ring ───────────────────────────────────────────────────── */ .action-btn:focus-visible, .menu-btn:focus-visible { outline: 2px solid var(--ds-focus-focus); outline-offset: 2px; z-index: 1; } .action-btn:focus:not(:focus-visible), .menu-btn:focus:not(:focus-visible) { outline: none; } /* ── Icon slot ────────────────────────────────────────────────────── */ .menu-icon, .action-icon { display: inline-flex; align-items: center; justify-content: center; width: var(--ds-spacing-spacing-06); /* 16px */ height: var(--ds-spacing-spacing-06); flex-shrink: 0; } ::slotted(svg), ::slotted(img) { width: var(--ds-spacing-spacing-06); height: var(--ds-spacing-spacing-06); display: block; flex-shrink: 0; } ::slotted(ds-icon) { flex-shrink: 0; } `, ]"
+              "default": "[ resetStyles, typographyBaseStyles, typographyStyles, innerFocusRingStyles, css` :host { display: inline-flex; vertical-align: middle; } :host([is-disabled]) { pointer-events: none; } /* ── Outer wrapper ───────────────────────────────────────────────── */ /* primary: 1px gap acts as the visual divider between halves */ /* tertiary: no gap — border is applied per-half */ .root { display: inline-flex; } :host([variant='primary']) .root, :host(:not([variant])) .root { gap: 1px; } :host([variant='tertiary']) .root { gap: 0; } /* ── Shared button base ───────────────────────────────────────────── */ .action-btn, .menu-btn { all: unset; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; user-select: none; white-space: nowrap; position: relative; transition: background-color 120ms ease, box-shadow 120ms ease, color 120ms ease; } /* ── Action button (left half) ────────────────────────────────────── */ .action-btn { border-radius: var(--ds-radius-semantic-radius-sm) 0 0 var(--ds-radius-semantic-radius-sm); font-feature-settings: 'cv08' 1; color: var(--ds-text-text-default); } /* ── Menu button (right half — always square) ─────────────────────── */ .menu-btn { border-radius: 0 var(--ds-radius-semantic-radius-sm) var(--ds-radius-semantic-radius-sm) 0; color: var(--ds-icon-icon-default); flex-shrink: 0; } /* ── Variant: primary ─────────────────────────────────────────────── */ :host([variant='primary']) .action-btn, :host(:not([variant])) .action-btn, :host([variant='primary']) .menu-btn, :host(:not([variant])) .menu-btn { background: var(--ds-background-brand-default); } :host([variant='primary']:not([is-disabled])) .action-btn:hover, :host(:not([variant]):not([is-disabled])) .action-btn:hover, :host([variant='primary']:not([is-disabled])) .menu-btn:hover, :host(:not([variant]):not([is-disabled])) .menu-btn:hover { background: var(--ds-background-brand-hovered); } :host([variant='primary']:not([is-disabled])) .action-btn:active, :host(:not([variant]):not([is-disabled])) .action-btn:active, :host([variant='primary']:not([is-disabled])) .menu-btn:active, :host(:not([variant]):not([is-disabled])) .menu-btn:active { background: var(--ds-background-brand-pressed); } /* ── Variant: tertiary ────────────────────────────────────────────── */ /* Left half: left + top + bottom border; right half: all sides */ :host([variant='tertiary']) .action-btn { background: var(--ds-background-neutral-subtle-default); box-shadow: inset 1px 0 0 0 var(--ds-border-border-bold), inset 0 1px 0 0 var(--ds-border-border-bold), inset 0 -1px 0 0 var(--ds-border-border-bold); } :host([variant='tertiary']) .menu-btn { background: var(--ds-background-neutral-subtle-default); box-shadow: inset 0 0 0 1px var(--ds-border-border-bold); } :host([variant='tertiary']:not([is-disabled])) .action-btn:hover, :host([variant='tertiary']:not([is-disabled])) .menu-btn:hover { background: var(--ds-background-neutral-subtle-hovered); } :host([variant='tertiary']:not([is-disabled])) .action-btn:active, :host([variant='tertiary']:not([is-disabled])) .menu-btn:active { background: var(--ds-background-neutral-subtle-pressed); } /* ── Sizes — text type (action-btn has padding) ───────────────────── */ :host([size='sm']) .action-btn:not(.action-btn--icon) { height: var(--ds-type-scale-y4); /* 24px */ padding: 0 var(--ds-spacing-spacing-04); /* 8px */ } :host([size='md']) .action-btn:not(.action-btn--icon), :host(:not([size])) .action-btn:not(.action-btn--icon) { height: var(--ds-type-scale-y6); /* 32px */ padding: 0 var(--ds-spacing-spacing-05); /* 12px */ } :host([size='lg']) .action-btn:not(.action-btn--icon) { height: var(--ds-type-scale-y7); /* 40px */ padding: 0 var(--ds-spacing-spacing-06); /* 16px */ } /* ── Sizes — icon type (action-btn is square) ─────────────────────── */ :host([size='sm']) .action-btn--icon { width: var(--ds-type-scale-y4); height: var(--ds-type-scale-y4); } :host([size='md']) .action-btn--icon, :host(:not([size])) .action-btn--icon { width: var(--ds-type-scale-y6); height: var(--ds-type-scale-y6); } :host([size='lg']) .action-btn--icon { width: var(--ds-type-scale-y7); height: var(--ds-type-scale-y7); } /* ── Menu button sizes (always square) ───────────────────────────── */ :host([size='sm']) .menu-btn { width: var(--ds-type-scale-y4); height: var(--ds-type-scale-y4); } :host([size='md']) .menu-btn, :host(:not([size])) .menu-btn { width: var(--ds-type-scale-y6); height: var(--ds-type-scale-y6); } :host([size='lg']) .menu-btn { width: var(--ds-type-scale-y7); height: var(--ds-type-scale-y7); } /* ── Disabled ─────────────────────────────────────────────────────── */ :host([is-disabled]) .action-btn, :host([is-disabled]) .menu-btn { background: var(--ds-background-disabled); box-shadow: none; color: var(--ds-text-text-disabled); cursor: not-allowed; } /* ── Focus ring ───────────────────────────────────────────────────── */ .action-btn:focus-visible, .menu-btn:focus-visible { outline: 2px solid var(--ds-focus-focus); outline-offset: 2px; z-index: 1; } .action-btn:focus:not(:focus-visible), .menu-btn:focus:not(:focus-visible) { outline: none; } /* ── Icon slot ────────────────────────────────────────────────────── */ .menu-icon, .action-icon { display: inline-flex; align-items: center; justify-content: center; width: var(--ds-spacing-spacing-06); /* 16px */ height: var(--ds-spacing-spacing-06); flex-shrink: 0; } ::slotted(svg), ::slotted(img) { width: var(--ds-spacing-spacing-06); height: var(--ds-spacing-spacing-06); display: block; flex-shrink: 0; } ::slotted(ds-icon) { flex-shrink: 0; } `, ]"
             },
             {
               "kind": "field",
@@ -2749,151 +3411,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/shared/events.ts",
-      "declarations": [
-        {
-          "kind": "function",
-          "name": "dispatch",
-          "return": {
-            "type": {
-              "text": "boolean"
-            }
-          },
-          "parameters": [
-            {
-              "name": "element",
-              "type": {
-                "text": "HTMLElement"
-              }
-            },
-            {
-              "name": "eventName",
-              "type": {
-                "text": "K"
-              }
-            },
-            {
-              "name": "detail",
-              "type": {
-                "text": "DsEventMap[K]['detail']"
-              }
-            },
-            {
-              "name": "options",
-              "optional": true,
-              "type": {
-                "text": "Omit<CustomEventInit, 'detail'>"
-              }
-            }
-          ],
-          "description": "Dispatch a typed custom event from a Lit element."
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "dispatch",
-          "declaration": {
-            "name": "dispatch",
-            "module": "src/shared/events.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/shared/styles.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "resetStyles",
-          "default": "css` *, *::before, *::after { box-sizing: border-box; } `",
-          "description": "Global component reset applied to every :host.\nEnsures box-model consistency across shadow roots."
-        },
-        {
-          "kind": "variable",
-          "name": "focusRingStyles",
-          "default": "css` :host(:focus-visible), :focus-visible { outline: 2px solid var(--ds-focus-focus, #ffffff); outline-offset: 2px; } :host(:focus:not(:focus-visible)) { outline: none; } `",
-          "description": "Focus ring styles using the design system focus tokens.\nApply to interactive elements via the .ds-focus-ring mixin pattern."
-        },
-        {
-          "kind": "variable",
-          "name": "innerFocusRingStyles",
-          "default": "css` :focus-visible { outline: 2px solid var(--ds-focus-focus); outline-offset: 2px; } :focus:not(:focus-visible) { outline: none; } `",
-          "description": "Standard focus ring for inner elements (buttons, inputs).\noutline automatically follows the element's own border-radius at the\n2px offset — no border-radius override needed here."
-        },
-        {
-          "kind": "variable",
-          "name": "insetFocusRingStyles",
-          "default": "css` :focus-visible { outline: 2px solid var(--ds-focus-focus); outline-offset: -2px; } :focus:not(:focus-visible) { outline: none; } `",
-          "description": "Inset focus ring for elements that sit inside a bordered container (e.g.\ntext inputs) where an outset ring would be clipped by the parent.\nMirrors ADS Focusable isInset: uses --ds-focus-focus-inset (gray-100) and\na negative offset so the ring renders inside the element boundary."
-        },
-        {
-          "kind": "variable",
-          "name": "srOnlyStyles",
-          "default": "css` .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0; } `",
-          "description": "Visually hidden — accessible but invisible.\nFor screen-reader-only text."
-        },
-        {
-          "kind": "variable",
-          "name": "typographyBaseStyles",
-          "default": "css` :host { font-family: var(--ds-font-family-normal, 'Inter', sans-serif); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; } `",
-          "description": "Typography base applied to all components.\nSets font family from the design token."
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "resetStyles",
-          "declaration": {
-            "name": "resetStyles",
-            "module": "src/shared/styles.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "focusRingStyles",
-          "declaration": {
-            "name": "focusRingStyles",
-            "module": "src/shared/styles.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "innerFocusRingStyles",
-          "declaration": {
-            "name": "innerFocusRingStyles",
-            "module": "src/shared/styles.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "insetFocusRingStyles",
-          "declaration": {
-            "name": "insetFocusRingStyles",
-            "module": "src/shared/styles.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "srOnlyStyles",
-          "declaration": {
-            "name": "srOnlyStyles",
-            "module": "src/shared/styles.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "typographyBaseStyles",
-          "declaration": {
-            "name": "typographyBaseStyles",
-            "module": "src/shared/styles.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/ds-tooltip/ds-tooltip.ts",
       "declarations": [
         {
@@ -2908,16 +3425,7 @@
                 "text": "array"
               },
               "static": true,
-              "default": "[ resetStyles, typographyBaseStyles, css` :host { display: inline-block; position: relative; } /* ── Tooltip bubble ─────────────────────────────────────────────────── */ .bubble { position: absolute; z-index: 9999; /* token gap: 240px has no --ds-* mapping — Figma max-width */ width: max-content; max-width: 240px; display: flex; align-items: baseline; gap: var(--ds-spacing-spacing-02); padding: var(--ds-spacing-spacing-01) var(--ds-spacing-spacing-03); background: var(--ds-color-default-neutral-white); border-radius: var(--ds-radius-semantic-radius-sm); overflow: clip; pointer-events: none; /* Hidden by default; exit fades over 120ms then snaps hidden */ visibility: hidden; opacity: 0; transition: opacity 120ms ease, visibility 0s linear 120ms; } :host([truncate]) .bubble { /* token gap: 420px has no --ds-* mapping — Figma max-width */ max-width: 420px; } /* Entry: animation overrides the transition. Exit uses the transition above. */ .bubble--open { visibility: visible; transition: none; } .content { flex: 1 1 auto; min-width: 0; margin: 0; color: var(--ds-text-text-inverse); font-family: var(--ds-typography-cozy-helper-helper-regular-font-family); font-size: var(--ds-typography-cozy-helper-helper-regular-font-size); font-weight: var(--ds-typography-cozy-helper-helper-regular-font-weight); line-height: var(--ds-typography-cozy-helper-helper-regular-line-height); letter-spacing: var(--ds-typography-cozy-helper-helper-regular-letter-spacing); font-feature-settings: 'cv08' 1; overflow-wrap: break-word; text-align: left; } :host([truncate]) .content { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } /* ── Keyboard shortcut badge ─────────────────────────────────────────── */ .shortcut { flex-shrink: 0; display: inline-flex; align-items: center; padding: 1px var(--ds-spacing-spacing-01); border-radius: var(--ds-radius-semantic-radius-xs); /* token gap: no --ds-* for kbd border/bg on inverse surface */ border: 1px solid rgba(0, 0, 0, 0.2); background: rgba(0, 0, 0, 0.05); font-family: var(--ds-typography-cozy-regular-mono-body-sm-font-family); font-size: 10px; font-weight: 500; color: var(--ds-text-text-inverse); letter-spacing: 0.02em; line-height: 1.4; white-space: nowrap; font-style: normal; } /* ── Entry animations ────────────────────────────────────────────────── Resting gap is 8px. Animation starts 4px closer to trigger so the bubble appears to slide out from the trigger edge. Centered variants use the individual \"translate\" CSS property so centering is independent of the animation \"transform\". ── */ @keyframes ds-tooltip-in-top { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } } @keyframes ds-tooltip-in-bottom { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } } @keyframes ds-tooltip-in-left { from { opacity: 0; transform: translateX(4px); } to { opacity: 1; transform: translateX(0); } } @keyframes ds-tooltip-in-right { from { opacity: 0; transform: translateX(-4px); } to { opacity: 1; transform: translateX(0); } } :host([align='top']) .bubble--open, :host([align='top-start']) .bubble--open, :host([align='top-end']) .bubble--open, :host(:not([align])) .bubble--open { animation: ds-tooltip-in-top 150ms cubic-bezier(0.2, 0, 0, 1) forwards; } :host([align='bottom']) .bubble--open, :host([align='bottom-start']) .bubble--open, :host([align='bottom-end']) .bubble--open { animation: ds-tooltip-in-bottom 150ms cubic-bezier(0.2, 0, 0, 1) forwards; } :host([align='left']) .bubble--open, :host([align='left-start']) .bubble--open, :host([align='left-end']) .bubble--open { animation: ds-tooltip-in-left 150ms cubic-bezier(0.2, 0, 0, 1) forwards; } :host([align='right']) .bubble--open, :host([align='right-start']) .bubble--open, :host([align='right-end']) .bubble--open { animation: ds-tooltip-in-right 150ms cubic-bezier(0.2, 0, 0, 1) forwards; } @media (prefers-reduced-motion: reduce) { .bubble--open { animation: none; opacity: 1; } } /* ── Positioning — 8px resting gap ───────────────────────────────────── Centered variants use the individual \"translate\" CSS property so it is independent of the animation \"transform\". ── */ /* top (default) */ :host([align='top']) .bubble, :host(:not([align])) .bubble { bottom: calc(100% + var(--ds-spacing-spacing-04)); left: 50%; translate: -50% 0; } :host([align='top-start']) .bubble { bottom: calc(100% + var(--ds-spacing-spacing-04)); left: 0; } :host([align='top-end']) .bubble { bottom: calc(100% + var(--ds-spacing-spacing-04)); right: 0; } /* bottom */ :host([align='bottom']) .bubble { top: calc(100% + var(--ds-spacing-spacing-04)); left: 50%; translate: -50% 0; } :host([align='bottom-start']) .bubble { top: calc(100% + var(--ds-spacing-spacing-04)); left: 0; } :host([align='bottom-end']) .bubble { top: calc(100% + var(--ds-spacing-spacing-04)); right: 0; } /* left */ :host([align='left']) .bubble { right: calc(100% + var(--ds-spacing-spacing-04)); top: 50%; translate: 0 -50%; } :host([align='left-start']) .bubble { right: calc(100% + var(--ds-spacing-spacing-04)); top: 0; } :host([align='left-end']) .bubble { right: calc(100% + var(--ds-spacing-spacing-04)); bottom: 0; } /* right */ :host([align='right']) .bubble { left: calc(100% + var(--ds-spacing-spacing-04)); top: 50%; translate: 0 -50%; } :host([align='right-start']) .bubble { left: calc(100% + var(--ds-spacing-spacing-04)); top: 0; } :host([align='right-end']) .bubble { left: calc(100% + var(--ds-spacing-spacing-04)); bottom: 0; } /* ── Mouse-pointer mode ───────────────────────────────────────────────── Bubble uses fixed positioning and follows the cursor via CSS custom properties updated on every mousemove. Placed after align rules so it takes precedence at equal specificity. ── */ :host([mouse-pointer]) .bubble { position: fixed; top: var(--_tip-y, 0px); left: var(--_tip-x, 0px); /* Offset so the tooltip doesn't sit under the pointer */ translate: 10px 6px; bottom: auto; right: auto; } /* Bubble appears below the cursor so use the bottom entry animation */ :host([mouse-pointer]) .bubble--open { animation: ds-tooltip-in-bottom 150ms cubic-bezier(0.2, 0, 0, 1) forwards; } `, ]"
-            },
-            {
-              "kind": "field",
-              "name": "truncate",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Single-line ellipsis truncation (max 420px) when true; wrapping (max 240px) when false."
+              "default": "[ resetStyles, typographyBaseStyles, typographyStyles, css` :host { display: inline-block; position: relative; } /* ── Tooltip bubble ─────────────────────────────────────────────────── */ .bubble { position: absolute; z-index: 9999; /* token gap: 240px has no --ds-* mapping — Figma max-width */ width: max-content; max-width: 240px; display: flex; align-items: center; gap: var(--ds-spacing-spacing-02); padding: var(--ds-spacing-spacing-01) var(--ds-spacing-spacing-03); background: var(--ds-color-default-gray-130); border: 1px solid var(--ds-border-border-default); border-radius: var(--ds-radius-semantic-radius-sm); overflow: clip; pointer-events: none; /* Hidden by default; exit fades over 120ms then snaps hidden */ visibility: hidden; opacity: 0; transition: opacity 120ms ease, visibility 0s linear 120ms; } /* Entry: animation overrides the transition. Exit uses the transition above. */ .bubble--open { visibility: visible; transition: none; } .content { flex: 1 1 auto; min-width: 0; margin: 0; color: var(--ds-text-text-subtle); font-feature-settings: 'cv08' 1; overflow-wrap: break-word; text-align: left; } /* ── Keyboard shortcut badge ─────────────────────────────────────────── */ .shortcut { flex-shrink: 0; display: inline-flex; align-items: center; padding: 1px var(--ds-spacing-spacing-01); border-radius: var(--ds-radius-semantic-radius-xs); /* token gap: no --ds-* for kbd border/bg on dark surface */ border: 1px solid rgba(255, 255, 255, 0.15); background: rgba(255, 255, 255, 0.06); font-size: 10px; font-weight: 500; color: var(--ds-text-text-subtle); letter-spacing: 0.02em; line-height: 1.4; white-space: nowrap; font-style: normal; } /* ── Entry animations ────────────────────────────────────────────────── Resting gap is 8px. Animation starts 4px closer to trigger so the bubble appears to slide out from the trigger edge. Centered variants use the individual \"translate\" CSS property so centering is independent of the animation \"transform\". ── */ @keyframes ds-tooltip-in-top { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } } @keyframes ds-tooltip-in-bottom { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } } @keyframes ds-tooltip-in-left { from { opacity: 0; transform: translateX(4px); } to { opacity: 1; transform: translateX(0); } } @keyframes ds-tooltip-in-right { from { opacity: 0; transform: translateX(-4px); } to { opacity: 1; transform: translateX(0); } } :host([align='top']) .bubble--open, :host([align='top-start']) .bubble--open, :host([align='top-end']) .bubble--open, :host(:not([align])) .bubble--open { animation: ds-tooltip-in-top 150ms cubic-bezier(0.2, 0, 0, 1) forwards; } :host([align='bottom']) .bubble--open, :host([align='bottom-start']) .bubble--open, :host([align='bottom-end']) .bubble--open { animation: ds-tooltip-in-bottom 150ms cubic-bezier(0.2, 0, 0, 1) forwards; } :host([align='left']) .bubble--open, :host([align='left-start']) .bubble--open, :host([align='left-end']) .bubble--open { animation: ds-tooltip-in-left 150ms cubic-bezier(0.2, 0, 0, 1) forwards; } :host([align='right']) .bubble--open, :host([align='right-start']) .bubble--open, :host([align='right-end']) .bubble--open { animation: ds-tooltip-in-right 150ms cubic-bezier(0.2, 0, 0, 1) forwards; } @media (prefers-reduced-motion: reduce) { .bubble--open { animation: none; opacity: 1; } } /* ── Positioning — 8px resting gap ───────────────────────────────────── Centered variants use the individual \"translate\" CSS property so it is independent of the animation \"transform\". ── */ /* top (default) */ :host([align='top']) .bubble, :host(:not([align])) .bubble { bottom: calc(100% + var(--ds-spacing-spacing-04)); left: 50%; translate: -50% 0; } :host([align='top-start']) .bubble { bottom: calc(100% + var(--ds-spacing-spacing-04)); left: 0; } :host([align='top-end']) .bubble { bottom: calc(100% + var(--ds-spacing-spacing-04)); right: 0; } /* bottom */ :host([align='bottom']) .bubble { top: calc(100% + var(--ds-spacing-spacing-04)); left: 50%; translate: -50% 0; } :host([align='bottom-start']) .bubble { top: calc(100% + var(--ds-spacing-spacing-04)); left: 0; } :host([align='bottom-end']) .bubble { top: calc(100% + var(--ds-spacing-spacing-04)); right: 0; } /* left */ :host([align='left']) .bubble { right: calc(100% + var(--ds-spacing-spacing-04)); top: 50%; translate: 0 -50%; } :host([align='left-start']) .bubble { right: calc(100% + var(--ds-spacing-spacing-04)); top: 0; } :host([align='left-end']) .bubble { right: calc(100% + var(--ds-spacing-spacing-04)); bottom: 0; } /* right */ :host([align='right']) .bubble { left: calc(100% + var(--ds-spacing-spacing-04)); top: 50%; translate: 0 -50%; } :host([align='right-start']) .bubble { left: calc(100% + var(--ds-spacing-spacing-04)); top: 0; } :host([align='right-end']) .bubble { left: calc(100% + var(--ds-spacing-spacing-04)); bottom: 0; } /* ── Mouse-pointer mode ───────────────────────────────────────────────── Bubble uses fixed positioning and follows the cursor via CSS custom properties updated on every mousemove. Placed after align rules so it takes precedence at equal specificity. ── */ :host([mouse-pointer]) .bubble { position: fixed; top: var(--_tip-y, 0px); left: var(--_tip-x, 0px); /* Offset so the tooltip doesn't sit under the pointer */ translate: 10px 6px; bottom: auto; right: auto; } /* Bubble appears below the cursor so use the bottom entry animation */ :host([mouse-pointer]) .bubble--open { animation: ds-tooltip-in-bottom 150ms cubic-bezier(0.2, 0, 0, 1) forwards; } `, ]"
             },
             {
               "kind": "field",
@@ -3091,6 +3599,165 @@
           "declaration": {
             "name": "DsTooltip",
             "module": "src/ds-tooltip/ds-tooltip.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/shared/events.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "dispatch",
+          "return": {
+            "type": {
+              "text": "boolean"
+            }
+          },
+          "parameters": [
+            {
+              "name": "element",
+              "type": {
+                "text": "HTMLElement"
+              }
+            },
+            {
+              "name": "eventName",
+              "type": {
+                "text": "K"
+              }
+            },
+            {
+              "name": "detail",
+              "type": {
+                "text": "DsEventMap[K]['detail']"
+              }
+            },
+            {
+              "name": "options",
+              "optional": true,
+              "type": {
+                "text": "Omit<CustomEventInit, 'detail'>"
+              }
+            }
+          ],
+          "description": "Dispatch a typed custom event from a Lit element."
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "dispatch",
+          "declaration": {
+            "name": "dispatch",
+            "module": "src/shared/events.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/shared/styles.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "resetStyles",
+          "default": "css` *, *::before, *::after { box-sizing: border-box; } `",
+          "description": "Global component reset applied to every :host.\nEnsures box-model consistency across shadow roots."
+        },
+        {
+          "kind": "variable",
+          "name": "focusRingStyles",
+          "default": "css` :host(:focus-visible), :focus-visible { outline: 2px solid var(--ds-focus-focus, #ffffff); outline-offset: 2px; } :host(:focus:not(:focus-visible)) { outline: none; } `",
+          "description": "Focus ring styles using the design system focus tokens.\nApply to interactive elements via the .ds-focus-ring mixin pattern."
+        },
+        {
+          "kind": "variable",
+          "name": "innerFocusRingStyles",
+          "default": "css` :focus-visible { outline: 2px solid var(--ds-focus-focus); outline-offset: 2px; } :focus:not(:focus-visible) { outline: none; } `",
+          "description": "Standard focus ring for inner elements (buttons, inputs).\noutline automatically follows the element's own border-radius at the\n2px offset — no border-radius override needed here."
+        },
+        {
+          "kind": "variable",
+          "name": "insetFocusRingStyles",
+          "default": "css` :focus-visible { outline: 2px solid var(--ds-focus-focus); outline-offset: -2px; } :focus:not(:focus-visible) { outline: none; } `",
+          "description": "Inset focus ring for elements that sit inside a bordered container (e.g.\ntext inputs) where an outset ring would be clipped by the parent.\nMirrors ADS Focusable isInset: uses --ds-focus-focus-inset (gray-100) and\na negative offset so the ring renders inside the element boundary."
+        },
+        {
+          "kind": "variable",
+          "name": "srOnlyStyles",
+          "default": "css` .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0; } `",
+          "description": "Visually hidden — accessible but invisible.\nFor screen-reader-only text."
+        },
+        {
+          "kind": "variable",
+          "name": "typographyBaseStyles",
+          "default": "css` :host { font-family: var(--ds-font-family-normal, 'Inter', sans-serif); font-feature-settings: 'cv08' 1, 'cv05' 1, 'zero' 1; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; } `",
+          "description": "Typography base applied to all components.\nSets font family from the design token."
+        },
+        {
+          "kind": "variable",
+          "name": "typographyStyles",
+          "default": "css` .text-regular-body-sm { font-family: var(--ds-typography-cozy-regular-body-sm-font-family); font-size: var(--ds-typography-cozy-regular-body-sm-font-size); font-weight: var(--ds-typography-cozy-regular-body-sm-font-weight); line-height: var(--ds-typography-cozy-regular-body-sm-line-height); letter-spacing: var(--ds-typography-cozy-regular-body-sm-letter-spacing); } .text-regular-body-md { font-family: var(--ds-typography-cozy-regular-body-md-font-family); font-size: var(--ds-typography-cozy-regular-body-md-font-size); font-weight: var(--ds-typography-cozy-regular-body-md-font-weight); line-height: var(--ds-typography-cozy-regular-body-md-line-height); letter-spacing: var(--ds-typography-cozy-regular-body-md-letter-spacing); } .text-medium-body-sm { font-family: var(--ds-typography-cozy-medium-body-sm-font-family); font-size: var(--ds-typography-cozy-medium-body-sm-font-size); font-weight: var(--ds-typography-cozy-medium-body-sm-font-weight); line-height: var(--ds-typography-cozy-medium-body-sm-line-height); letter-spacing: var(--ds-typography-cozy-medium-body-sm-letter-spacing); } .text-medium-body-md { font-family: var(--ds-typography-cozy-medium-body-md-font-family); font-size: var(--ds-typography-cozy-medium-body-md-font-size); font-weight: var(--ds-typography-cozy-medium-body-md-font-weight); line-height: var(--ds-typography-cozy-medium-body-md-line-height); letter-spacing: var(--ds-typography-cozy-medium-body-md-letter-spacing); } .text-helper-helper-regular { font-family: var(--ds-typography-cozy-helper-helper-regular-font-family); font-size: var(--ds-typography-cozy-helper-helper-regular-font-size); font-weight: var(--ds-typography-cozy-helper-helper-regular-font-weight); line-height: var(--ds-typography-cozy-helper-helper-regular-line-height); letter-spacing: var(--ds-typography-cozy-helper-helper-regular-letter-spacing); } .text-regular-mono-body-sm { font-family: var(--ds-typography-cozy-regular-mono-body-sm-font-family); font-size: var(--ds-typography-cozy-regular-body-sm-font-size); font-weight: var(--ds-typography-cozy-regular-body-sm-font-weight); line-height: var(--ds-typography-cozy-regular-body-sm-line-height); letter-spacing: var(--ds-typography-cozy-regular-body-sm-letter-spacing); } .text-heading-xxs { font-family: var(--ds-typography-cozy-heading-xxs-font-family); font-size: var(--ds-typography-cozy-heading-xxs-font-size); font-weight: var(--ds-typography-cozy-heading-xxs-font-weight); line-height: var(--ds-typography-cozy-heading-xxs-line-height); letter-spacing: var(--ds-typography-cozy-heading-xxs-letter-spacing); } `",
+          "description": "Composite typography utility classes — one class per Figma text style.\nAdopt into a shadow root via static styles to use class=\"text-*\" on\ninner elements, mirroring Figma's single-name text-style assignment."
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "resetStyles",
+          "declaration": {
+            "name": "resetStyles",
+            "module": "src/shared/styles.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "focusRingStyles",
+          "declaration": {
+            "name": "focusRingStyles",
+            "module": "src/shared/styles.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "innerFocusRingStyles",
+          "declaration": {
+            "name": "innerFocusRingStyles",
+            "module": "src/shared/styles.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "insetFocusRingStyles",
+          "declaration": {
+            "name": "insetFocusRingStyles",
+            "module": "src/shared/styles.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "srOnlyStyles",
+          "declaration": {
+            "name": "srOnlyStyles",
+            "module": "src/shared/styles.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "typographyBaseStyles",
+          "declaration": {
+            "name": "typographyBaseStyles",
+            "module": "src/shared/styles.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "typographyStyles",
+          "declaration": {
+            "name": "typographyStyles",
+            "module": "src/shared/styles.ts"
           }
         }
       ]
