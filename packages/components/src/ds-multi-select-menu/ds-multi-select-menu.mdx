@@ -1,0 +1,89 @@
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as Stories from './ds-multi-select-menu.stories';
+
+<Meta of={Stories} name="Overview" />
+
+# Multi Select Menu
+
+A floating listbox for picking **multiple values** simultaneously. Each item has a **checkbox on the left**. Manages selection state internally — clicking an item toggles its checkbox and fires `ds-select-menu-change` with all currently selected values.
+
+<Canvas of={Stories.Default} />
+
+## With groups
+
+<Canvas of={Stories.WithGroups} />
+
+## Preselected values
+
+<Canvas of={Stories.Preselected} />
+
+## With descriptions
+
+<Canvas of={Stories.WithDescription} />
+
+## States
+
+<Canvas of={Stories.ShowcaseStates} />
+
+---
+
+## API
+
+### `<ds-multi-select-menu>` properties
+
+<ArgTypes of={Stories} />
+
+### `<ds-multi-select-menu>` slots
+
+| Slot | Description |
+|------|-------------|
+| _(default)_ | `<ds-multi-select-menu-group>` children |
+| `header` | Optional header |
+| `footer` | Optional footer (e.g. Cancel / Apply buttons) |
+
+### `<ds-multi-select-menu-item>` properties
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `value` | `string` | `''` | Identifier used in change event |
+| `selected` | `boolean` | `false` | Managed by parent — set for pre-selection only |
+| `disabled` | `boolean` | `false` | Prevents interaction |
+| `size` | `'sm' \| 'md'` | auto | Injected by parent menu |
+
+### `<ds-multi-select-menu-item>` slots
+
+| Slot | Description |
+|------|-------------|
+| _(default)_ | Label text |
+| `description` | Optional helper text below label |
+
+### Events
+
+| Event | Detail | Fired by |
+|-------|--------|----------|
+| `ds-select-menu-change` | `{ values: string[], originalEvent }` | On every toggle. `values` contains all selected item values. |
+
+---
+
+## Accessibility
+
+- Container: `role="listbox" aria-multiselectable="true"`. Each item: `role="option"` with `aria-selected`.
+- Checkboxes are decorative (`aria-hidden`) — the option's `aria-selected` communicates state to screen readers.
+
+---
+
+## React usage
+
+```tsx
+import { DsMultiSelectMenu, DsMultiSelectMenuItem, DsMenuCategory } from '@my-ds/react';
+import type { DsSelectMenuChangeEvent } from '@my-ds/components';
+
+<DsMultiSelectMenu
+  style={{ width: 280 }}
+  onDsSelectMenuChange={(e: DsSelectMenuChangeEvent) => console.log(e.detail.values)}
+>
+  <DsMenuCategory>Permissions</DsMenuCategory>
+  <DsMultiSelectMenuItem value="read" selected>Read</DsMultiSelectMenuItem>
+  <DsMultiSelectMenuItem value="write">Write</DsMultiSelectMenuItem>
+</DsMultiSelectMenu>
+```

@@ -10,6 +10,7 @@ export type DsIconButtonSize = 'xs' | 'sm' | 'md' | 'lg';
 export type DsIconButtonShape = 'default' | 'circle';
 export type { DsTooltipAlign };
 
+/** @tagname ds-icon-button */
 @customElement('ds-icon-button')
 export class DsIconButton extends LitElement {
   static styles = [
@@ -72,6 +73,9 @@ export class DsIconButton extends LitElement {
         width: var(--ds-spacing-spacing-06);
         height: var(--ds-spacing-spacing-06);
         display: block;
+        flex-shrink: 0;
+      }
+      ::slotted(ds-icon) {
         flex-shrink: 0;
       }
 

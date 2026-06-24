@@ -7,7 +7,6 @@ import type { DsTooltipAlign } from './ds-tooltip.js';
 
 interface TooltipArgs {
   align: DsTooltipAlign;
-  truncate: boolean;
   closeOnActivation: boolean;
   enterDelayMs: number;
   leaveDelayMs: number;
@@ -41,11 +40,6 @@ const meta: Meta<TooltipArgs> = {
         defaultValue: { summary: 'top' },
         category: 'Props',
       },
-    },
-    truncate: {
-      control: 'boolean',
-      description: 'Clamp to a single line with ellipsis (max 420px). Default wraps at 240px.',
-      table: { type: { summary: 'boolean' }, defaultValue: { summary: 'false' }, category: 'Props' },
     },
     closeOnActivation: {
       control: 'boolean',
@@ -85,7 +79,6 @@ const meta: Meta<TooltipArgs> = {
   },
   args: {
     align: 'top',
-    truncate: false,
     closeOnActivation: false,
     enterDelayMs: 100,
     leaveDelayMs: 300,
@@ -99,7 +92,6 @@ const meta: Meta<TooltipArgs> = {
     <div style="padding: 60px; display: inline-block;">
       <ds-tooltip
         align=${args.align}
-        ?truncate=${args.truncate}
         ?close-on-activation=${args.closeOnActivation}
         enter-delay-ms=${ifDefined(args.enterDelayMs)}
         leave-delay-ms=${ifDefined(args.leaveDelayMs)}
@@ -246,11 +238,7 @@ export const WithKeyboardShortcut: Story = {
 
 export const LongContent: Story = {
   name: 'Long content (wraps)',
-  args: { truncate: false, content: LONG_TEXT },
-};
-
-export const Truncated: Story = {
-  args: { truncate: true, content: LONG_TEXT },
+  args: { content: LONG_TEXT },
 };
 
 export const CloseOnActivation: Story = {
@@ -311,30 +299,6 @@ export const ShowcaseAlignments: Story = {
       </div>
     `;
   },
-};
-
-export const ShowcaseModes: Story = {
-  name: 'Showcase / Truncate modes',
-  tags: ['!dev'],
-  parameters: { controls: { disable: true } },
-  render: () => html`
-    <div style="display: flex; gap: 48px; align-items: flex-start; flex-wrap: wrap; padding: 60px;">
-      <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start;">
-        <span style="font-size: 12px; color: var(--ds-text-text-subtle);">truncate = false (wraps, max 240px)</span>
-        <ds-tooltip align="bottom">
-          <ds-button slot="trigger" variant="secondary">Hover</ds-button>
-          ${LONG_TEXT}
-        </ds-tooltip>
-      </div>
-      <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start;">
-        <span style="font-size: 12px; color: var(--ds-text-text-subtle);">truncate = true (one line, max 420px)</span>
-        <ds-tooltip align="bottom" truncate>
-          <ds-button slot="trigger" variant="secondary">Hover</ds-button>
-          ${LONG_TEXT}
-        </ds-tooltip>
-      </div>
-    </div>
-  `,
 };
 
 export const ShowcaseShortcuts: Story = {

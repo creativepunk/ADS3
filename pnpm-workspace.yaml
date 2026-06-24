@@ -3,4 +3,5 @@ packages:
 allowBuilds:
   '@bundled-es-modules/glob': true
   esbuild: true
+  rs-module-lexer: true
   style-dictionary: true

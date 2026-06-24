@@ -1,0 +1,59 @@
+{/* ds-form-label — Overview docs */}
+
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as FormLabelStories from './ds-form-label.stories';
+
+<Meta of={FormLabelStories} name="Overview" />
+
+# Form Label
+
+`<ds-form-label>` is an internal primitive used inside form components (text field, select, checkbox group, radio group, etc.) to render a consistent, accessible label above the control. It is not intended to be used standalone in product UI.
+
+<Canvas of={FormLabelStories.Default} />
+
+## States
+
+| State | When to use |
+| --- | --- |
+| **Default** | Optional fields |
+| **Required** | Mandatory fields — appends a red `*` and `aria-hidden` to avoid double-reading |
+| **Info tip** | When the field needs supplemental context that doesn't fit inline |
+
+<Canvas of={FormLabelStories.ShowcaseStates} />
+
+## API
+
+### Properties
+
+<ArgTypes of={FormLabelStories} />
+
+### Slots
+
+| Slot | Description |
+| --- | --- |
+| _(default)_ | Label text. Use the `label` prop instead when consumed inside a composite component. |
+
+### Attribute names
+
+| Prop | Attribute |
+| --- | --- |
+| `isRequired` | `is-required` |
+| `hasInfoTip` | `has-info-tip` |
+
+```html
+<ds-form-label label="Email" is-required has-info-tip for="email-input"></ds-form-label>
+```
+
+## Accessibility
+
+- The inner `<label>` element associates with a form control via the `for` attribute.
+- The required asterisk is wrapped in `aria-hidden="true"` — screen readers infer required state from the native control's `required` attribute or `aria-required`.
+- The info icon has an `aria-label="More information"` so icon-only presentation is still announced.
+
+## React usage
+
+```tsx
+import { DsFormLabel } from '@my-ds/react';
+
+<DsFormLabel label="Email address" isRequired hasInfoTip for="email" />
+```

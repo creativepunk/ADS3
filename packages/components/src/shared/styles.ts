@@ -101,3 +101,60 @@ export const typographyBaseStyles = css`
     -moz-osx-font-smoothing: grayscale;
   }
 `;
+
+/**
+ * Composite typography utility classes — one class per Figma text style.
+ * Adopt into a shadow root via static styles to use class="text-*" on
+ * inner elements, mirroring Figma's single-name text-style assignment.
+ */
+export const typographyStyles = css`
+  .text-regular-body-sm {
+    font-family: var(--ds-typography-cozy-regular-body-sm-font-family);
+    font-size: var(--ds-typography-cozy-regular-body-sm-font-size);
+    font-weight: var(--ds-typography-cozy-regular-body-sm-font-weight);
+    line-height: var(--ds-typography-cozy-regular-body-sm-line-height);
+    letter-spacing: var(--ds-typography-cozy-regular-body-sm-letter-spacing);
+  }
+  .text-regular-body-md {
+    font-family: var(--ds-typography-cozy-regular-body-md-font-family);
+    font-size: var(--ds-typography-cozy-regular-body-md-font-size);
+    font-weight: var(--ds-typography-cozy-regular-body-md-font-weight);
+    line-height: var(--ds-typography-cozy-regular-body-md-line-height);
+    letter-spacing: var(--ds-typography-cozy-regular-body-md-letter-spacing);
+  }
+  .text-medium-body-sm {
+    font-family: var(--ds-typography-cozy-medium-body-sm-font-family);
+    font-size: var(--ds-typography-cozy-medium-body-sm-font-size);
+    font-weight: var(--ds-typography-cozy-medium-body-sm-font-weight);
+    line-height: var(--ds-typography-cozy-medium-body-sm-line-height);
+    letter-spacing: var(--ds-typography-cozy-medium-body-sm-letter-spacing);
+  }
+  .text-medium-body-md {
+    font-family: var(--ds-typography-cozy-medium-body-md-font-family);
+    font-size: var(--ds-typography-cozy-medium-body-md-font-size);
+    font-weight: var(--ds-typography-cozy-medium-body-md-font-weight);
+    line-height: var(--ds-typography-cozy-medium-body-md-line-height);
+    letter-spacing: var(--ds-typography-cozy-medium-body-md-letter-spacing);
+  }
+  .text-helper-helper-regular {
+    font-family: var(--ds-typography-cozy-helper-helper-regular-font-family);
+    font-size: var(--ds-typography-cozy-helper-helper-regular-font-size);
+    font-weight: var(--ds-typography-cozy-helper-helper-regular-font-weight);
+    line-height: var(--ds-typography-cozy-helper-helper-regular-line-height);
+    letter-spacing: var(--ds-typography-cozy-helper-helper-regular-letter-spacing);
+  }
+  .text-regular-mono-body-sm {
+    font-family: var(--ds-typography-cozy-regular-mono-body-sm-font-family);
+    font-size: var(--ds-typography-cozy-regular-body-sm-font-size);
+    font-weight: var(--ds-typography-cozy-regular-body-sm-font-weight);
+    line-height: var(--ds-typography-cozy-regular-body-sm-line-height);
+    letter-spacing: var(--ds-typography-cozy-regular-body-sm-letter-spacing);
+  }
+  .text-heading-xxs {
+    font-family: var(--ds-typography-cozy-heading-xxs-font-family);
+    font-size: var(--ds-typography-cozy-heading-xxs-font-size);
+    font-weight: var(--ds-typography-cozy-heading-xxs-font-weight);
+    line-height: var(--ds-typography-cozy-heading-xxs-line-height);
+    letter-spacing: var(--ds-typography-cozy-heading-xxs-letter-spacing);
+  }
+`;

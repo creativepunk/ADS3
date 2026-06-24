@@ -21,15 +21,25 @@ export function setIconResolver(resolver: DsIconResolver): void {
 // Convenience factory for Vite consumers using @material-symbols/svg-400.
 // Call once at app / Storybook preview startup:
 //   setIconResolver(createMaterialSymbolsResolver())
+//
+// Uses fetch() rather than dynamic import() because dynamic bare specifiers
+// (e.g. `@scope/pkg/${name}.svg`) are not rewritten by Vite — the browser
+// receives them as-is and throws a "Failed to resolve module specifier" error.
+// fetch() constructs the URL from import.meta.url, which Vite resolves
+// to the correct dev-server origin, so node_modules files are served directly.
+const _moduleUrl = import.meta.url;
+
 export function createMaterialSymbolsResolver(
   iconStyle: DsIconStyle = 'outlined',
 ): DsIconResolver {
-  return async (name: string, _iconStyle: DsIconStyle): Promise<string> => {
-    const mod = await import(
-      /* @vite-ignore */
-      `@material-symbols/svg-400/${iconStyle}/${name}.svg?raw`
-    ) as { default: string };
-    return mod.default;
+  return async (name: string): Promise<string> => {
+    const url = new URL(
+      `../../node_modules/@material-symbols/svg-400/${iconStyle}/${name}.svg`,
+      _moduleUrl,
+    ).href;
+    const resp = await fetch(url);
+    if (!resp.ok) throw new Error(`@material-symbols/svg-400: icon "${name}" not found (${resp.status})`);
+    return resp.text();
   };
 }
 
@@ -44,6 +54,7 @@ function normalizeSvg(raw: string): string {
     .replace(/ height="\d+"/, ' height="20"');
 }
 
+/** @tagname ds-icon */
 @customElement('ds-icon')
 export class DsIcon extends LitElement {
   static styles = [
@@ -136,7 +147,8 @@ export class DsIcon extends LitElement {
       const normalized = normalizeSvg(raw);
       _cache.set(cacheKey, normalized);
       this._svg = normalized;
-    } catch {
+    } catch (err) {
+      console.error(`[ds-icon] failed to load "${iconName}":`, err);
       this._svg = '';
     }
   }

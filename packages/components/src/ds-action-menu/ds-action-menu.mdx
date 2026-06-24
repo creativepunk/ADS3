@@ -1,0 +1,128 @@
+{/* ds-action-menu — Overview docs */}
+
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as Stories from './ds-action-menu.stories';
+
+<Meta of={Stories} name="Overview" />
+
+# Action Menu
+
+A floating list of clickable actions (copy, edit, delete, share…). Each item fires `ds-menu-action` when activated. For value-selection menus see [`<ds-single-select-menu>`](?path=/docs/components-single-select-menu--overview) and [`<ds-multi-select-menu>`](?path=/docs/components-multi-select-menu--overview).
+
+Items are always wrapped in a `<ds-action-menu-group>`. A single-section menu has one group; multi-section menus add more groups with `has-separator`.
+
+<Canvas of={Stories.Default} />
+
+## Groups
+
+Use `has-separator` on a group to draw a divider above it. The separator belongs to the group — no extra element needed.
+
+<Canvas of={Stories.WithGroups} />
+
+## Group titles
+
+Add a `title` to label a group of items. The title renders as a small category heading and is wired to `aria-label` on the group for assistive technology.
+
+<Canvas of={Stories.WithTitles} />
+
+## Danger variant
+
+`variant="danger"` shows red text by default and a full red background on hover/active.
+
+<Canvas of={Stories.Danger} />
+
+## Sizes
+
+<Canvas of={Stories.ShowcaseSizes} />
+
+## Checked items (checkbox & radio)
+
+Set `selection-type="checkbox"` or `selection-type="radio"` on the group. The group manages checked state automatically — no external state needed.
+
+<Canvas of={Stories.WithCheckedItems} />
+
+## Keyboard shortcuts
+
+<Canvas of={Stories.WithShortcuts} />
+
+## Sub-menus
+
+<Canvas of={Stories.WithSubMenu} />
+
+---
+
+## API
+
+### `<ds-action-menu>` properties
+
+<ArgTypes of={Stories} />
+
+### `<ds-action-menu>` slots
+
+| Slot | Description |
+|------|-------------|
+| _(default)_ | `<ds-action-menu-group>` children |
+| `header` | Optional header above the item list |
+| `footer` | Optional footer below the item list |
+
+### `<ds-action-menu-group>` properties
+
+| Property | Attribute | Type | Default | Description |
+|----------|-----------|------|---------|-------------|
+| `hasSeparator` | `has-separator` | `boolean` | `false` | Draws a divider line above the group |
+| `title` | `title` | `string` | `''` | Section label rendered above the items |
+| `selectionType` | `selection-type` | `'checkbox' \| 'radio'` | `'checkbox'` | How checked items behave within the group |
+
+### `<ds-action-menu-item>` properties
+
+| Property | Attribute | Type | Default | Description |
+|----------|-----------|------|---------|-------------|
+| `value` | `value` | `string` | `''` | Identifier emitted in `ds-menu-action` detail |
+| `variant` | `variant` | `'default' \| 'danger'` | `'default'` | Danger: red text default, red bg on hover |
+| `disabled` | `disabled` | `boolean` | `false` | Prevents interaction |
+| `shortcut` | `shortcut` | `string` | `''` | Keyboard shortcut hint e.g. `⌘K` |
+| `isChecked` | `is-checked` | `boolean` | `false` | Shows checkmark; managed by parent group |
+| `size` | `size` | `'sm' \| 'md'` | auto | Injected by parent `<ds-action-menu>` |
+
+### `<ds-action-menu-item>` slots
+
+| Slot | Description |
+|------|-------------|
+| _(default)_ | Label text |
+| `leadingIcon` | 16 px icon before the label |
+| `subMenu` | Nested `<ds-action-menu>` for flyout sub-menus |
+
+### Events
+
+| Event | Detail | Fired by |
+|-------|--------|----------|
+| `ds-menu-action` | `{ value: string, originalEvent }` | Item click |
+
+---
+
+## Accessibility
+
+- `<ds-action-menu>` renders `role="menu"`.
+- `<ds-action-menu-group>` renders `role="group"` with `aria-label` when `title` is set.
+- Items render `role="menuitem"`, `menuitemcheckbox`, or `menuitemradio` depending on context.
+- Disabled items use the native `disabled` attribute — excluded from the tab order automatically.
+- Pair the trigger with `aria-haspopup="menu"` and `aria-expanded`.
+
+---
+
+## React usage
+
+```tsx
+import { DsActionMenu, DsActionMenuGroup, DsActionMenuItem } from '@my-ds/react';
+
+<DsActionMenu style={{ width: 240 }}>
+  <DsActionMenuGroup>
+    <DsActionMenuItem value="edit" onDsMenuAction={(e) => console.log(e.detail.value)}>
+      Edit
+    </DsActionMenuItem>
+  </DsActionMenuGroup>
+  <DsActionMenuGroup hasSeparator>
+    <DsActionMenuItem value="delete" variant="danger">Delete</DsActionMenuItem>
+  </DsActionMenuGroup>
+</DsActionMenu>
+```

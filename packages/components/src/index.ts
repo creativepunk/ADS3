@@ -53,3 +53,43 @@ export type {
 } from './ds-calendar/ds-calendar.js';
 
 export { DsTooltip } from './ds-tooltip/ds-tooltip.js';
+
+export { DsSplitButton } from './ds-split-button/ds-split-button.js';
+export type { DsSplitButtonSize } from './ds-split-button/ds-split-button.js';
+
+export { DsMenuCategory } from './ds-menu-category/ds-menu-category.js';
+
+export {
+  DsActionMenu,
+  DsActionMenuItem,
+  DsActionMenuSeparator,
+} from './ds-action-menu/ds-action-menu.js';
+export type {
+  DsActionMenuItemVariant,
+  DsActionMenuItemSize,
+} from './ds-action-menu/ds-action-menu.js';
+
+export {
+  DsSingleSelectMenu,
+  DsSingleSelectMenuItem,
+} from './ds-single-select-menu/ds-single-select-menu.js';
+export type { DsSingleSelectMenuItemSize } from './ds-single-select-menu/ds-single-select-menu.js';
+
+export {
+  DsMultiSelectMenu,
+  DsMultiSelectMenuItem,
+} from './ds-multi-select-menu/ds-multi-select-menu.js';
+export type { DsMultiSelectMenuItemSize } from './ds-multi-select-menu/ds-multi-select-menu.js';
+
+export { DsFormLabel } from './ds-form-label/ds-form-label.js';
+
+export { DsFormMessage } from './ds-form-message/ds-form-message.js';
+export type { DsFormMessageType } from './ds-form-message/ds-form-message.js';
+
+export { DsCheckbox } from './ds-checkbox/ds-checkbox.js';
+
+export { DsCheckboxGroup } from './ds-checkbox/ds-checkbox-group.js';
+export type {
+  DsCheckboxGroupOrientation,
+  DsCheckboxGroupType,
+} from './ds-checkbox/ds-checkbox-group.js';

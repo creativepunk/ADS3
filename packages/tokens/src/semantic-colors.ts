@@ -22,7 +22,8 @@ export const semanticColorsDark = {
     success: baseColors.green[40],
     danger: baseColors.red[50],
     warning: baseColors.yellow[40],
-    selected: baseColors.blue[50]
+    selected: baseColors.blue[50],
+    info: baseColors.blue[50]
   },
 
   // ─── link ────────────────────────────────────────────────────────────────
@@ -47,7 +48,8 @@ export const semanticColorsDark = {
     success: baseColors.green[40],
     danger: baseColors.red[50],
     warning: baseColors.yellow[40],
-    selected: baseColors.blue[50]
+    selected: baseColors.blue[50],
+    info: baseColors.blue[50]
   },
 
   // ─── border ──────────────────────────────────────────────────────────────
@@ -62,7 +64,7 @@ export const semanticColorsDark = {
     success: baseColors.green[40],
     danger: baseColors.red[50],
     warning: baseColors.yellow[40],
-    selected: baseColors.blue[60],
+    selected: baseColors.blue[70],
     figma: baseColors.purple[50]
   },
 
@@ -74,8 +76,8 @@ export const semanticColorsDark = {
       pressed: baseColors.neutral['white-8'],
       subtle: {
         default: "rgba(255, 255, 255, 0)",
-        hovered: baseColors.neutral['white-8'],
-        pressed: baseColors.neutral['white-5']
+        hovered: baseColors.neutral['white-20'],
+        pressed: baseColors.neutral['white-8']
       },
       bold: {
         default: baseColors.gray[20],
@@ -91,13 +93,13 @@ export const semanticColorsDark = {
       disabled: baseColors.neutral['white-3']
     },
     brand: {
-      default: baseColors.blue[60],
-      hovered: hoverColors.blue[60],
+      default: baseColors.blue[70],
+      hovered: hoverColors.blue[70],
       pressed: baseColors.blue[80]
     },
     danger: {
-      default: baseColors.red[60],
-      hovered: hoverColors.red[60],
+      default: baseColors.red[70],
+      hovered: hoverColors.red[70],
       pressed: baseColors.red[80]
     },
     success: {
@@ -122,8 +124,14 @@ export const semanticColorsDark = {
       bolder: {
         default: baseColors.blue[60],
         hovered: hoverColors.blue[50],
-        pressed: baseColors.blue[40]
+        pressed: baseColors.blue[40],
+        disabled: baseColors.blue[90]
       }
+    },
+    information: {
+      default: baseColors.blue[70],
+      hovered: hoverColors.blue[70],
+      pressed: baseColors.blue[80]
     }
   },
 
@@ -218,23 +226,93 @@ export const semanticColorsDark = {
       backgroundDisabled: baseColors.gray[90]
     },
     Gray: {
-      background: baseColors.gray[90],
-      color: baseColors.gray[20],
-      icon: baseColors.gray[20],
+      background: baseColors.neutral['white-8'],
+      color: baseColors.gray[50],
+      icon: baseColors.gray[50],
       backgroundDisabled: baseColors.gray[90]
     },
     Selectable: {
-      backgroundEnabled: "{background.neutral.default}",
+      backgroundEnabled: baseColors.neutral['white-5'],
       backgroundSelected: "{background.selected.bold.default}",
       colorEnabled: "{text.text-subtle}",
       colorSelected: "{text.text-default}",
       hover: "{background.neutral.hovered}",
-      icon: "{icon.icon-default}",
+      icon: "{icon.icon-subtle}",
       backgroundDisabled: "{background.disabled}",
       border: "{border.border-default}",
       borderSelected: "{border.border-selected}",
       focus: "{focus.focus}",
       borderDisabled: "{border.border-disabled}"
+    }
+  },
+
+  // ─── badge ───────────────────────────────────────────────────────────────
+  badge: {
+    Blue: {
+      background: baseColors.blue[70],
+      color: baseColors.blue[20],
+      icon: baseColors.blue[20],
+      backgroundDisabled: baseColors.gray[90]
+    },
+    Cyan: {
+      background: baseColors.cyan[70],
+      color: baseColors.cyan[20],
+      icon: baseColors.cyan[20],
+      backgroundDisabled: baseColors.gray[90]
+    },
+    Teal: {
+      background: baseColors.teal[70],
+      color: baseColors.teal[20],
+      icon: baseColors.teal[20],
+      backgroundDisabled: baseColors.gray[90]
+    },
+    Green: {
+      background: baseColors.green[70],
+      color: baseColors.green[20],
+      icon: baseColors.green[20],
+      backgroundDisabled: baseColors.gray[90]
+    },
+    Purple: {
+      background: baseColors.purple[70],
+      color: baseColors.purple[20],
+      icon: baseColors.purple[20],
+      backgroundDisabled: baseColors.gray[90]
+    },
+    Magenta: {
+      background: baseColors.magenta[70],
+      color: baseColors.magenta[20],
+      icon: baseColors.magenta[20],
+      backgroundDisabled: baseColors.gray[90]
+    },
+    Red: {
+      background: baseColors.red[70],
+      color: baseColors.red[20],
+      icon: baseColors.red[20],
+      backgroundDisabled: baseColors.gray[90]
+    },
+    Orange: {
+      background: baseColors.orange[70],
+      color: baseColors.orange[20],
+      icon: baseColors.orange[20],
+      backgroundDisabled: baseColors.gray[90]
+    },
+    Yellow: {
+      background: baseColors.yellow[70],
+      color: baseColors.yellow[20],
+      icon: baseColors.yellow[20],
+      backgroundDisabled: baseColors.gray[90]
+    },
+    Gray: {
+      background: baseColors.neutral['white-20'],
+      color: baseColors.gray[20],
+      icon: baseColors.gray[20],
+      backgroundDisabled: baseColors.gray[90]
+    },
+    inverted: {
+      background: baseColors.neutral['white'],
+      color: baseColors.gray[130],
+      icon: baseColors.gray[130],
+      backgroundDisabled: baseColors.gray[90]
     }
   }
 } as const;

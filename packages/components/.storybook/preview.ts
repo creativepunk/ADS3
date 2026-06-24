@@ -1,4 +1,4 @@
-import type { Preview } from '@storybook/web-components';
+import type { Preview } from '@storybook/web-components-vite';
 import { setIconResolver, createMaterialSymbolsResolver } from '../src/ds-icon/ds-icon.js';
 
 // Register the Material Symbols resolver once so any <ds-icon name="...">
@@ -24,6 +24,9 @@ const preview: Preview = {
   parameters: {
     docs: {
       theme: dsDarkTheme,
+      canvas: {
+        sourceState: 'shown',
+      },
     },
     controls: {
       matchers: {

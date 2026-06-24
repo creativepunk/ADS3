@@ -5,18 +5,15 @@ const config: StorybookConfig = {
     '../src/**/*.mdx',
     '../src/**/*.stories.@(ts|mdx)',
   ],
-  addons: [
-    {
-      name: '@storybook/addon-essentials',
-      // Dark-only DS — backgrounds toggle would add a useless light option.
-      options: { backgrounds: false },
-    },
-    '@storybook/addon-a11y',
-  ],
+
+  addons: ['@storybook/addon-essentials', '@storybook/addon-a11y'],
+
   framework: {
     name: '@storybook/web-components-vite',
     options: {},
   },
+
+  features: {}
 };
 
 export default config;

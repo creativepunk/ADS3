@@ -1,6 +1,6 @@
 import { LitElement, html, css, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { resetStyles, typographyBaseStyles } from '../shared/styles.js';
+import { resetStyles, typographyBaseStyles, typographyStyles } from '../shared/styles.js';
 
 export type DsTooltipAlign =
   | 'top' | 'top-start' | 'top-end'
@@ -10,11 +10,13 @@ export type DsTooltipAlign =
 
 let _uid = 0;
 
+/** @tagname ds-tooltip */
 @customElement('ds-tooltip')
 export class DsTooltip extends LitElement {
   static styles = [
     resetStyles,
     typographyBaseStyles,
+    typographyStyles,
     css`
       :host {
         display: inline-block;
@@ -29,10 +31,11 @@ export class DsTooltip extends LitElement {
         width: max-content;
         max-width: 240px;
         display: flex;
-        align-items: baseline;
+        align-items: center;
         gap: var(--ds-spacing-spacing-02);
         padding: var(--ds-spacing-spacing-01) var(--ds-spacing-spacing-03);
-        background: var(--ds-color-default-neutral-white);
+        background: var(--ds-color-default-gray-130);
+        border: 1px solid var(--ds-border-border-default);
         border-radius: var(--ds-radius-semantic-radius-sm);
         overflow: clip;
         pointer-events: none;
@@ -40,11 +43,6 @@ export class DsTooltip extends LitElement {
         visibility: hidden;
         opacity: 0;
         transition: opacity 120ms ease, visibility 0s linear 120ms;
-      }
-
-      :host([truncate]) .bubble {
-        /* token gap: 420px has no --ds-* mapping — Figma max-width */
-        max-width: 420px;
       }
 
       /* Entry: animation overrides the transition. Exit uses the transition above. */
@@ -57,21 +55,10 @@ export class DsTooltip extends LitElement {
         flex: 1 1 auto;
         min-width: 0;
         margin: 0;
-        color: var(--ds-text-text-inverse);
-        font-family: var(--ds-typography-cozy-helper-font-family);
-        font-size: var(--ds-typography-cozy-helper-font-size);
-        font-weight: var(--ds-typography-cozy-helper-font-weight);
-        line-height: var(--ds-typography-cozy-helper-line-height);
-        letter-spacing: var(--ds-typography-cozy-helper-letter-spacing);
+        color: var(--ds-text-text-subtle);
         font-feature-settings: 'cv08' 1;
         overflow-wrap: break-word;
         text-align: left;
-      }
-
-      :host([truncate]) .content {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
       }
 
       /* ── Keyboard shortcut badge ─────────────────────────────────────────── */
@@ -81,13 +68,12 @@ export class DsTooltip extends LitElement {
         align-items: center;
         padding: 1px var(--ds-spacing-spacing-01);
         border-radius: var(--ds-radius-semantic-radius-xs);
-        /* token gap: no --ds-* for kbd border/bg on inverse surface */
-        border: 1px solid rgba(0, 0, 0, 0.2);
-        background: rgba(0, 0, 0, 0.05);
-        font-family: var(--ds-typography-cozy-mono-body-sm-font-family);
+        /* token gap: no --ds-* for kbd border/bg on dark surface */
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        background: rgba(255, 255, 255, 0.06);
         font-size: 10px;
         font-weight: 500;
-        color: var(--ds-text-text-inverse);
+        color: var(--ds-text-text-subtle);
         letter-spacing: 0.02em;
         line-height: 1.4;
         white-space: nowrap;
@@ -227,10 +213,6 @@ export class DsTooltip extends LitElement {
       }
     `,
   ];
-
-  /** Single-line ellipsis truncation (max 420px) when true; wrapping (max 240px) when false. */
-  @property({ type: Boolean, reflect: true })
-  truncate = false;
 
   /** Where the bubble appears relative to the trigger. Default: 'top'. */
   @property({ type: String, reflect: true })
@@ -381,8 +363,8 @@ export class DsTooltip extends LitElement {
         part="tooltip"
         role="tooltip"
       >
-        <p class="content"><slot></slot></p>
-        ${this.shortcut ? html`<kbd class="shortcut">${this.shortcut}</kbd>` : nothing}
+        <p class="content text-helper-helper-regular"><slot></slot></p>
+        ${this.shortcut ? html`<kbd class="shortcut text-helper-helper-regular">${this.shortcut}</kbd>` : nothing}
       </div>
     `;
   }

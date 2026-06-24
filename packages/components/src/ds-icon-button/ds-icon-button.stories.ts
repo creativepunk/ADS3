@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/web-components';
 import { html } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import './ds-icon-button.js';
+import '../ds-icon/ds-icon.js';
 import type {
   DsIconButtonVariant,
   DsIconButtonSize,
@@ -21,18 +22,7 @@ interface IconButtonArgs {
   tooltipAlign: DsTooltipAlign;
 }
 
-const PLUS_ICON = html`
-  <svg
-    viewBox="0 0 16 16"
-    width="16"
-    height="16"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="1.5"
-  >
-    <path d="M8 3v10M3 8h10" stroke-linecap="round" />
-  </svg>
-`;
+const PLUS_ICON = html`<ds-icon name="add" size="sm"></ds-icon>`;
 
 const meta: Meta<IconButtonArgs> = {
   title: 'Components/Icon Button',

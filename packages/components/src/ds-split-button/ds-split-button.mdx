@@ -1,0 +1,157 @@
+{/* ds-split-button — Overview docs */}
+
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as SplitButtonStories from './ds-split-button.stories';
+
+<Meta of={SplitButtonStories} name="Overview" />
+
+# Split Button
+
+A split button pairs a primary action with a secondary menu trigger in a
+single compound control. The left half fires `ds-button-click` for the main
+action; the right chevron fires `ds-menu-click` to open a dropdown or menu.
+Use `ds-button` alone when you only need one action.
+
+<Canvas of={SplitButtonStories.Default} />
+
+## Variants
+
+Two variants control the visual fill.
+
+**Primary** (default) — solid brand background. Use for the most prominent action on a surface.
+
+**Tertiary** — transparent background with a 1px border. Use when the split button needs to sit alongside other UI without dominating it.
+
+<Canvas of={SplitButtonStories.ShowcaseVariants} />
+
+## Types
+
+Two types control the content of the action (left) button.
+
+**Text** (default) — renders the default slot as a label.
+
+**Icon** — renders a square action button with the `actionIcon` slot. Use when space is constrained or the action is well-understood by icon alone. Always provide a meaningful `aria-label` on the host when using the icon type.
+
+<Canvas of={SplitButtonStories.ShowcaseTypes} />
+
+## Sizes
+
+Three sizes — `sm` (24px), `md` (32px, default), and `lg` (40px). Both halves
+scale together; the chevron button is always square at the same height.
+
+<Canvas of={SplitButtonStories.ShowcaseSizes} />
+
+## States
+
+`isDisabled` disables both halves simultaneously. `isMenuOpen` reflects the
+open/closed state of the downstream menu in `aria-expanded` on the chevron
+button — the consuming component owns this toggle.
+
+<Canvas of={SplitButtonStories.ShowcaseStates} />
+
+## Full matrix
+
+All variant × type × size combinations.
+
+<Canvas of={SplitButtonStories.ShowcaseMatrix} />
+
+## API
+
+### Properties
+
+<ArgTypes of={SplitButtonStories} />
+
+### Slots
+
+| Slot | Purpose |
+| --- | --- |
+| _(default)_ | Label text for the action (left) button. Used when `type="text"`. |
+| `actionIcon` | Icon for the action (left) button. Used when `type="icon"`. Provide a `<ds-icon>` or 16×16 `<svg>`. |
+| `menuIcon` | Override the default chevron-down icon in the menu button. Provide a 16×16 `<svg>`. |
+
+### Events
+
+| Event | Detail | When |
+| --- | --- | --- |
+| `ds-button-click` | `{ originalEvent: MouseEvent }` | The action (left) button is clicked while enabled. |
+| `ds-menu-click` | `{ originalEvent: MouseEvent }` | The menu (chevron) button is clicked while enabled. |
+
+Both events are `composed: true` and `bubbles: true`. In React, listen with
+`onDsButtonClick` and `onDsMenuClick`.
+
+### CSS parts
+
+| Part | Element |
+| --- | --- |
+| `action-btn` | The inner `<button>` for the main action. |
+| `menu-btn` | The inner `<button>` for the menu trigger. |
+
+### Attribute names
+
+| Property | Attribute |
+| --- | --- |
+| `variant` | `variant` |
+| `type` | `type` |
+| `size` | `size` |
+| `isDisabled` | `is-disabled` |
+| `isMenuOpen` | `is-menu-open` |
+| `menuAriaLabel` | `menu-aria-label` |
+
+```html
+<ds-split-button variant="tertiary" is-disabled>Disabled</ds-split-button>
+<ds-split-button type="icon" is-menu-open menu-aria-label="More actions">
+  <ds-icon slot="actionIcon" name="play_arrow" size="sm"></ds-icon>
+</ds-split-button>
+```
+
+## Accessibility
+
+- Each half is a native `<button>` — keyboard-focusable and activatable with
+  `Enter` or `Space`.
+- The menu button carries `aria-haspopup="true"` at all times and
+  `aria-expanded="true"` when `isMenuOpen` is set.
+- `menuAriaLabel` (default `"Open menu"`) is required because the chevron
+  button has no visible text. Override it with a description that matches the
+  specific menu content (e.g. `"More save options"`).
+- When `type="icon"`, the action button also has no visible text — provide an
+  `aria-label` on the `<ds-split-button>` element or on the slotted icon.
+- `isDisabled` sets the native `disabled` attribute on both `<button>`
+  elements and suppresses all pointer events on the host.
+- Focus rings are rendered on each button independently using
+  `--ds-focus-focus`, so Tab cycles through action → menu.
+
+## React usage
+
+```tsx
+import { DsSplitButton } from '@my-ds/react';
+
+// Text variant (primary)
+function SaveDropdown() {
+  const [open, setOpen] = React.useState(false);
+  return (
+    <DsSplitButton
+      isMenuOpen={open}
+      menuAriaLabel="More save options"
+      onDsButtonClick={() => handleSave()}
+      onDsMenuClick={() => setOpen((o) => !o)}
+    >
+      Save
+    </DsSplitButton>
+  );
+}
+
+// Icon variant (tertiary)
+function PlayDropdown() {
+  return (
+    <DsSplitButton
+      variant="tertiary"
+      type="icon"
+      menuAriaLabel="More playback options"
+      onDsButtonClick={() => handlePlay()}
+      onDsMenuClick={() => openMenu()}
+    >
+      <ds-icon slot="actionIcon" name="play_arrow" size="sm" />
+    </DsSplitButton>
+  );
+}
+```

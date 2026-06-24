@@ -1,0 +1,66 @@
+{/* ds-form-message — Overview docs */}
+
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as FormMessageStories from './ds-form-message.stories';
+
+<Meta of={FormMessageStories} name="Overview" />
+
+# Form Message
+
+`<ds-form-message>` is an internal primitive used inside form components to render validation feedback and helper text below a control. It is not intended to be used standalone in product UI.
+
+<Canvas of={FormMessageStories.Default} />
+
+## Types
+
+| Type | Icon | Color | When to use |
+| --- | --- | --- | --- |
+| **error** | `error` (circle) | danger red | Validation failure; shown after submit or on blur |
+| **success** | `check_circle` | success green | Valid input confirmation |
+| **helper** | _(none)_ | subtlest gray | Persistent hint visible before interaction |
+
+<Canvas of={FormMessageStories.ShowcaseTypes} />
+
+## API
+
+### Properties
+
+<ArgTypes of={FormMessageStories} />
+
+### Slots
+
+| Slot | Description |
+| --- | --- |
+| _(default)_ | Message text content |
+
+### Events
+
+None — this is a display-only component.
+
+### Attribute names
+
+| Prop | Attribute |
+| --- | --- |
+| `type` | `type` |
+
+```html
+<ds-form-message type="error">This field is required</ds-form-message>
+<ds-form-message type="success">Looks good!</ds-form-message>
+<ds-form-message type="helper">Enter your full legal name</ds-form-message>
+```
+
+## Accessibility
+
+- Error and success messages use `role="status"` with `aria-live="polite"` so screen readers announce them when they appear.
+- Helper text does not use `aria-live` since it is always visible and does not change dynamically.
+- The icon is `aria-hidden="true"` — color and icon are supplementary to the text.
+- Composite form components should link this element to the input via `aria-describedby`.
+
+## React usage
+
+```tsx
+import { DsFormMessage } from '@my-ds/react';
+
+<DsFormMessage type="error">This field is required</DsFormMessage>
+<DsFormMessage type="helper">Enter your full legal name</DsFormMessage>
+```

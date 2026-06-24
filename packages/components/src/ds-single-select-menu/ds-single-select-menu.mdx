@@ -1,0 +1,90 @@
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as Stories from './ds-single-select-menu.stories';
+
+<Meta of={Stories} name="Overview" />
+
+# Single Select Menu
+
+A floating listbox for picking **one value** from a list. Manages selection state internally — clicking an item deselects any previous selection and fires `ds-select-menu-change`. The selected item displays a **checkmark on the right**.
+
+<Canvas of={Stories.Default} />
+
+## With groups
+
+<Canvas of={Stories.WithGroups} />
+
+## Preselected value
+
+Set `selected` on an item to pre-select it before any user interaction.
+
+<Canvas of={Stories.Preselected} />
+
+## With descriptions
+
+<Canvas of={Stories.WithDescription} />
+
+## States
+
+<Canvas of={Stories.ShowcaseStates} />
+
+---
+
+## API
+
+### `<ds-single-select-menu>` properties
+
+<ArgTypes of={Stories} />
+
+### `<ds-single-select-menu>` slots
+
+| Slot | Description |
+|------|-------------|
+| _(default)_ | `<ds-single-select-menu-group>` children |
+| `header` | Optional header |
+| `footer` | Optional footer |
+
+### `<ds-single-select-menu-item>` properties
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `value` | `string` | `''` | Identifier used in change event and for selection matching |
+| `selected` | `boolean` | `false` | Managed by parent — set for pre-selection only |
+| `disabled` | `boolean` | `false` | Prevents interaction |
+| `size` | `'sm' \| 'md'` | auto | Injected by parent menu |
+
+### `<ds-single-select-menu-item>` slots
+
+| Slot | Description |
+|------|-------------|
+| _(default)_ | Label text |
+| `description` | Optional helper text below label |
+
+### Events
+
+| Event | Detail | Fired by |
+|-------|--------|----------|
+| `ds-select-menu-change` | `{ values: string[], originalEvent }` | On any selection change. `values` always has 0 or 1 item. |
+
+---
+
+## Accessibility
+
+- Container: `role="listbox"`. Each item: `role="option"` with `aria-selected`.
+- Disabled items have `tabindex="-1"` and `opacity: 0.4`.
+
+---
+
+## React usage
+
+```tsx
+import { DsSingleSelectMenu, DsSingleSelectMenuItem, DsMenuCategory } from '@my-ds/react';
+import type { DsSelectMenuChangeEvent } from '@my-ds/components';
+
+<DsSingleSelectMenu
+  style={{ width: 280 }}
+  onDsSelectMenuChange={(e: DsSelectMenuChangeEvent) => console.log(e.detail.values[0])}
+>
+  <DsSingleSelectMenuItem value="apple">Apple</DsSingleSelectMenuItem>
+  <DsSingleSelectMenuItem value="banana" selected>Banana</DsSingleSelectMenuItem>
+</DsSingleSelectMenu>
+```

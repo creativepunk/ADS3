@@ -88,57 +88,131 @@ export const fontWeight = {
  * Sourced from Figma "Typography styles" collection, Cozy mode.
  */
 export const typography = {
-  'body-sm': {
+  'regular-body-sm': {
     fontSize: 14,
     fontWeight: 400,
     lineHeight: 16,
     letterSpacing: 0.16,
+    paragraphSpacing: 16,
   },
-  'body-md': {
+  'regular-body-md': {
     fontSize: 16,
     fontWeight: 400,
     lineHeight: 20,
     letterSpacing: 0.16,
+    paragraphSpacing: 20,
   },
-  'body-lg': {
+  'regular-body-lg': {
     fontSize: 20,
     fontWeight: 400,
     lineHeight: 24,
     letterSpacing: 0.16,
+    paragraphSpacing: 24,
   },
-  'mono-body-sm': {
+  'regular-mono-body-sm': {
     fontFamily: 'mono',
     fontSize: 14,
     fontWeight: 400,
     lineHeight: 16,
     letterSpacing: 0.16,
+    paragraphSpacing: 16,
   },
-  'mono-body-md': {
+  'regular-mono-body-md': {
     fontFamily: 'mono',
     fontSize: 16,
     fontWeight: 400,
     lineHeight: 20,
     letterSpacing: 0.16,
+    paragraphSpacing: 20,
   },
-  'mono-body-lg': {
+  'regular-mono-body-lg': {
     fontFamily: 'mono',
     fontSize: 20,
     fontWeight: 400,
     lineHeight: 24,
     letterSpacing: 0.16,
+    paragraphSpacing: 24,
   },
-  'code': {
+  'medium-body-sm': {
+    fontSize: 14,
+    fontWeight: 500,
+    lineHeight: 16,
+    letterSpacing: 0.5,
+    paragraphSpacing: 16,
+  },
+  'medium-body-md': {
+    fontSize: 16,
+    fontWeight: 500,
+    lineHeight: 20,
+    letterSpacing: 0.5,
+    paragraphSpacing: 20,
+  },
+  'medium-body-lg': {
+    fontSize: 20,
+    fontWeight: 500,
+    lineHeight: 24,
+    letterSpacing: 0.5,
+    paragraphSpacing: 24,
+  },
+  'bold-body-sm': {
+    fontSize: 14,
+    fontWeight: 700,
+    lineHeight: 16,
+    letterSpacing: 0.5,
+    paragraphSpacing: 16,
+  },
+  'bold-body-md': {
+    fontSize: 16,
+    fontWeight: 700,
+    lineHeight: 20,
+    letterSpacing: 0.5,
+    paragraphSpacing: 20,
+  },
+  'bold-body-lg': {
+    fontSize: 20,
+    fontWeight: 700,
+    lineHeight: 24,
+    letterSpacing: 0.5,
+    paragraphSpacing: 24,
+  },
+  'code-code-regular': {
     fontFamily: 'mono',
     fontSize: 12,
     fontWeight: 400,
     lineHeight: 16,
     letterSpacing: 0.32,
   },
-  'helper': {
+  'code-code-medium': {
+    fontFamily: 'mono',
+    fontSize: 12,
+    fontWeight: 500,
+    lineHeight: 16,
+    letterSpacing: 0.5,
+  },
+  'code-code-bold': {
+    fontFamily: 'mono',
+    fontSize: 12,
+    fontWeight: 700,
+    lineHeight: 16,
+    letterSpacing: 0.5,
+  },
+  'helper-helper-regular': {
     fontSize: 12,
     fontWeight: 400,
     lineHeight: 16,
     letterSpacing: 0.32,
+  },
+  'helper-helper-medium': {
+    fontSize: 12,
+    fontWeight: 500,
+    lineHeight: 16,
+    letterSpacing: 0.5,
+  },
+  'helper-helper-bold': {
+    fontSize: 12,
+    fontWeight: 700,
+    lineHeight: 16,
+    letterSpacing: 0.5,
   },
   'heading-xxs': {
     fontSize: 14,
@@ -238,57 +312,131 @@ export const typography = {
  * Sourced from Figma "Typography styles" collection, Compact mode.
  */
 export const typographyCompact = {
-  'body-sm': {
+  'regular-body-sm': {
     fontSize: 12,
     fontWeight: 400,
     lineHeight: 16,
     letterSpacing: 0.16,
+    paragraphSpacing: 16,
   },
-  'body-md': {
+  'regular-body-md': {
     fontSize: 14,
     fontWeight: 400,
     lineHeight: 16,
     letterSpacing: 0.16,
+    paragraphSpacing: 16,
   },
-  'body-lg': {
+  'regular-body-lg': {
     fontSize: 16,
     fontWeight: 400,
     lineHeight: 20,
     letterSpacing: 0.16,
+    paragraphSpacing: 20,
   },
-  'mono-body-sm': {
+  'regular-mono-body-sm': {
     fontFamily: 'mono',
     fontSize: 12,
     fontWeight: 400,
     lineHeight: 16,
     letterSpacing: 0.16,
+    paragraphSpacing: 16,
   },
-  'mono-body-md': {
+  'regular-mono-body-md': {
     fontFamily: 'mono',
     fontSize: 14,
     fontWeight: 400,
     lineHeight: 16,
     letterSpacing: 0.16,
+    paragraphSpacing: 16,
   },
-  'mono-body-lg': {
+  'regular-mono-body-lg': {
     fontFamily: 'mono',
     fontSize: 16,
     fontWeight: 400,
     lineHeight: 20,
     letterSpacing: 0.16,
+    paragraphSpacing: 20,
   },
-  'code': {
+  'medium-body-sm': {
+    fontSize: 12,
+    fontWeight: 500,
+    lineHeight: 16,
+    letterSpacing: 0.5,
+    paragraphSpacing: 16,
+  },
+  'medium-body-md': {
+    fontSize: 14,
+    fontWeight: 500,
+    lineHeight: 16,
+    letterSpacing: 0.5,
+    paragraphSpacing: 16,
+  },
+  'medium-body-lg': {
+    fontSize: 16,
+    fontWeight: 400,
+    lineHeight: 20,
+    letterSpacing: 0.5,
+    paragraphSpacing: 20,
+  },
+  'bold-body-sm': {
+    fontSize: 12,
+    fontWeight: 500,
+    lineHeight: 16,
+    letterSpacing: 0.5,
+    paragraphSpacing: 16,
+  },
+  'bold-body-md': {
+    fontSize: 14,
+    fontWeight: 500,
+    lineHeight: 16,
+    letterSpacing: 0.5,
+    paragraphSpacing: 16,
+  },
+  'bold-body-lg': {
+    fontSize: 16,
+    fontWeight: 400,
+    lineHeight: 20,
+    letterSpacing: 0.5,
+    paragraphSpacing: 20,
+  },
+  'code-code-regular': {
     fontFamily: 'mono',
     fontSize: 12,
     fontWeight: 400,
     lineHeight: 16,
     letterSpacing: 0.32,
   },
-  'helper': {
+  'code-code-medium': {
+    fontFamily: 'mono',
+    fontSize: 12,
+    fontWeight: 500,
+    lineHeight: 16,
+    letterSpacing: 0.5,
+  },
+  'code-code-bold': {
+    fontFamily: 'mono',
+    fontSize: 12,
+    fontWeight: 500,
+    lineHeight: 16,
+    letterSpacing: 0.5,
+  },
+  'helper-helper-regular': {
     fontSize: 12,
     fontWeight: 400,
     lineHeight: 16,
     letterSpacing: 0.32,
+  },
+  'helper-helper-medium': {
+    fontSize: 12,
+    fontWeight: 500,
+    lineHeight: 16,
+    letterSpacing: 0.5,
+  },
+  'helper-helper-bold': {
+    fontSize: 12,
+    fontWeight: 500,
+    lineHeight: 16,
+    letterSpacing: 0.5,
   },
   'heading-xxs': {
     fontSize: 12,

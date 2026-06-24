@@ -162,9 +162,20 @@ padding: 8px 16px;
 :host([size="md"]) .inner { padding: var(--ds-spacing-03) var(--ds-spacing-05); }
 :host([size="lg"]) .inner { padding: var(--ds-spacing-04) var(--ds-spacing-06); }
 
-/* Disabled — pointer-events on :host, background on the inner element */
-:host([disabled]) { pointer-events: none; opacity: 0.4; cursor: not-allowed; }
-:host([disabled]) .inner { background: var(--ds-color-background-disabled); }
+/* Disabled — pointer-events on :host only; never use opacity to dim anything.
+   Apply explicit disabled tokens to every text, icon, and background element.
+   NEVER do: :host([disabled]) { opacity: 0.4; } — this dims everything
+   including child components that manage their own disabled appearance. */
+:host([disabled]) { pointer-events: none; cursor: not-allowed; }
+:host([disabled]) .label,
+:host([disabled]) ::slotted([slot='description']) { color: var(--ds-text-text-disabled); }
+:host([disabled]) .icon-wrap,
+:host([disabled]) ::slotted(ds-icon)             { color: var(--ds-icon-icon-disabled); }
+:host([disabled]) .inner                         { background: var(--ds-background-disabled); }
+
+/* ⚠ Token gap rule: if any of --ds-text-text-disabled, --ds-icon-icon-disabled,
+   or --ds-background-disabled are missing from the token package, flag them as
+   token gaps in the Step 8 summary rather than falling back to opacity. */
 ```
 
 **Focus ring:**
@@ -409,6 +420,7 @@ Then immediately ask: **"Ready for the next component, or would you like to revi
 - [ ] No hardcoded hex colors or pixel values (except documented fallbacks)
 - [ ] All variants driven by `:host([attr])` CSS selectors, not JS class manipulation
 - [ ] `disabled` uses native `?disabled=${...}` not just `aria-disabled`
+- [ ] Disabled state never uses `opacity: 0.4` on `:host` — uses `--ds-text-text-disabled` / `--ds-icon-icon-disabled` on individual elements instead; missing tokens flagged as token gaps in Step 8
 - [ ] Focus ring uses `--ds-color-focus-default`, not a custom color
 - [ ] `composed: true` on all dispatched events (already in `dispatch()` utility)
 - [ ] React wrapper has `displayName` set

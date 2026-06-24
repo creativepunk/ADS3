@@ -3,10 +3,12 @@ import { customElement, property } from 'lit/decorators.js';
 import {
   resetStyles,
   typographyBaseStyles,
+  typographyStyles,
   innerFocusRingStyles,
   srOnlyStyles,
 } from '../shared/styles.js';
 import { dispatch } from '../shared/events.js';
+import '../ds-icon/ds-icon.js';
 
 export type DsButtonVariant =
   | 'primary'
@@ -17,11 +19,13 @@ export type DsButtonVariant =
 export type DsButtonSize = 'sm' | 'md' | 'lg';
 export type DsButtonType = 'button' | 'submit' | 'reset';
 
+/** @tagname ds-button */
 @customElement('ds-button')
 export class DsButton extends LitElement {
   static styles = [
     resetStyles,
     typographyBaseStyles,
+    typographyStyles,
     innerFocusRingStyles,
     srOnlyStyles,
     css`
@@ -44,12 +48,6 @@ export class DsButton extends LitElement {
         gap: var(--ds-spacing-spacing-04);
         padding: 0 var(--ds-spacing-spacing-05);
         border-radius: var(--ds-radius-semantic-radius-sm);
-        /* Figma text style: Body/sm */
-        font-family: var(--ds-typography-cozy-body-sm-font-family);
-        font-size: var(--ds-typography-cozy-body-sm-font-size);
-        font-weight: var(--ds-typography-cozy-body-sm-font-weight);
-        line-height: var(--ds-typography-cozy-body-sm-line-height);
-        letter-spacing: var(--ds-typography-cozy-body-sm-letter-spacing);
         font-feature-settings: 'cv08' 1;
         color: var(--ds-text-text-default);
         cursor: pointer;
@@ -171,6 +169,7 @@ export class DsButton extends LitElement {
         width: var(--ds-spacing-spacing-06);
         height: var(--ds-spacing-spacing-06);
         flex: 0 0 auto;
+        color: var(--ds-icon-icon-default);
       }
       .icon-slot.empty {
         display: none;
@@ -181,13 +180,28 @@ export class DsButton extends LitElement {
         height: 100%;
         display: block;
       }
+      ::slotted(ds-icon) {
+        flex-shrink: 0;
+      }
+
+      /* Built-in icon-after (shown when iconAfter=true) */
+      .icon-after {
+        color: var(--ds-icon-icon-default);
+        flex-shrink: 0;
+      }
+
+      :host([is-disabled]) .icon-slot,
+      :host([is-disabled]) .icon-after {
+        color: var(--ds-icon-icon-disabled);
+      }
 
       /* ── Loading state ────────────────────────────────────────────────── */
       /* When loading, the label and icons collapse out of the flex layout
          so the button shrinks to fit just the spinner — matching the Figma
          loading width (40px regardless of label length). */
       :host([is-loading]) .label,
-      :host([is-loading]) .icon-slot {
+      :host([is-loading]) .icon-slot,
+      :host([is-loading]) .icon-after {
         display: none;
       }
       .spinner {
@@ -240,6 +254,10 @@ export class DsButton extends LitElement {
   @property({ type: String, reflect: true })
   type: DsButtonType = 'button';
 
+  /** Show the built-in keyboard_arrow_down icon after the label. */
+  @property({ type: Boolean, reflect: true })
+  iconAfter = false;
+
   @property({ type: String, attribute: 'aria-label' })
   override ariaLabel: string | null = null;
 
@@ -252,17 +270,10 @@ export class DsButton extends LitElement {
   }
 
   private _hasIconBefore = false;
-  private _hasIconAfter = false;
 
-  private _onBeforeSlotChange = (e: Event) => {
+  private _onIconBeforeSlotChange = (e: Event) => {
     const slot = e.target as HTMLSlotElement;
     this._hasIconBefore = slot.assignedNodes({ flatten: true }).length > 0;
-    this.requestUpdate();
-  };
-
-  private _onAfterSlotChange = (e: Event) => {
-    const slot = e.target as HTMLSlotElement;
-    this._hasIconAfter = slot.assignedNodes({ flatten: true }).length > 0;
     this.requestUpdate();
   };
 
@@ -284,6 +295,7 @@ export class DsButton extends LitElement {
     return html`
       <button
         part="button"
+        class="text-medium-body-sm"
         type=${this.type}
         ?disabled=${this.isDisabled}
         aria-busy=${this.isLoading ? 'true' : nothing}
@@ -295,15 +307,12 @@ export class DsButton extends LitElement {
           class="icon-slot ${this._hasIconBefore ? '' : 'empty'}"
           aria-hidden="true"
         >
-          <slot name="icon-before" @slotchange=${this._onBeforeSlotChange}></slot>
+          <slot name="iconBefore" @slotchange=${this._onIconBeforeSlotChange}></slot>
         </span>
         <span class="label"><slot></slot></span>
-        <span
-          class="icon-slot ${this._hasIconAfter ? '' : 'empty'}"
-          aria-hidden="true"
-        >
-          <slot name="icon-after" @slotchange=${this._onAfterSlotChange}></slot>
-        </span>
+        ${this.iconAfter
+          ? html`<ds-icon class="icon-after" name="keyboard_arrow_down" size="sm" aria-hidden="true"></ds-icon>`
+          : nothing}
         <span class="spinner" aria-hidden="true">
           <span class="spinner-ring"></span>
         </span>

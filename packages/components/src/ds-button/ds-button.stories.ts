@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/web-components';
 import { html, nothing } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import './ds-button.js';
+import '../ds-icon/ds-icon.js';
 import type {
   DsButtonSize,
   DsButtonType,
@@ -18,40 +19,10 @@ interface ButtonArgs {
   ariaLabel?: string;
   label: string;
   showIconBefore: boolean;
-  showIconAfter: boolean;
+  iconAfter: boolean;
 }
 
-const PLUS_ICON = html`
-  <svg
-    slot="icon-before"
-    viewBox="0 0 16 16"
-    width="16"
-    height="16"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="1.5"
-  >
-    <path d="M8 3v10M3 8h10" stroke-linecap="round" />
-  </svg>
-`;
-
-const CHEVRON_ICON = html`
-  <svg
-    slot="icon-after"
-    viewBox="0 0 16 16"
-    width="16"
-    height="16"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="1.5"
-  >
-    <path
-      d="M4 6l4 4 4-4"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    />
-  </svg>
-`;
+const PLUS_ICON = html`<ds-icon slot="iconBefore" name="add" size="sm"></ds-icon>`;
 
 const meta: Meta<ButtonArgs> = {
   title: 'Components/Button',
@@ -131,15 +102,18 @@ const meta: Meta<ButtonArgs> = {
     },
     showIconBefore: {
       control: 'boolean',
-      name: 'icon-before',
-      description: 'Toggle a sample icon in the icon-before slot.',
+      name: 'iconBefore',
+      description: 'Toggle a sample icon in the iconBefore slot.',
       table: { category: 'Slot content' },
     },
-    showIconAfter: {
+    iconAfter: {
       control: 'boolean',
-      name: 'icon-after',
-      description: 'Toggle a sample icon in the icon-after slot.',
-      table: { category: 'Slot content' },
+      description: 'Show the built-in keyboard_arrow_down iconAfter after the label.',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+        category: 'Props',
+      },
     },
   },
   args: {
@@ -151,7 +125,7 @@ const meta: Meta<ButtonArgs> = {
     isSelected: false,
     label: 'Button',
     showIconBefore: false,
-    showIconAfter: false,
+    iconAfter: false,
   },
   parameters: {
     options: { showPanel: true },
@@ -164,12 +138,12 @@ const meta: Meta<ButtonArgs> = {
       ?is-disabled=${args.isDisabled}
       ?is-loading=${args.isLoading}
       ?is-selected=${args.isSelected}
+      ?iconAfter=${args.iconAfter}
       aria-label=${ifDefined(args.ariaLabel || undefined)}
       @ds-click=${(e: CustomEvent) => console.log('ds-click', e.detail)}
     >
       ${args.showIconBefore ? PLUS_ICON : nothing}
       ${args.label}
-      ${args.showIconAfter ? CHEVRON_ICON : nothing}
     </ds-button>
   `,
 };
@@ -340,8 +314,8 @@ export const ShowcaseWithIcons: Story = {
   render: () => html`
     <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
       <ds-button>${PLUS_ICON}Add item</ds-button>
-      <ds-button variant="secondary">Open${CHEVRON_ICON}</ds-button>
-      <ds-button variant="tertiary">${PLUS_ICON}New${CHEVRON_ICON}</ds-button>
+      <ds-button variant="secondary" iconAfter>Open</ds-button>
+      <ds-button variant="tertiary" iconAfter>${PLUS_ICON}New</ds-button>
     </div>
   `,
 };

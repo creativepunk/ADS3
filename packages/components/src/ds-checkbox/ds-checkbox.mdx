@@ -1,0 +1,158 @@
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as CheckboxStories from './ds-checkbox.stories';
+import * as CheckboxGroupStories from './ds-checkbox-group.stories';
+
+<Meta of={CheckboxStories} name="Overview" />
+
+# Checkbox
+
+A form control that lets users select one or more options from a set. Use `ds-checkbox` for a single item with an optional label and description. Use `ds-checkbox-group` when presenting a titled list of checkboxes — it handles layout, the group label, and an optional helper/error message.
+
+<Canvas of={CheckboxStories.Default} />
+
+## States
+
+All interactive states — unchecked, checked, indeterminate, disabled, read-only, and error — are driven by reflected boolean attributes so CSS `:host([attr])` selectors handle all visual transitions without JS class manipulation.
+
+<Canvas of={CheckboxStories.ShowcaseStates} />
+
+### Checked
+
+<Canvas of={CheckboxStories.Checked} />
+
+### Indeterminate
+
+Use `is-indeterminate` when a parent checkbox represents partial selection of a child set. The dash icon replaces the checkmark.
+
+<Canvas of={CheckboxStories.Indeterminate} />
+
+### Error
+
+<Canvas of={CheckboxStories.Error} />
+
+### Disabled
+
+<Canvas of={CheckboxStories.Disabled} />
+
+### Read-only
+
+<Canvas of={CheckboxStories.ReadOnly} />
+
+## With description
+
+Pass `description` to render helper text beneath the label.
+
+<Canvas of={CheckboxStories.ShowcaseWithDescription} />
+
+## Checkbox Group
+
+`ds-checkbox-group` wraps a set of `ds-checkbox` items. It renders a `ds-form-label` at the top and a `ds-form-message` at the bottom in a vertical flex layout with zero gap.
+
+<Canvas of={CheckboxGroupStories.Default} />
+
+### Horizontal layout
+
+<Canvas of={CheckboxGroupStories.Horizontal} />
+
+### Error state
+
+<Canvas of={CheckboxGroupStories.Error} />
+
+### Disabled
+
+<Canvas of={CheckboxGroupStories.Disabled} />
+
+### Read-only
+
+<Canvas of={CheckboxGroupStories.ReadOnly} />
+
+### With helper text
+
+<Canvas of={CheckboxGroupStories.WithHelperText} />
+
+### Full matrix
+
+<Canvas of={CheckboxGroupStories.ShowcaseMatrix} />
+
+## API
+
+### ds-checkbox properties
+
+<ArgTypes of={CheckboxStories} />
+
+### ds-checkbox slots
+
+| Slot | Description |
+|------|-------------|
+| *(default)* | Alternative to the `label` prop — use when label needs rich content |
+| `children` | Nested child checkboxes (rendered indented below the parent) |
+
+### ds-checkbox events
+
+| Event | Detail | Description |
+|-------|--------|-------------|
+| `ds-checkbox-change` | `{ value: boolean, originalEvent?: Event }` | Fired when the checked state changes |
+
+### Attribute mapping
+
+Boolean props use kebab-case attribute names:
+
+```html
+<!-- isChecked → is-checked -->
+<ds-checkbox is-checked></ds-checkbox>
+
+<!-- isDisabled → is-disabled -->
+<ds-checkbox is-disabled></ds-checkbox>
+
+<!-- isIndeterminate → is-indeterminate -->
+<ds-checkbox is-indeterminate></ds-checkbox>
+
+<!-- hasError → has-error -->
+<ds-checkbox has-error></ds-checkbox>
+```
+
+### ds-checkbox-group properties
+
+<ArgTypes of={CheckboxGroupStories} />
+
+### ds-checkbox-group slots
+
+| Slot | Description |
+|------|-------------|
+| *(default)* | `ds-checkbox` items |
+
+## Accessibility
+
+- Each `ds-checkbox` renders a native `<input type="checkbox">` — no `div[role="checkbox"]` workarounds.
+- `aria-checked="mixed"` is set automatically when `is-indeterminate` is true.
+- `aria-disabled` and `aria-readonly` are set in addition to the native attribute so assistive technologies announce the state even when `pointer-events: none` is active.
+- The group container carries `role="group"` with an `aria-label` mirroring the visible group label.
+- Focus ring uses `--ds-focus-focus` (white) at 2px solid — consistent with all other interactive DS components.
+- Keyboard: `Space` toggles the checkbox even when the native input is visually hidden.
+
+## React usage
+
+```tsx
+import { DsCheckbox, DsCheckboxGroup } from '@my-ds/react';
+
+function Example() {
+  const [accepted, setAccepted] = React.useState(false);
+
+  return (
+    <DsCheckboxGroup
+      label="Preferences"
+      isRequired
+      helperText="Select at least one option"
+      errorText="At least one option is required"
+    >
+      <DsCheckbox
+        label="Accept terms"
+        isChecked={accepted}
+        isRequired
+        onDsCheckboxChange={(e) => setAccepted(e.detail.value)}
+      />
+      <DsCheckbox label="Subscribe to newsletter" />
+    </DsCheckboxGroup>
+  );
+}
+```

@@ -4,6 +4,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import {
   resetStyles,
   typographyBaseStyles,
+  typographyStyles,
   srOnlyStyles,
 } from '../shared/styles.js';
 import { dispatch } from '../shared/events.js';
@@ -11,6 +12,9 @@ import { dispatch } from '../shared/events.js';
 import '../ds-button/ds-button.js';
 // Register <ds-icon-button> — used for the nav arrow controls.
 import '../ds-icon-button/ds-icon-button.js';
+// Register picker item components.
+import '../ds-single-select-menu/ds-single-select-menu-item.js';
+import '../ds-menu-category/ds-menu-category.js';
 
 export type DsCalendarMarkerColor = 'red' | 'yellow' | 'blue' | 'white';
 
@@ -43,11 +47,13 @@ function daysInMonth(year: number, month: number): number {
   return new Date(year, month, 0).getDate();
 }
 
+/** @tagname ds-calendar */
 @customElement('ds-calendar')
 export class DsCalendar extends LitElement {
   static styles = [
     resetStyles,
     typographyBaseStyles,
+    typographyStyles,
     srOnlyStyles,
     css`
       :host {
@@ -85,20 +91,20 @@ export class DsCalendar extends LitElement {
         padding-bottom: var(--ds-spacing-spacing-05);
       }
 
+      .label-wrap {
+        flex: 1 1 auto;
+        display: flex;
+        justify-content: center;
+      }
+
       .check-icon {
         width: var(--ds-spacing-spacing-06); /* 16px */
         height: var(--ds-spacing-spacing-06);
         display: block;
       }
 
-      /* Month-label control — the shared <ds-button> (ghost). It flexes to
-         fill the space between the arrows and its inner button stretches so
-         the hover/selected background spans the full width. */
       .label-btn {
-        flex: 1 1 auto;
-      }
-      .label-btn::part(button) {
-        width: 100%;
+        flex: 0 0 auto;
       }
 
       /* Focus rings — scoped selectors beat all: unset (higher specificity). */
@@ -127,12 +133,6 @@ export class DsCalendar extends LitElement {
         align-items: center;
         justify-content: center;
         padding: var(--ds-spacing-spacing-04) 0;
-        /* Figma text style: Heading/xxs */
-        font-family: var(--ds-typography-cozy-heading-xxs-font-family);
-        font-size: var(--ds-typography-cozy-heading-xxs-font-size);
-        font-weight: var(--ds-typography-cozy-heading-xxs-font-weight);
-        line-height: var(--ds-typography-cozy-heading-xxs-line-height);
-        letter-spacing: var(--ds-typography-cozy-heading-xxs-letter-spacing);
         color: var(--ds-text-text-subtle);
       }
 
@@ -154,12 +154,6 @@ export class DsCalendar extends LitElement {
         border-radius: var(--ds-radius-semantic-radius-sm);
         background: var(--ds-background-neutral-subtle-default);
         color: var(--ds-text-text-default);
-        /* Figma text style: Body/md */
-        font-family: var(--ds-typography-cozy-body-md-font-family);
-        font-size: var(--ds-typography-cozy-body-md-font-size);
-        font-weight: var(--ds-typography-cozy-body-md-font-weight);
-        line-height: var(--ds-typography-cozy-body-md-line-height);
-        letter-spacing: var(--ds-typography-cozy-body-md-letter-spacing);
         cursor: pointer;
         transition: background-color 120ms ease;
       }
@@ -231,23 +225,17 @@ export class DsCalendar extends LitElement {
       .picker {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: var(--ds-spacing-spacing-04);
         padding-top: var(--ds-spacing-spacing-04);
+        overflow: hidden;
       }
       .picker-col {
         display: flex;
         flex-direction: column;
         min-width: 0;
+        overflow: hidden;
       }
-      .picker-col-label {
-        padding: var(--ds-spacing-spacing-04) var(--ds-spacing-spacing-05);
-        /* Figma text style: Utility/Helper */
-        font-family: var(--ds-typography-cozy-helper-font-family);
-        font-size: var(--ds-typography-cozy-helper-font-size);
-        font-weight: var(--ds-typography-cozy-helper-font-weight);
-        line-height: var(--ds-typography-cozy-helper-line-height);
-        letter-spacing: var(--ds-typography-cozy-helper-letter-spacing);
-        color: var(--ds-text-text-subtlest);
+      .picker-col + .picker-col {
+        border-left: 1px solid var(--ds-border-border-default);
       }
       .picker-list {
         display: flex;
@@ -255,46 +243,7 @@ export class DsCalendar extends LitElement {
         max-height: 280px;
         overflow-y: auto;
         scrollbar-width: thin;
-      }
-      .picker-item {
-        all: unset;
-        box-sizing: border-box;
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: var(--ds-spacing-spacing-04);
-        height: var(--ds-type-scale-y7); /* 40px */
-        padding: 0 var(--ds-spacing-spacing-05);
-        border-radius: var(--ds-radius-semantic-radius-sm);
-        background: var(--ds-background-neutral-subtle-default);
-        color: var(--ds-text-text-default);
-        /* Figma text style: Body/md */
-        font-family: var(--ds-typography-cozy-body-md-font-family);
-        font-size: var(--ds-typography-cozy-body-md-font-size);
-        font-weight: var(--ds-typography-cozy-body-md-font-weight);
-        line-height: var(--ds-typography-cozy-body-md-line-height);
-        letter-spacing: var(--ds-typography-cozy-body-md-letter-spacing);
-        cursor: pointer;
-        transition: background-color 120ms ease;
-      }
-      .picker-item:hover {
-        background: var(--ds-background-neutral-subtle-hovered);
-      }
-      .picker-item:active {
-        background: var(--ds-background-neutral-subtle-pressed);
-      }
-      .picker-item[aria-selected='true'] {
-        background: var(--ds-background-neutral-default);
-      }
-      .picker-item:disabled {
-        color: var(--ds-text-text-disabled);
-        cursor: not-allowed;
-        background: var(--ds-background-neutral-subtle-default);
-      }
-      .check-icon {
-        color: var(--ds-icon-icon-default);
-        flex: 0 0 auto;
+        padding: var(--ds-spacing-spacing-02) 0;
       }
 
       @media (prefers-reduced-motion: reduce) {
@@ -381,11 +330,11 @@ export class DsCalendar extends LitElement {
   @state() private _pickerOpen = false;
   @state() private _pickerYearMin = 0;
   @state() private _pickerYearMax = 0;
+  // null = no month highlighted yet after a year change
+  @state() private _pickerPendingMonth: number | null = null;
   private _pendingFocus = false;
   private _pendingPickerScroll = false;
-  // Scroll-position restoration when years are prepended (extended upward).
-  private _prepScrollTop = -1;
-  private _prepScrollHeight = -1;
+  private _suppressYearScroll = false;
   private _extendingYears = false;
 
   // ── Derived helpers ──────────────────────────────────────────────────────
@@ -469,25 +418,47 @@ export class DsCalendar extends LitElement {
       const focused = this.renderRoot.querySelector<HTMLElement>('.day[tabindex="0"]');
       focused?.focus();
     }
-    // After prepending years at the top, restore scroll position so the
-    // viewport doesn't jump — new scroll = old scroll + height added above.
-    if (this._prepScrollTop >= 0) {
-      const list = this.renderRoot.querySelector<HTMLElement>('.picker-year-list');
-      if (list) {
-        list.scrollTop = this._prepScrollTop + (list.scrollHeight - this._prepScrollHeight);
-      }
-      this._prepScrollTop = -1;
-      this._prepScrollHeight = -1;
+    if (this._extendingYears) {
       this._extendingYears = false;
     }
-    // When picker first opens, bring the selected year into view.
+    // When picker first opens, center both selected year and selected month.
     if (this._pendingPickerScroll) {
       this._pendingPickerScroll = false;
-      this._extendingYears = false;
-      const sel = this.renderRoot.querySelector<HTMLElement>(
-        '.picker-year-list [aria-selected="true"]',
-      );
-      sel?.scrollIntoView({ block: 'center' });
+      this._suppressYearScroll = true;
+      requestAnimationFrame(() => {
+        this._alignPickerLists();
+        // Release the suppression after the scroll events from centering settle.
+        requestAnimationFrame(() => { this._suppressYearScroll = false; });
+      });
+    }
+  }
+
+  private _alignPickerLists(): void {
+    const yearList = this.renderRoot.querySelector<HTMLElement>('.picker-year-list');
+    const yearItem = this.renderRoot.querySelector<HTMLElement>('.picker-year-list ds-single-select-menu-item[selected]');
+    const monthList = this.renderRoot.querySelector<HTMLElement>('.picker-month-list');
+    const monthItem = this.renderRoot.querySelector<HTMLElement>('.picker-month-list ds-single-select-menu-item[selected]');
+
+    if (!yearList || !monthList) return;
+
+    if (monthItem) {
+      // Set month scroll first — it may be constrained (e.g. January can't center).
+      const idealMonth = monthItem.offsetTop - monthList.clientHeight / 2 + monthItem.offsetHeight / 2;
+      monthList.scrollTop = Math.max(0, Math.min(idealMonth, monthList.scrollHeight - monthList.clientHeight));
+    }
+
+    if (yearItem) {
+      if (monthItem) {
+        // Find the actual visual center of the month item after its clamped scroll,
+        // then scroll the year list so the year item lands at that same visual position.
+        const monthItemVisualCenter = monthItem.offsetTop + monthItem.offsetHeight / 2 - monthList.scrollTop;
+        const yearScroll = yearItem.offsetTop + yearItem.offsetHeight / 2 - monthItemVisualCenter;
+        yearList.scrollTop = Math.max(0, Math.min(yearScroll, yearList.scrollHeight - yearList.clientHeight));
+      } else {
+        // No month selected — just center the year.
+        const idealYear = yearItem.offsetTop - yearList.clientHeight / 2 + yearItem.offsetHeight / 2;
+        yearList.scrollTop = Math.max(0, Math.min(idealYear, yearList.scrollHeight - yearList.clientHeight));
+      }
     }
   }
 
@@ -623,15 +594,17 @@ export class DsCalendar extends LitElement {
           ?is-disabled=${this._pickerOpen}
           @ds-click=${() => this._shiftMonth(-1)}
         >${chevronLeft}</ds-icon-button>
-        <ds-button
-          class="label-btn"
-          variant="ghost"
-          size="sm"
-          ?is-selected=${this._pickerOpen}
-          @ds-click=${this._onLabelClick}
-        >
-          ${label}
-        </ds-button>
+        <div class="label-wrap">
+          <ds-button
+            class="label-btn"
+            variant="ghost"
+            size="sm"
+            ?is-selected=${this._pickerOpen}
+            @ds-click=${this._onLabelClick}
+          >
+            ${label}
+          </ds-button>
+        </div>
         <ds-icon-button
           variant="ghost"
           size="sm"
@@ -659,7 +632,7 @@ export class DsCalendar extends LitElement {
     return html`
       <div class="weekdays" role="row">
         ${labels.map(
-          (name) => html`<span class="weekday" role="columnheader">${name}</span>`,
+          (name) => html`<span class="weekday text-heading-xxs" role="columnheader">${name}</span>`,
         )}
       </div>
       <div
@@ -678,6 +651,7 @@ export class DsCalendar extends LitElement {
           const marker = this.markers[iso];
           const classes = {
             day: true,
+            'text-regular-body-md': true,
             'is-outside': !inMonth,
             'is-today': isToday,
             'is-selected': isSelected,
@@ -719,10 +693,10 @@ export class DsCalendar extends LitElement {
   }
 
   private _renderPicker() {
-    // Years in descending order (newest at top). The list grows dynamically as
-    // the user scrolls — _onYearListScroll extends _pickerYearMax / _pickerYearMin.
+    // Years in ascending order (oldest at top). The list grows dynamically as
+    // the user scrolls — _onYearListScroll extends _pickerYearMin / _pickerYearMax.
     const years: number[] = [];
-    for (let y = this._pickerYearMax; y >= this._pickerYearMin; y--) {
+    for (let y = this._pickerYearMin; y <= this._pickerYearMax; y++) {
       years.push(y);
     }
     const months = this._monthNames();
@@ -730,43 +704,33 @@ export class DsCalendar extends LitElement {
     return html`
       <div class="picker">
         <div class="picker-col">
-          <span class="picker-col-label" id="cal-year-label">Year</span>
+          <ds-menu-category>Year</ds-menu-category>
           <div
             class="picker-list picker-year-list"
             role="listbox"
-            aria-labelledby="cal-year-label"
+            aria-label="Year"
             @scroll=${this._onYearListScroll}
           >
             ${years.map((y) => {
               const selected = y === this.year;
-              return html`<button
-                class="picker-item"
-                type="button"
-                role="option"
-                aria-selected=${selected ? 'true' : 'false'}
-                @click=${() => this._selectPickerYear(y)}
-              >
-                <span>${y}</span>
-                ${selected ? html`<span class="check-icon">${checkIcon}</span>` : nothing}
-              </button>`;
+              return html`<ds-single-select-menu-item
+                value=${String(y)}
+                ?selected=${selected}
+                @ds-menu-select=${(e: Event) => { e.stopPropagation(); this._selectPickerYear(y); }}
+              >${y}</ds-single-select-menu-item>`;
             })}
           </div>
         </div>
         <div class="picker-col">
-          <span class="picker-col-label" id="cal-month-label">Month</span>
-          <div class="picker-list" role="listbox" aria-labelledby="cal-month-label">
+          <ds-menu-category>Month</ds-menu-category>
+          <div class="picker-list picker-month-list" role="listbox" aria-label="Month">
             ${months.map((name, i) => {
-              const selected = i + 1 === this.month;
-              return html`<button
-                class="picker-item"
-                type="button"
-                role="option"
-                aria-selected=${selected ? 'true' : 'false'}
-                @click=${() => this._selectPickerMonth(i + 1)}
-              >
-                <span>${name}</span>
-                ${selected ? html`<span class="check-icon">${checkIcon}</span>` : nothing}
-              </button>`;
+              const selected = this._pickerPendingMonth === i + 1;
+              return html`<ds-single-select-menu-item
+                value=${String(i + 1)}
+                ?selected=${selected}
+                @ds-menu-select=${(e: Event) => { e.stopPropagation(); this._selectPickerMonth(i + 1); }}
+              >${name}</ds-single-select-menu-item>`;
             })}
           </div>
         </div>
@@ -795,33 +759,41 @@ export class DsCalendar extends LitElement {
     if (this._pickerOpen) {
       this._pickerYearMin = this.year - 10;
       this._pickerYearMax = this.year + 10;
+      this._pickerPendingMonth = this.month;
       this._pendingPickerScroll = true;
     }
   };
 
   private _onYearListScroll = (e: Event): void => {
-    if (this._extendingYears) return;
+    if (this._extendingYears || this._suppressYearScroll) return;
     const el = e.target as HTMLElement;
     if (el.scrollTop < 100) {
-      // Near the top — prepend newer years above the current range.
+      // Near the top — prepend older years; preserve scroll position after re-render.
       this._extendingYears = true;
-      this._prepScrollTop = el.scrollTop;
-      this._prepScrollHeight = el.scrollHeight;
-      this._pickerYearMax += 20;
-    } else if (el.scrollHeight - el.scrollTop - el.clientHeight < 100) {
-      // Near the bottom — append older years below the current range.
-      this._extendingYears = true;
+      const prevScrollTop = el.scrollTop;
+      const prevScrollHeight = el.scrollHeight;
       this._pickerYearMin -= 20;
+      // After Lit re-renders the new items, compensate for the added height above.
+      this.updateComplete.then(() => {
+        el.scrollTop = prevScrollTop + (el.scrollHeight - prevScrollHeight);
+        this._extendingYears = false;
+      });
+    } else if (el.scrollHeight - el.scrollTop - el.clientHeight < 100) {
+      // Near the bottom — append newer years; no scroll compensation needed.
+      this._extendingYears = true;
+      this._pickerYearMax += 20;
     }
   };
 
   private _selectPickerYear(y: number): void {
     this.year = y;
+    this._pickerPendingMonth = null;
     this._dispatchNavigate();
   }
 
   private _selectPickerMonth(m: number): void {
     this.month = m;
+    this._pickerPendingMonth = m;
     this._pickerOpen = false;
     this._dispatchNavigate();
   }
@@ -842,7 +814,6 @@ const chevronLeft = html`<svg viewBox="0 0 16 16" width="16" height="16" fill="n
 const chevronRight = html`<svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4l4 4-4 4" /></svg>`;
 const chevronsLeft = html`<svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4 4 8l4 4M13 4 9 8l4 4" /></svg>`;
 const chevronsRight = html`<svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4l4 4-4 4M8 4l4 4-4 4" /></svg>`;
-const checkIcon = html`<svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.5 6.5 12 13 4.5" /></svg>`;
 
 declare global {
   interface HTMLElementTagNameMap {

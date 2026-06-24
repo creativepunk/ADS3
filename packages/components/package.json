@@ -21,8 +21,9 @@
     "dev": "tsc -p tsconfig.json --watch",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "clean": "rimraf dist storybook-static",
-    "storybook": "storybook dev -p 6006",
-    "storybook:build": "storybook build"
+    "storybook": "pnpm cem && storybook dev -p 6006",
+    "storybook:build": "pnpm cem && storybook build",
+    "cem": "cem analyze"
   },
   "dependencies": {
     "@fontsource/inter": "^5.2.8",
@@ -31,14 +32,14 @@
     "lit": "^3.1.2"
   },
   "devDependencies": {
-    "@storybook/addon-a11y": "^8.6.0",
-    "@storybook/addon-docs": "^8.6.0",
-    "@storybook/addon-essentials": "^8.6.0",
+    "@custom-elements-manifest/analyzer": "^0.11.0",
+    "@storybook/addon-a11y": "^10.4.6",
+    "@storybook/addon-docs": "^10.4.6",
     "@storybook/blocks": "^8.6.0",
-    "@storybook/web-components": "^8.6.0",
-    "@storybook/web-components-vite": "^8.6.0",
+    "@storybook/web-components": "^10.4.6",
+    "@storybook/web-components-vite": "^10.4.6",
     "rimraf": "^5.0.5",
-    "storybook": "^8.6.0",
+    "storybook": "^10.4.6",
     "typescript": "^5.3.3",
     "vite": "^5.4.0"
   },

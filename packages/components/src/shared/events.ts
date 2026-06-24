@@ -15,6 +15,12 @@ export interface DsEventMap {
   'ds-blur': DsBlurEvent;
   'ds-select': DsSelectEvent;
   'ds-navigate': DsNavigateEvent;
+  'ds-button-click': DsButtonClickEvent;
+  'ds-menu-click': DsMenuClickEvent;
+  'ds-menu-action': DsMenuActionEvent;
+  'ds-menu-select': DsMenuSelectEvent;
+  'ds-select-menu-change': DsSelectMenuChangeEvent;
+  'ds-checkbox-change': DsCheckboxChangeEvent;
 }
 
 export interface DsClickEvent extends CustomEvent {
@@ -23,9 +29,52 @@ export interface DsClickEvent extends CustomEvent {
   };
 }
 
+export interface DsButtonClickEvent extends CustomEvent {
+  detail: {
+    originalEvent: MouseEvent;
+  };
+}
+
+export interface DsMenuClickEvent extends CustomEvent {
+  detail: {
+    originalEvent: MouseEvent;
+  };
+}
+
+export interface DsMenuActionEvent extends CustomEvent {
+  detail: {
+    value: string;
+    originalEvent: MouseEvent | KeyboardEvent;
+  };
+}
+
+export interface DsMenuSelectEvent extends CustomEvent {
+  detail: {
+    value: string;
+    selected: boolean;
+    originalEvent: MouseEvent | KeyboardEvent;
+  };
+}
+
+/** Fired by <ds-select-menu> when the user commits a selection change. */
+export interface DsSelectMenuChangeEvent extends CustomEvent {
+  detail: {
+    /** All currently selected values. Single-select has at most one entry. */
+    values: string[];
+    originalEvent: MouseEvent | KeyboardEvent;
+  };
+}
+
 export interface DsChangeEvent extends CustomEvent {
   detail: {
     value: string | boolean | number;
+    originalEvent?: Event;
+  };
+}
+
+export interface DsCheckboxChangeEvent extends CustomEvent {
+  detail: {
+    value: boolean;
     originalEvent?: Event;
   };
 }
