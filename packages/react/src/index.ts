@@ -18,6 +18,8 @@
 // Add new wrappers here as components are created.
 
 export { DsButton } from './ds-button.js';
+export { DsSearch } from './ds-search.js';
+export type { DsSearchProps, DsSearchVariant } from './ds-search.js';
 export type { DsButtonProps } from './ds-button.js';
 
 export { DsIconButton } from './ds-icon-button.js';

@@ -82,7 +82,7 @@ export class DsSplitButton extends LitElement {
       .action-btn {
         border-radius: var(--ds-radius-semantic-radius-sm) 0 0
           var(--ds-radius-semantic-radius-sm);
-        font-feature-settings: 'cv06' 1;
+        font-feature-settings: 'cv08' 1;
         color: var(--ds-text-text-default);
       }
 

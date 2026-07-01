@@ -85,7 +85,7 @@ export class DsActionMenuItem extends LitElement {
         min-height: 40px;
         background: transparent;
         color: var(--ds-text-text-default);
-        font-feature-settings: 'cv06' 1;
+        font-feature-settings: 'cv08' 1;
         cursor: pointer;
         user-select: none;
         transition: background 80ms ease;
@@ -212,7 +212,7 @@ export class DsActionMenuItem extends LitElement {
       .shortcut {
         flex-shrink: 0;
         color: var(--ds-text-text-subtle);
-        font-feature-settings: 'cv06' 1;
+        font-feature-settings: 'cv08' 1;
         white-space: nowrap;
       }
 

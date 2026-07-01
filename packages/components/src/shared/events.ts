@@ -25,6 +25,8 @@ export interface DsEventMap {
   'ds-checkbox-change': DsCheckboxChangeEvent;
   'ds-radio-change': DsRadioChangeEvent;
   'ds-segmented-change': DsSegmentedChangeEvent;
+  'ds-search-expand': DsSearchExpandEvent;
+  'ds-search-clear': DsSearchClearEvent;
 }
 
 export interface DsClickEvent extends CustomEvent {
@@ -112,6 +114,19 @@ export interface DsSegmentedChangeEvent extends CustomEvent {
     value: string;
     selected: boolean;
     originalEvent: MouseEvent | KeyboardEvent;
+  };
+}
+
+export interface DsSearchExpandEvent extends CustomEvent {
+  detail: {
+    originalEvent: MouseEvent | KeyboardEvent;
+  };
+}
+
+
+export interface DsSearchClearEvent extends CustomEvent {
+  detail: {
+    originalEvent: MouseEvent;
   };
 }
 

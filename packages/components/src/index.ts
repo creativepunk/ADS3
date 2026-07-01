@@ -128,3 +128,6 @@ export type {
 
 export { DsNumberField } from './ds-number-field/ds-number-field.js';
 export type { DsNumberFieldType } from './ds-number-field/ds-number-field.js';
+
+export { DsSearch } from './ds-search/ds-search.js';
+export type { DsSearchVariant } from './ds-search/ds-search.js';

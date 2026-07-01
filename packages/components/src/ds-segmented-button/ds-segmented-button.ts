@@ -33,7 +33,7 @@ export class DsSegmentedButtonItem extends LitElement {
         font-weight: var(--ds-typography-cozy-medium-body-sm-font-weight, 500);
         line-height: var(--ds-typography-cozy-medium-body-sm-line-height, 16px);
         letter-spacing: var(--ds-typography-cozy-medium-body-sm-letter-spacing, 0.5px);
-        font-feature-settings: 'cv06' 1, 'cv05' 1, 'zero' 1;
+        font-feature-settings: 'cv08' 1, 'cv05' 1, 'zero' 1;
         white-space: nowrap;
         box-shadow: none;
         transition: background 100ms ease;

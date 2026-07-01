@@ -84,7 +84,7 @@ export class DsSingleSelectMenu extends LitElement {
 
       .empty-text {
         color: var(--ds-text-text-subtlest);
-        font-feature-settings: 'cv06' 1;
+        font-feature-settings: 'cv08' 1;
       }
 
       .footer {

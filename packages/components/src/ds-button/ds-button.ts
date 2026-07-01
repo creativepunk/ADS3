@@ -48,7 +48,7 @@ export class DsButton extends LitElement {
         gap: var(--ds-spacing-spacing-04);
         padding: 0 var(--ds-spacing-spacing-05);
         border-radius: var(--ds-radius-semantic-radius-sm);
-        font-feature-settings: 'cv06' 1;
+        font-feature-settings: 'cv08' 1;
         color: var(--ds-text-text-default);
         cursor: pointer;
         user-select: none;

@@ -48,7 +48,7 @@ export class DsFormMessage extends LitElement {
       .text {
         flex: 1 0 0;
         min-width: 1px;
-        font-feature-settings: 'cv06' 1, 'zero' 1, 'cv05' 1;
+        font-feature-settings: 'cv08' 1, 'zero' 1, 'cv05' 1;
         word-break: break-word;
       }
 

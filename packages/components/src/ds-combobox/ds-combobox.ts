@@ -131,11 +131,15 @@ export class DsCombobox extends LitElement {
         outline: none;
         color: var(--ds-text-text-default);
         caret-color: var(--ds-text-text-default);
-        font-feature-settings: 'cv06' 1, 'zero' 1, 'cv05' 1;
+        font-feature-settings: 'cv08' 1, 'zero' 1, 'cv05' 1;
       }
 
       .search-input::placeholder {
         color: var(--ds-text-text-subtlest);
+      }
+
+      .search-input.ghost-mode::placeholder {
+        color: var(--ds-text-text-subtle);
       }
 
       /* ── Chevron ───────────────────────────────────────────────── */
@@ -569,7 +573,7 @@ export class DsCombobox extends LitElement {
           >
             ${selectionChip}
             <input
-              class="search-input text-regular-body-md"
+              class="search-input text-regular-body-md${this._open && this.selection === 'single' && this.values.length > 0 && !this._query ? ' ghost-mode' : ''}"
               role="combobox"
               aria-autocomplete="list"
               aria-expanded=${this._open ? 'true' : 'false'}
@@ -577,7 +581,13 @@ export class DsCombobox extends LitElement {
               aria-label=${this.label || this.placeholder}
               autocomplete="off"
               spellcheck="false"
-              placeholder=${this.selection === 'multi' && this.values.length > 0 ? '' : this.placeholder}
+              placeholder=${
+                this._open && this.selection === 'single' && this.values.length > 0
+                  ? (this.options.find((o) => o.value === this.values[0])?.label ?? this.values[0])
+                  : this.selection === 'multi' && this.values.length > 0
+                    ? ''
+                    : this.placeholder
+              }
               .value=${!this._open && this.selection === 'single' && this.values.length > 0
                 ? (this.options.find((o) => o.value === this.values[0])?.label ?? this.values[0])
                 : this._query}

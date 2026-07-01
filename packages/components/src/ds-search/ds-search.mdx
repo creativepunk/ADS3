@@ -1,0 +1,95 @@
+import { Meta, Canvas, ArgTypes } from '@storybook/blocks';
+import * as SearchStories from './ds-search.stories';
+
+<Meta of={SearchStories} name="Overview" />
+
+# Search
+
+An inline search field with three variants. Use `expanded` when the search input should always be visible (e.g. a page-level search bar). Use `expandable-ghost` or `expandable-tertiary` when the search control should start as a compact icon trigger and expand into a text field on interaction — useful in toolbars and navigation areas where space is constrained.
+
+<Canvas of={SearchStories.Default} />
+
+## Variants
+
+| Variant | Default appearance | Border |
+|---|---|---|
+| `expandable-ghost` | Icon only, no border | None until hover/expanded |
+| `expandable-tertiary` | Icon only, with border | `--ds-border-border-bold` |
+| `expanded` | Full-width field, always open | `--ds-border-border-bold` |
+
+<Canvas of={SearchStories.ShowcaseVariants} />
+
+## Expanded state
+
+All variants share the same expanded appearance: a full-width field with a bold border. On focus the border switches to `--ds-focus-focus` (white) and the background shifts to `--ds-background-input-pressed`.
+
+<Canvas of={SearchStories.ShowcaseVariantsExpanded} />
+
+## States
+
+<Canvas of={SearchStories.ShowcaseStates} />
+
+- **Collapsed** — icon-only button (`role="button"`). Clicking expands the field.
+- **Expanded empty** — text field with placeholder. `Escape` collapses expandable variants.
+- **Expanded with value** — a clear (×) button appears to the right of the typed text.
+
+## API
+
+### Properties
+
+<ArgTypes of={SearchStories} />
+
+### Slots
+
+This component has no user-facing slots — content is managed internally.
+
+### Events
+
+| Event | Detail | Description |
+|---|---|---|
+| `ds-input` | `{ value: string, originalEvent: InputEvent }` | Fired on every keystroke. |
+| `ds-search-expand` | `{ originalEvent: MouseEvent \| KeyboardEvent }` | Fired when an expandable variant opens. |
+| `ds-search-clear` | `{ originalEvent: MouseEvent }` | Fired when the user clicks the clear button. |
+
+### CSS custom properties
+
+| Property | Default | Description |
+|---|---|---|
+| `--ds-search-width` | `340px` | Width of the expanded field. |
+
+### Attribute names
+
+| Prop | Attribute | Type |
+|---|---|---|
+| `isExpanded` | `is-expanded` | boolean |
+| `hasValue` | `has-value` | boolean (reflected) |
+
+```html
+<ds-search variant="expandable-ghost" is-expanded placeholder="Find…"></ds-search>
+```
+
+## Accessibility
+
+- When collapsed, the container has `role="button"` and `aria-expanded="false"`. Keyboard users can activate it with `Enter` or `Space`.
+- When expanded, the container has `role="search"` wrapping a native `<input type="search">`. The input is labelled by the `placeholder` attribute or an explicit `aria-label`.
+- The clear button has `aria-label="Clear search"` and is removed from tab order (`tabindex="-1"`) when there is no value to clear.
+- Pressing `Escape` while expanded collapses `expandable-ghost` and `expandable-tertiary` variants.
+- Focus ring uses `--ds-focus-focus` (inset outline on the container when `focus-within`).
+
+## React usage
+
+```tsx
+import { DsSearch } from '@my-ds/react';
+
+function Example() {
+  return (
+    <DsSearch
+      variant="expandable-ghost"
+      placeholder="Search…"
+      onDsInput={(e) => console.log(e.detail.value)}
+      onDsSearchExpand={() => console.log('expanded')}
+      onDsSearchClear={() => console.log('cleared')}
+    />
+  );
+}
+```

@@ -1,14 +1,3 @@
-/* Alias 'Inter Variable' → 'Inter' so --ds-font-family-normal resolves to the
-   variable font and OpenType features (cv05 tailed-l, cv06 I-serifs, zero slashed-0)
-   work. The variable font is imported via @fontsource-variable/inter in preview.ts. */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 100 900;
-  font-display: swap;
-  src: local('Inter Variable');
-}
-
 /* Dark-only design system — force the preview iframe background to the
    elevation/default token everywhere (story canvas, docs canvas, root). */
 html,

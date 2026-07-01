@@ -9,3 +9,9 @@ declare module '*.svg?raw' {
   const content: string;
   export default content;
 }
+
+// Vite ?url query — resolves any asset to its public URL string at build time.
+declare module '*.woff2?url' {
+  const url: string;
+  export default url;
+}
