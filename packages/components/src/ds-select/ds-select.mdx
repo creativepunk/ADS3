@@ -1,0 +1,85 @@
+import { Meta, Canvas, ArgTypes } from '@storybook/blocks';
+import * as SelectStories from './ds-select.stories';
+
+<Meta of={SelectStories} name="Overview" />
+
+# Select
+
+A form field that opens a dropdown menu for selecting one (`single`) or many (`multi`) options.
+Use `ds-select` when the option list is too long for radio buttons or checkboxes.
+The slotted `ds-single-select-menu` or `ds-multi-select-menu` drives the options.
+
+<Canvas of={SelectStories.Default} />
+
+## Variants
+
+`selection` controls whether the component behaves as a single-select or multi-select.
+
+<Canvas of={SelectStories.ShowcaseVariants} />
+
+## Layout types
+
+`type="default"` (the default) stacks the label above the trigger.
+`type="inline"` places a fixed-180px label to the left of the trigger — the host must be at least 420px wide.
+
+<Canvas of={SelectStories.ShowcaseTypes} />
+
+## States
+
+<Canvas of={SelectStories.ShowcaseStates} />
+
+## API
+
+### Properties
+
+<ArgTypes of={SelectStories} />
+
+### Slots
+
+| Name | Description |
+|------|-------------|
+| *(default)* | A `ds-single-select-menu` or `ds-multi-select-menu` element |
+
+### Events
+
+| Event | React prop | Detail |
+|-------|-----------|--------|
+| `ds-select-change` | `onDsSelectChange` | `{ values: string[], originalEvent }` |
+
+### CSS custom properties
+
+| Property | Description |
+|----------|-------------|
+| — | Uses global `--ds-*` tokens; no local overrides needed |
+
+## Accessibility
+
+- The trigger is a `<button>` with `aria-haspopup="listbox"` and `aria-expanded`.
+- `aria-controls` links the button to the dropdown region.
+- The slotted `ds-single-select-menu` provides `role="listbox"`; items have `role="option"`.
+- `aria-label` on the trigger falls back to the `label` prop, then `placeholder`.
+- Keyboard: `Enter` / `Space` open/close the dropdown; `Escape` closes it.
+- `disabled` is forwarded to the native `<button>` — the element is removed from the tab order.
+
+## React usage
+
+```tsx
+import { DsSelect } from '@my-ds/react';
+import { DsSingleSelectMenu, DsSingleSelectMenuItem } from '@my-ds/react';
+
+function FruitPicker() {
+  return (
+    <DsSelect
+      label="Fruit"
+      placeholder="Select a fruit"
+      helperText="Pick your favourite"
+      onDsSelectChange={(e) => console.log(e.detail.values)}
+    >
+      <DsSingleSelectMenu>
+        <DsSingleSelectMenuItem value="apple">Apple</DsSingleSelectMenuItem>
+        <DsSingleSelectMenuItem value="banana">Banana</DsSingleSelectMenuItem>
+      </DsSingleSelectMenu>
+    </DsSelect>
+  );
+}
+```

@@ -1,13 +1,12 @@
-// Self-hosted Inter ships with the component library so any consumer (React
-// wrappers, apps) gets the font without extra setup. Loaded as a document-level
-// side effect — @font-face is not scoped by shadow DOM, so it reaches every
-// component. Weights match the typography tokens: 300 / 400 / 500 / 600.
-// The DS `--ds-font-family-normal` token is a bare `Inter` with no generic
-// fallback, so without this text degrades to the browser default serif.
-import '@fontsource/inter/300.css';
-import '@fontsource/inter/400.css';
-import '@fontsource/inter/500.css';
-import '@fontsource/inter/600.css';
+// Self-hosted Inter Variable ships with the component library so any consumer
+// (React wrappers, apps) gets the font without extra setup. Loaded as a
+// document-level side effect — @font-face is not scoped by shadow DOM, so it
+// reaches every component. The variable font retains the full OpenType feature
+// table (cv05 lowercase-l tail, cv06 uppercase-I serifs, zero slashed-zero)
+// which the static @fontsource/inter subsets strip during subsetting.
+import '@fontsource-variable/inter/standard.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
 
 import { css } from 'lit';
 
@@ -96,8 +95,8 @@ export const srOnlyStyles = css`
  */
 export const typographyBaseStyles = css`
   :host {
-    font-family: var(--ds-font-family-normal, 'Inter', sans-serif);
-    font-feature-settings: 'cv08' 1, 'cv05' 1, 'zero' 1;
+    font-family: var(--ds-font-family-normal, 'Inter Variable', 'Inter', sans-serif);
+    font-feature-settings: 'cv05' 1, 'cv06' 1, 'zero' 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -113,49 +112,256 @@ export const typographyStyles = css`
     font-family: var(--ds-typography-cozy-regular-body-sm-font-family);
     font-size: var(--ds-typography-cozy-regular-body-sm-font-size);
     font-weight: var(--ds-typography-cozy-regular-body-sm-font-weight);
-    line-height: var(--ds-typography-cozy-regular-body-sm-line-height);
+    line-height: var(--ds-typography-cozy-regular-body-sm-line-height, 16px);
     letter-spacing: var(--ds-typography-cozy-regular-body-sm-letter-spacing);
+    font-feature-settings: 'cv05' 1, 'cv06' 1, 'zero' 1;
   }
   .text-regular-body-md {
     font-family: var(--ds-typography-cozy-regular-body-md-font-family);
     font-size: var(--ds-typography-cozy-regular-body-md-font-size);
     font-weight: var(--ds-typography-cozy-regular-body-md-font-weight);
-    line-height: var(--ds-typography-cozy-regular-body-md-line-height);
+    line-height: var(--ds-typography-cozy-regular-body-md-line-height, 20px);
     letter-spacing: var(--ds-typography-cozy-regular-body-md-letter-spacing);
+    font-feature-settings: 'cv05' 1, 'cv06' 1, 'zero' 1;
   }
   .text-medium-body-sm {
     font-family: var(--ds-typography-cozy-medium-body-sm-font-family);
     font-size: var(--ds-typography-cozy-medium-body-sm-font-size);
     font-weight: var(--ds-typography-cozy-medium-body-sm-font-weight);
-    line-height: var(--ds-typography-cozy-medium-body-sm-line-height);
+    line-height: var(--ds-typography-cozy-medium-body-sm-line-height, 16px);
     letter-spacing: var(--ds-typography-cozy-medium-body-sm-letter-spacing);
+    font-feature-settings: 'cv05' 1, 'cv06' 1, 'zero' 1;
   }
   .text-medium-body-md {
     font-family: var(--ds-typography-cozy-medium-body-md-font-family);
     font-size: var(--ds-typography-cozy-medium-body-md-font-size);
     font-weight: var(--ds-typography-cozy-medium-body-md-font-weight);
-    line-height: var(--ds-typography-cozy-medium-body-md-line-height);
+    line-height: var(--ds-typography-cozy-medium-body-md-line-height, 20px);
     letter-spacing: var(--ds-typography-cozy-medium-body-md-letter-spacing);
+    font-feature-settings: 'cv05' 1, 'cv06' 1, 'zero' 1;
   }
   .text-helper-helper-regular {
     font-family: var(--ds-typography-cozy-helper-helper-regular-font-family);
     font-size: var(--ds-typography-cozy-helper-helper-regular-font-size);
     font-weight: var(--ds-typography-cozy-helper-helper-regular-font-weight);
-    line-height: var(--ds-typography-cozy-helper-helper-regular-line-height);
+    line-height: var(--ds-typography-cozy-helper-helper-regular-line-height, 16px);
     letter-spacing: var(--ds-typography-cozy-helper-helper-regular-letter-spacing);
+    font-feature-settings: 'cv05' 1, 'cv06' 1, 'zero' 1;
+  }
+  .text-helper-helper-bold {
+    font-family: var(--ds-typography-cozy-helper-helper-bold-font-family);
+    font-size: var(--ds-typography-cozy-helper-helper-bold-font-size);
+    font-weight: var(--ds-typography-cozy-helper-helper-bold-font-weight);
+    line-height: var(--ds-typography-cozy-helper-helper-bold-line-height, 16px);
+    letter-spacing: var(--ds-typography-cozy-helper-helper-bold-letter-spacing);
+    font-feature-settings: 'cv05' 1, 'cv06' 1, 'zero' 1;
   }
   .text-regular-mono-body-sm {
     font-family: var(--ds-typography-cozy-regular-mono-body-sm-font-family);
     font-size: var(--ds-typography-cozy-regular-body-sm-font-size);
     font-weight: var(--ds-typography-cozy-regular-body-sm-font-weight);
-    line-height: var(--ds-typography-cozy-regular-body-sm-line-height);
+    line-height: var(--ds-typography-cozy-regular-body-sm-line-height, 16px);
     letter-spacing: var(--ds-typography-cozy-regular-body-sm-letter-spacing);
+    font-feature-settings: 'cv05' 1, 'cv06' 1, 'zero' 1;
   }
   .text-heading-xxs {
     font-family: var(--ds-typography-cozy-heading-xxs-font-family);
     font-size: var(--ds-typography-cozy-heading-xxs-font-size);
     font-weight: var(--ds-typography-cozy-heading-xxs-font-weight);
-    line-height: var(--ds-typography-cozy-heading-xxs-line-height);
+    line-height: var(--ds-typography-cozy-heading-xxs-line-height, 16px);
     letter-spacing: var(--ds-typography-cozy-heading-xxs-letter-spacing);
+    font-feature-settings: 'cv05' 1, 'cv06' 1, 'zero' 1;
+  }
+  .text-regular-body-lg {
+    font-family: var(--ds-typography-cozy-regular-body-lg-font-family);
+    font-size: var(--ds-typography-cozy-regular-body-lg-font-size);
+    font-weight: var(--ds-typography-cozy-regular-body-lg-font-weight);
+    line-height: var(--ds-typography-cozy-regular-body-lg-line-height, 24px);
+    letter-spacing: var(--ds-typography-cozy-regular-body-lg-letter-spacing);
+    font-feature-settings: 'cv05' 1, 'cv06' 1, 'zero' 1;
+  }
+  .text-regular-mono-body-md {
+    font-family: var(--ds-typography-cozy-regular-mono-body-md-font-family);
+    font-size: var(--ds-typography-cozy-regular-mono-body-md-font-size);
+    font-weight: var(--ds-typography-cozy-regular-mono-body-md-font-weight);
+    line-height: var(--ds-typography-cozy-regular-mono-body-md-line-height, 20px);
+    letter-spacing: var(--ds-typography-cozy-regular-mono-body-md-letter-spacing);
+    font-feature-settings: 'cv05' 1, 'cv06' 1, 'zero' 1;
+  }
+  .text-regular-mono-body-lg {
+    font-family: var(--ds-typography-cozy-regular-mono-body-lg-font-family);
+    font-size: var(--ds-typography-cozy-regular-mono-body-lg-font-size);
+    font-weight: var(--ds-typography-cozy-regular-mono-body-lg-font-weight);
+    line-height: var(--ds-typography-cozy-regular-mono-body-lg-line-height, 24px);
+    letter-spacing: var(--ds-typography-cozy-regular-mono-body-lg-letter-spacing);
+    font-feature-settings: 'cv05' 1, 'cv06' 1, 'zero' 1;
+  }
+  .text-medium-body-lg {
+    font-family: var(--ds-typography-cozy-medium-body-lg-font-family);
+    font-size: var(--ds-typography-cozy-medium-body-lg-font-size);
+    font-weight: var(--ds-typography-cozy-medium-body-lg-font-weight);
+    line-height: var(--ds-typography-cozy-medium-body-lg-line-height, 24px);
+    letter-spacing: var(--ds-typography-cozy-medium-body-lg-letter-spacing);
+    font-feature-settings: 'cv05' 1, 'cv06' 1, 'zero' 1;
+  }
+  .text-bold-body-sm {
+    font-family: var(--ds-typography-cozy-bold-body-sm-font-family);
+    font-size: var(--ds-typography-cozy-bold-body-sm-font-size);
+    font-weight: var(--ds-typography-cozy-bold-body-sm-font-weight);
+    line-height: var(--ds-typography-cozy-bold-body-sm-line-height, 16px);
+    letter-spacing: var(--ds-typography-cozy-bold-body-sm-letter-spacing);
+    font-feature-settings: 'cv05' 1, 'cv06' 1, 'zero' 1;
+  }
+  .text-bold-body-md {
+    font-family: var(--ds-typography-cozy-bold-body-md-font-family);
+    font-size: var(--ds-typography-cozy-bold-body-md-font-size);
+    font-weight: var(--ds-typography-cozy-bold-body-md-font-weight);
+    line-height: var(--ds-typography-cozy-bold-body-md-line-height, 20px);
+    letter-spacing: var(--ds-typography-cozy-bold-body-md-letter-spacing);
+    font-feature-settings: 'cv05' 1, 'cv06' 1, 'zero' 1;
+  }
+  .text-bold-body-lg {
+    font-family: var(--ds-typography-cozy-bold-body-lg-font-family);
+    font-size: var(--ds-typography-cozy-bold-body-lg-font-size);
+    font-weight: var(--ds-typography-cozy-bold-body-lg-font-weight);
+    line-height: var(--ds-typography-cozy-bold-body-lg-line-height, 24px);
+    letter-spacing: var(--ds-typography-cozy-bold-body-lg-letter-spacing);
+    font-feature-settings: 'cv05' 1, 'cv06' 1, 'zero' 1;
+  }
+  .text-code-code-regular {
+    font-family: var(--ds-typography-cozy-code-code-regular-font-family);
+    font-size: var(--ds-typography-cozy-code-code-regular-font-size);
+    font-weight: var(--ds-typography-cozy-code-code-regular-font-weight);
+    line-height: var(--ds-typography-cozy-code-code-regular-line-height, 16px);
+    letter-spacing: var(--ds-typography-cozy-code-code-regular-letter-spacing);
+    font-feature-settings: 'cv05' 1, 'cv06' 1, 'zero' 1;
+  }
+  .text-code-code-medium {
+    font-family: var(--ds-typography-cozy-code-code-medium-font-family);
+    font-size: var(--ds-typography-cozy-code-code-medium-font-size);
+    font-weight: var(--ds-typography-cozy-code-code-medium-font-weight);
+    line-height: var(--ds-typography-cozy-code-code-medium-line-height, 16px);
+    letter-spacing: var(--ds-typography-cozy-code-code-medium-letter-spacing);
+    font-feature-settings: 'cv05' 1, 'cv06' 1, 'zero' 1;
+  }
+  .text-code-code-bold {
+    font-family: var(--ds-typography-cozy-code-code-bold-font-family);
+    font-size: var(--ds-typography-cozy-code-code-bold-font-size);
+    font-weight: var(--ds-typography-cozy-code-code-bold-font-weight);
+    line-height: var(--ds-typography-cozy-code-code-bold-line-height, 16px);
+    letter-spacing: var(--ds-typography-cozy-code-code-bold-letter-spacing);
+    font-feature-settings: 'cv05' 1, 'cv06' 1, 'zero' 1;
+  }
+  .text-helper-helper-medium {
+    font-family: var(--ds-typography-cozy-helper-helper-medium-font-family);
+    font-size: var(--ds-typography-cozy-helper-helper-medium-font-size);
+    font-weight: var(--ds-typography-cozy-helper-helper-medium-font-weight);
+    line-height: var(--ds-typography-cozy-helper-helper-medium-line-height, 16px);
+    letter-spacing: var(--ds-typography-cozy-helper-helper-medium-letter-spacing);
+    font-feature-settings: 'cv05' 1, 'cv06' 1, 'zero' 1;
+  }
+  .text-heading-xs {
+    font-family: var(--ds-typography-cozy-heading-xs-font-family);
+    font-size: var(--ds-typography-cozy-heading-xs-font-size);
+    font-weight: var(--ds-typography-cozy-heading-xs-font-weight);
+    line-height: var(--ds-typography-cozy-heading-xs-line-height, 20px);
+    letter-spacing: var(--ds-typography-cozy-heading-xs-letter-spacing);
+    font-feature-settings: 'cv05' 1, 'cv06' 1, 'zero' 1;
+  }
+  .text-heading-sm {
+    font-family: var(--ds-typography-cozy-heading-sm-font-family);
+    font-size: var(--ds-typography-cozy-heading-sm-font-size);
+    font-weight: var(--ds-typography-cozy-heading-sm-font-weight);
+    line-height: var(--ds-typography-cozy-heading-sm-line-height, 24px);
+    letter-spacing: var(--ds-typography-cozy-heading-sm-letter-spacing);
+    font-feature-settings: 'cv05' 1, 'cv06' 1, 'zero' 1;
+  }
+  .text-heading-md {
+    font-family: var(--ds-typography-cozy-heading-md-font-family);
+    font-size: var(--ds-typography-cozy-heading-md-font-size);
+    font-weight: var(--ds-typography-cozy-heading-md-font-weight);
+    line-height: var(--ds-typography-cozy-heading-md-line-height, 28px);
+    letter-spacing: var(--ds-typography-cozy-heading-md-letter-spacing);
+    font-feature-settings: 'cv05' 1, 'cv06' 1, 'zero' 1;
+  }
+  .text-heading-lg {
+    font-family: var(--ds-typography-cozy-heading-lg-font-family);
+    font-size: var(--ds-typography-cozy-heading-lg-font-size);
+    font-weight: var(--ds-typography-cozy-heading-lg-font-weight);
+    line-height: var(--ds-typography-cozy-heading-lg-line-height, 32px);
+    letter-spacing: var(--ds-typography-cozy-heading-lg-letter-spacing);
+    font-feature-settings: 'cv05' 1, 'cv06' 1, 'zero' 1;
+  }
+  .text-heading-xl {
+    font-family: var(--ds-typography-cozy-heading-xl-font-family);
+    font-size: var(--ds-typography-cozy-heading-xl-font-size);
+    font-weight: var(--ds-typography-cozy-heading-xl-font-weight);
+    line-height: var(--ds-typography-cozy-heading-xl-line-height, 36px);
+    letter-spacing: var(--ds-typography-cozy-heading-xl-letter-spacing);
+    font-feature-settings: 'cv05' 1, 'cv06' 1, 'zero' 1;
+  }
+  .text-heading-xxl {
+    font-family: var(--ds-typography-cozy-heading-xxl-font-family);
+    font-size: var(--ds-typography-cozy-heading-xxl-font-size);
+    font-weight: var(--ds-typography-cozy-heading-xxl-font-weight);
+    line-height: var(--ds-typography-cozy-heading-xxl-line-height, 48px);
+    letter-spacing: var(--ds-typography-cozy-heading-xxl-letter-spacing);
+    font-feature-settings: 'cv05' 1, 'cv06' 1, 'zero' 1;
+  }
+  .text-metric-xxs {
+    font-family: var(--ds-typography-cozy-metric-xxs-font-family);
+    font-size: var(--ds-typography-cozy-metric-xxs-font-size);
+    font-weight: var(--ds-typography-cozy-metric-xxs-font-weight);
+    line-height: var(--ds-typography-cozy-metric-xxs-line-height, 16px);
+    letter-spacing: var(--ds-typography-cozy-metric-xxs-letter-spacing);
+    font-feature-settings: 'cv05' 1, 'cv06' 1, 'zero' 1;
+  }
+  .text-metric-xs {
+    font-family: var(--ds-typography-cozy-metric-xs-font-family);
+    font-size: var(--ds-typography-cozy-metric-xs-font-size);
+    font-weight: var(--ds-typography-cozy-metric-xs-font-weight);
+    line-height: var(--ds-typography-cozy-metric-xs-line-height, 20px);
+    letter-spacing: var(--ds-typography-cozy-metric-xs-letter-spacing);
+    font-feature-settings: 'cv05' 1, 'cv06' 1, 'zero' 1;
+  }
+  .text-metric-sm {
+    font-family: var(--ds-typography-cozy-metric-sm-font-family);
+    font-size: var(--ds-typography-cozy-metric-sm-font-size);
+    font-weight: var(--ds-typography-cozy-metric-sm-font-weight);
+    line-height: var(--ds-typography-cozy-metric-sm-line-height, 24px);
+    letter-spacing: var(--ds-typography-cozy-metric-sm-letter-spacing);
+    font-feature-settings: 'cv05' 1, 'cv06' 1, 'zero' 1;
+  }
+  .text-metric-md {
+    font-family: var(--ds-typography-cozy-metric-md-font-family);
+    font-size: var(--ds-typography-cozy-metric-md-font-size);
+    font-weight: var(--ds-typography-cozy-metric-md-font-weight);
+    line-height: var(--ds-typography-cozy-metric-md-line-height, 28px);
+    letter-spacing: var(--ds-typography-cozy-metric-md-letter-spacing);
+    font-feature-settings: 'cv05' 1, 'cv06' 1, 'zero' 1;
+  }
+  .text-metric-lg {
+    font-family: var(--ds-typography-cozy-metric-lg-font-family);
+    font-size: var(--ds-typography-cozy-metric-lg-font-size);
+    font-weight: var(--ds-typography-cozy-metric-lg-font-weight);
+    line-height: var(--ds-typography-cozy-metric-lg-line-height, 32px);
+    letter-spacing: var(--ds-typography-cozy-metric-lg-letter-spacing);
+    font-feature-settings: 'cv05' 1, 'cv06' 1, 'zero' 1;
+  }
+  .text-metric-xl {
+    font-family: var(--ds-typography-cozy-metric-xl-font-family);
+    font-size: var(--ds-typography-cozy-metric-xl-font-size);
+    font-weight: var(--ds-typography-cozy-metric-xl-font-weight);
+    line-height: var(--ds-typography-cozy-metric-xl-line-height, 36px);
+    letter-spacing: var(--ds-typography-cozy-metric-xl-letter-spacing);
+    font-feature-settings: 'cv05' 1, 'cv06' 1, 'zero' 1;
+  }
+  .text-metric-xxl {
+    font-family: var(--ds-typography-cozy-metric-xxl-font-family);
+    font-size: var(--ds-typography-cozy-metric-xxl-font-size);
+    font-weight: var(--ds-typography-cozy-metric-xxl-font-weight);
+    line-height: var(--ds-typography-cozy-metric-xxl-line-height, 48px);
+    letter-spacing: var(--ds-typography-cozy-metric-xxl-letter-spacing);
+    font-feature-settings: 'cv05' 1, 'cv06' 1, 'zero' 1;
   }
 `;

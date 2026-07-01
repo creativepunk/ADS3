@@ -56,7 +56,7 @@ export class DsTooltip extends LitElement {
         min-width: 0;
         margin: 0;
         color: var(--ds-text-text-subtle);
-        font-feature-settings: 'cv08' 1;
+        font-feature-settings: 'cv06' 1;
         overflow-wrap: break-word;
         text-align: left;
       }

@@ -6,7 +6,7 @@ import '../ds-form-message/ds-form-message.js';
 import './ds-checkbox.js';
 
 export type DsCheckboxGroupOrientation = 'vertical' | 'horizontal';
-export type DsCheckboxGroupType = 'default' | 'inline';
+export type DsCheckboxGroupType = 'stacked' | 'inline';
 
 /** @tagname ds-checkbox-group */
 @customElement('ds-checkbox-group')
@@ -35,18 +35,18 @@ export class DsCheckboxGroup extends LitElement {
         gap: var(--ds-spacing-spacing-04); /* 8px vertical gap between items */
       }
 
-      :host([orientation='horizontal']) .values {
+      :host([option-orientation='horizontal']) .values {
         flex-direction: row;
         flex-wrap: wrap;
         gap: var(--ds-spacing-spacing-04);
       }
 
       /* inline type: items have no extra gap beyond the natural inline gap */
-      :host([type='inline'][orientation='horizontal']) .values {
+      :host([type='inline'][option-orientation='horizontal']) .values {
         gap: var(--ds-spacing-spacing-04);
       }
 
-      :host([type='inline'][orientation='vertical']) .values {
+      :host([type='inline'][option-orientation='vertical']) .values {
         gap: var(--ds-spacing-spacing-04);
       }
 
@@ -96,11 +96,11 @@ export class DsCheckboxGroup extends LitElement {
 
   /** Lays items out horizontally or vertically. */
   @property({ type: String, reflect: true })
-  orientation: DsCheckboxGroupOrientation = 'vertical';
+  optionOrientation: DsCheckboxGroupOrientation = 'vertical';
 
   /** `default` = standard spacing; `inline` = compact, same layout rules. */
   @property({ type: String, reflect: true })
-  type: DsCheckboxGroupType = 'default';
+  type: DsCheckboxGroupType = 'stacked';
 
   /** Helper text shown below the group when there is no error. */
   @property({ type: String, reflect: true, attribute: 'helper-text' })
@@ -150,7 +150,7 @@ export class DsCheckboxGroup extends LitElement {
             ?is-required=${this.isRequired}
             ?has-info-tip=${this.hasInfoTip}
             type=${isInline ? 'inline' : 'stacked'}
-            style=${isInline ? '--ds-form-label-padding-top: var(--ds-spacing-spacing-02); height: 24px;' : nothing}
+            style=${isInline ? '--ds-form-label-padding-top: var(--ds-spacing-spacing-02); min-height: 24px;' : nothing}
           ></ds-form-label>
         `
       : nothing;

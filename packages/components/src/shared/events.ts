@@ -20,7 +20,11 @@ export interface DsEventMap {
   'ds-menu-action': DsMenuActionEvent;
   'ds-menu-select': DsMenuSelectEvent;
   'ds-select-menu-change': DsSelectMenuChangeEvent;
+  'ds-select-change': DsSelectChangeEvent;
+  'ds-combobox-change': DsComboboxChangeEvent;
   'ds-checkbox-change': DsCheckboxChangeEvent;
+  'ds-radio-change': DsRadioChangeEvent;
+  'ds-segmented-change': DsSegmentedChangeEvent;
 }
 
 export interface DsClickEvent extends CustomEvent {
@@ -72,10 +76,42 @@ export interface DsChangeEvent extends CustomEvent {
   };
 }
 
+/** Fired by <ds-combobox> when the user commits a selection change. */
+export interface DsComboboxChangeEvent extends CustomEvent {
+  detail: {
+    values: string[];
+    originalEvent: MouseEvent | KeyboardEvent;
+  };
+}
+
+/** Fired by <ds-select> when the user commits a selection change. */
+export interface DsSelectChangeEvent extends CustomEvent {
+  detail: {
+    /** All currently selected values. Single-select has at most one entry. */
+    values: string[];
+    originalEvent: MouseEvent | KeyboardEvent;
+  };
+}
+
 export interface DsCheckboxChangeEvent extends CustomEvent {
   detail: {
     value: boolean;
     originalEvent?: Event;
+  };
+}
+
+export interface DsRadioChangeEvent extends CustomEvent {
+  detail: {
+    value: string;
+    originalEvent?: Event;
+  };
+}
+
+export interface DsSegmentedChangeEvent extends CustomEvent {
+  detail: {
+    value: string;
+    selected: boolean;
+    originalEvent: MouseEvent | KeyboardEvent;
   };
 }
 

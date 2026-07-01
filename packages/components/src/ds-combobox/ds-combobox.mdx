@@ -1,0 +1,75 @@
+import { Meta, Canvas, ArgTypes } from '@storybook/blocks';
+import * as ComboboxStories from './ds-combobox.stories';
+
+<Meta of={ComboboxStories} name="Overview" />
+
+# Combobox
+
+A searchable select field for option lists that are too long to scan at a glance — 10 to hundreds of items.
+The trigger itself acts as a search input; typing filters the list client-side in real time.
+For short, stable lists (under ~10 items) use `ds-select` instead.
+
+<Canvas of={ComboboxStories.Default} />
+
+## Variants
+
+`selection="single"` (default) closes the dropdown after one pick.
+`selection="multi"` keeps it open; selected values appear as chips in the trigger, limited to 3 visible with a `+N more` overflow chip.
+
+<Canvas of={ComboboxStories.ShowcaseVariants} />
+
+## States
+
+<Canvas of={ComboboxStories.ShowcaseStates} />
+
+## API
+
+### Properties
+
+<ArgTypes of={ComboboxStories} />
+
+### Events
+
+| Event | React prop | Detail |
+|-------|-----------|--------|
+| `ds-combobox-change` | `onDsComboboxChange` | `{ values: string[], originalEvent }` |
+
+### Keyboard
+
+| Key | Action |
+|-----|--------|
+| `ArrowDown` | Move focus to next option |
+| `ArrowUp` | Move focus to previous option |
+| `Enter` | Select focused option |
+| `Escape` | Close dropdown |
+| `Tab` | Close dropdown, move focus out |
+
+## Accessibility
+
+- Trigger `<input>` has `role="combobox"`, `aria-autocomplete="list"`, `aria-expanded`, `aria-controls`.
+- Dropdown has `role="listbox"`; options have `role="option"` with `aria-selected`.
+- Multi-select listbox advertises `aria-multiselectable="true"`.
+- Disabled options have `aria-disabled="true"` and are skipped in keyboard navigation.
+- Loading state has `role="status"` with `aria-label`.
+
+## React usage
+
+```tsx
+import { DsCombobox } from '@my-ds/react';
+
+const options = [
+  { value: 'apple', label: 'Apple' },
+  { value: 'banana', label: 'Banana' },
+];
+
+function FruitPicker() {
+  return (
+    <DsCombobox
+      label="Fruit"
+      placeholder="Search fruits"
+      options={options}
+      onDsComboboxChange={(e) => console.log(e.detail.values)}
+    />
+  );
+}
+```

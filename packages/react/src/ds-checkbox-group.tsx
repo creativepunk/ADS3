@@ -14,7 +14,7 @@ export interface DsCheckboxGroupProps {
   hasError?: boolean;
   isDisabled?: boolean;
   isReadOnly?: boolean;
-  orientation?: DsCheckboxGroupOrientation;
+  optionOrientation?: DsCheckboxGroupOrientation;
   type?: DsCheckboxGroupType;
   helperText?: string;
   errorText?: string;

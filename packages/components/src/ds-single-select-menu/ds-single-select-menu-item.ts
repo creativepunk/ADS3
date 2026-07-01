@@ -55,7 +55,7 @@ export class DsSingleSelectMenuItem extends LitElement {
         box-sizing: border-box;
         background: transparent;
         color: var(--ds-text-text-default);
-        font-feature-settings: 'cv08' 1;
+        font-feature-settings: 'cv06' 1;
         cursor: pointer;
         user-select: none;
         transition: background 80ms ease;
@@ -136,10 +136,15 @@ export class DsSingleSelectMenuItem extends LitElement {
         line-height: var(--ds-typography-cozy-helper-helper-regular-line-height);
         letter-spacing: var(--ds-typography-cozy-helper-helper-regular-letter-spacing);
         color: var(--ds-text-text-subtle);
-        font-feature-settings: 'cv08' 1;
+        font-feature-settings: 'cv06' 1;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+      }
+
+      /* ── Keyboard-focused state (set by parent combobox) ─────── */
+      :host([data-focused]) .item {
+        background: var(--ds-background-neutral-subtle-hovered);
       }
 
       /* ── Trailing checkmark ───────────────────────────────────── */

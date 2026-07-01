@@ -6,7 +6,11 @@ const config: StorybookConfig = {
     '../src/**/*.mdx',
   ],
 
-  addons: ['@storybook/addon-docs', '@storybook/addon-a11y'],
+  addons: [
+    '@storybook/addon-docs',
+    '@storybook/addon-a11y',
+    '@storybook/addon-vitest'
+  ],
 
   framework: {
     name: '@storybook/web-components-vite',

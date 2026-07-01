@@ -57,7 +57,7 @@ export class DsSingleSelectMenu extends LitElement {
       .body {
         padding: var(--ds-spacing-spacing-04) 0;
         overflow-y: auto;
-        max-height: 320px;
+        max-height: var(--ds-menu-body-max-height, 320px);
       }
 
       .state-panel {
@@ -84,7 +84,7 @@ export class DsSingleSelectMenu extends LitElement {
 
       .empty-text {
         color: var(--ds-text-text-subtlest);
-        font-feature-settings: 'cv08' 1;
+        font-feature-settings: 'cv06' 1;
       }
 
       .footer {
@@ -105,6 +105,9 @@ export class DsSingleSelectMenu extends LitElement {
 
   /** Show a loading spinner while options are fetching. */
   @property({ type: Boolean, reflect: true }) loading = false;
+
+  /** Text shown when there are no items. */
+  @property({ type: String, attribute: 'empty-text' }) emptyText = 'No options';
 
   @state() private _hasItems = false;
   @state() private _hasHeader = false;
@@ -195,7 +198,7 @@ export class DsSingleSelectMenu extends LitElement {
               </div>`
             : !this._hasItems
               ? html`<div class="state-panel">
-                  <span class="empty-text text-helper-helper-regular">No options</span>
+                  <span class="empty-text text-helper-helper-regular">${this.emptyText}</span>
                 </div>`
               : nothing}
           <slot

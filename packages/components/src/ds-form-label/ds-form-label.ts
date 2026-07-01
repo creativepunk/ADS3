@@ -21,17 +21,18 @@ export class DsFormLabel extends LitElement {
       }
 
       /* ── Inline ──────────────────────────────────────────────────────────
-         Fixed 180px, center-left aligned.
+         Fixed 180px, center-left aligned. Padding lives on the inner label
+         so the host hugs the content height with no extra space.
          --ds-form-label-padding-top lets parent form components override
          the top padding to optically center against their field height:
-           checkbox group  → 4px  (24px field, 16px text: (24-16)/2 = 4px)
+           checkbox group  → 4px  (default, 24px field, 16px text)
            text field/select → 8px (32px field, 16px text: (32-16)/2 = 8px)
       */
       :host([type='inline']) {
         width: 180px;
         flex-shrink: 0;
+        padding-top: var(--ds-form-label-padding-top, var(--ds-spacing-spacing-02)); /* default 4px */
         padding-bottom: 0;
-        padding-top: var(--ds-form-label-padding-top, var(--ds-spacing-spacing-04)); /* default 8px */
         align-self: flex-start;
       }
 
@@ -47,10 +48,12 @@ export class DsFormLabel extends LitElement {
        * The block label container provides the width for text to wrap into.
        */
       .label-text {
+        vertical-align: top;
         color: var(--ds-text-text-subtle);
       }
 
       .required-mark {
+        vertical-align: top;
         margin-left: var(--ds-spacing-spacing-01); /* 2px — hugs text end */
         color: var(--ds-text-text-danger);
       }
@@ -59,7 +62,7 @@ export class DsFormLabel extends LitElement {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        vertical-align: middle;
+        vertical-align: top;
         margin-left: var(--ds-spacing-spacing-02); /* 4px gap after text+* */
         color: var(--ds-icon-icon-subtle);
       }

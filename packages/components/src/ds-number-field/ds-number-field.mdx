@@ -1,0 +1,103 @@
+import { Meta, Canvas, ArgTypes } from '@storybook/blocks';
+import * as NumberFieldStories from './ds-number-field.stories';
+
+<Meta of={NumberFieldStories} name="Overview" />
+
+# Number Field
+
+A numeric input with inline increment/decrement stepper buttons. Use it when you need direct numeric entry with controlled stepping — prefer `ds-select` when the user picks from a fixed list, and `ds-field-input` for free-form text.
+
+<Canvas of={NumberFieldStories.Default} />
+
+## With a value
+
+<Canvas of={NumberFieldStories.WithValue} />
+
+## Min / Max constraints
+
+The stepper buttons are automatically disabled when the current value reaches the `min` or `max` bound. Keyboard `↑` / `↓` also respects these bounds.
+
+<Canvas of={NumberFieldStories.WithMinMax} />
+
+## Step
+
+Control how much each press of `+` / `−` (or `↑` / `↓`) changes the value.
+
+<Canvas of={NumberFieldStories.WithStep} />
+
+## States
+
+<Canvas of={NumberFieldStories.ShowcaseStates} />
+
+## Inline layout
+
+`type="inline"` places the 180 px label to the left of the input, matching the `ds-select` inline pattern.
+
+<Canvas of={NumberFieldStories.ShowcaseInlineLayouts} />
+
+## API
+
+### Properties
+
+<ArgTypes of={NumberFieldStories} />
+
+### Events
+
+| Event       | React prop    | Detail                                      |
+|-------------|---------------|---------------------------------------------|
+| `ds-change` | `onDsChange`  | `{ value: number }`                         |
+| `ds-input`  | `onDsInput`   | `{ value: string, originalEvent: InputEvent }` |
+| `ds-focus`  | `onDsFocus`   | `{ originalEvent: FocusEvent }`             |
+| `ds-blur`   | `onDsBlur`    | `{ originalEvent: FocusEvent }`             |
+
+### CSS parts
+
+| Part        | Element                    |
+|-------------|----------------------------|
+| `trigger`   | The inner trigger wrapper  |
+| `decrement` | The `−` stepper button     |
+| `increment` | The `+` stepper button     |
+
+### Attribute names
+
+| Property     | HTML attribute  | Type      |
+|--------------|-----------------|-----------|
+| `isRequired` | `is-required`   | boolean   |
+| `helperText` | `helper-text`   | string    |
+| `errorMessage` | `error-message` | string  |
+| `successMessage` | `success-message` | string |
+| `invalid`    | `invalid`       | boolean   |
+| `valid`      | `valid`         | boolean   |
+| `disabled`   | `disabled`      | boolean   |
+| `readonly`   | `readonly`      | boolean   |
+
+## Accessibility
+
+- The inner `<input>` uses `type="text" inputmode="numeric"` so mobile keyboards show a numeric pad while still accepting non-numeric characters gracefully.
+- `aria-label` on the input falls back to the `label` prop or `"Number field"` when no label is set.
+- `aria-invalid="true"` is applied to the input when `invalid=true`.
+- The `−` / `+` buttons have `aria-label="Decrement"` / `aria-label="Increment"`.
+- Pressing `↑` increments; `↓` decrements (both honour `min`, `max`, and `step`).
+- Focus ring uses `var(--ds-focus-focus)` on the inner input; stepper buttons also show focus rings on keyboard navigation.
+- `disabled` propagates to the native `<input>` and both stepper buttons; `pointer-events: none` is also applied at `:host` level to prevent any interaction.
+
+## React usage
+
+```tsx
+import { DsNumberField } from '@my-ds/react';
+
+function Example() {
+  return (
+    <DsNumberField
+      label="Quantity"
+      isRequired
+      value={1}
+      min={0}
+      max={99}
+      step={1}
+      helperText="Enter a quantity between 0 and 99"
+      onDsChange={(e) => console.log(e.detail.value)}
+    />
+  );
+}
+```

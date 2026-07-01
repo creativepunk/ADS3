@@ -93,3 +93,38 @@ export type {
   DsCheckboxGroupOrientation,
   DsCheckboxGroupType,
 } from './ds-checkbox/ds-checkbox-group.js';
+
+export { DsRadio } from './ds-radio/ds-radio.js';
+
+export { DsRadioGroup } from './ds-radio/ds-radio-group.js';
+export type {
+  DsRadioGroupOrientation,
+  DsRadioGroupType,
+} from './ds-radio/ds-radio-group.js';
+
+export { DsBadge } from './ds-badge/ds-badge.js';
+export type { DsBadgeColor } from './ds-badge/ds-badge.js';
+
+export { DsSegmentedButton, DsSegmentedButtonItem } from './ds-segmented-button/ds-segmented-button.js';
+export type { DsSegmentedButtonSize } from './ds-segmented-button/ds-segmented-button.js';
+
+export { DsFieldInput } from './ds-field-input/ds-field-input.js';
+export type { DsFieldInputLayoutType } from './ds-field-input/ds-field-input.js';
+
+export { DsSelect } from './ds-select/ds-select.js';
+export type { DsSelectSelection, DsSelectType } from './ds-select/ds-select.js';
+
+export { DsCombobox } from './ds-combobox/ds-combobox.js';
+export type { DsComboboxType, DsComboboxOption } from './ds-combobox/ds-combobox.js';
+
+export { DsSpinner } from './ds-spinner/ds-spinner.js';
+export type { DsSpinnerSize, DsSpinnerAppearance } from './ds-spinner/ds-spinner.js';
+
+export { DsStatusMarker } from './ds-status-marker/ds-status-marker.js';
+export type {
+  DsStatusMarkerStatus,
+  DsStatusMarkerType,
+} from './ds-status-marker/ds-status-marker.js';
+
+export { DsNumberField } from './ds-number-field/ds-number-field.js';
+export type { DsNumberFieldType } from './ds-number-field/ds-number-field.js';

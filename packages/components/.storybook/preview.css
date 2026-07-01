@@ -1,6 +1,6 @@
 /* Alias 'Inter Variable' → 'Inter' so --ds-font-family-normal resolves to the
-   variable font and OpenType features (cv05, cv08, zero) work. The variable
-   font is imported via @fontsource-variable/inter in preview.ts. */
+   variable font and OpenType features (cv05 tailed-l, cv06 I-serifs, zero slashed-0)
+   work. The variable font is imported via @fontsource-variable/inter in preview.ts. */
 @font-face {
   font-family: 'Inter';
   font-style: normal;

@@ -23,7 +23,7 @@ export class DsMenuCategory extends LitElement {
         padding: var(--ds-spacing-spacing-04) var(--ds-spacing-spacing-06)
           var(--ds-spacing-spacing-02);
         color: var(--ds-text-text-subtlest);
-        font-feature-settings: 'cv08' 1;
+        font-feature-settings: 'cv06' 1;
         white-space: nowrap;
       }
     `,

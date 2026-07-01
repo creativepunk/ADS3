@@ -1,13 +1,11 @@
 import type { Preview } from '@storybook/web-components-vite';
-import { setIconResolver, createMaterialSymbolsResolver } from '../src/ds-icon/ds-icon.js';
-
-// Register the Material Symbols resolver once so any <ds-icon name="...">
-// in stories and docs can lazy-load from @material-symbols/svg-400.
-setIconResolver(createMaterialSymbolsResolver());
+// Material Symbols variable font — provides wght 100–700, opsz 20–48, FILL 0/1.
+// ds-icon renders ligature spans with font-variation-settings per size.
+import 'material-symbols/outlined.css';
 // Variable Inter — registers under the family name 'Inter Variable'.
 // The @font-face below in preview.css aliases it to 'Inter' so all
 // --ds-font-family-normal references resolve to the variable font,
-// enabling cv05 (tailed l), cv08, and zero (slashed 0) OpenType features.
+// enabling cv05 (tailed l), cv06 (I-serifs), and zero (slashed 0) OpenType features.
 import '@fontsource-variable/inter';
 // Static slices kept as fallback for weights outside the variable range.
 import '@fontsource/inter/300.css';

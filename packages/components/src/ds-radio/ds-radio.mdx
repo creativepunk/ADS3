@@ -1,0 +1,153 @@
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as RadioStories from './ds-radio.stories';
+import * as RadioGroupStories from './ds-radio-group.stories';
+
+<Meta of={RadioStories} name="Overview" />
+
+# Radio Button
+
+A form control that lets users select exactly one option from a set. Use `ds-radio` for a single item with an optional label and description. Use `ds-radio-group` when presenting a titled list of radio buttons — it handles layout, the group label, the `role="radiogroup"` container, and an optional helper/error message.
+
+<Canvas of={RadioStories.Default} />
+
+## States
+
+All interactive states — unselected, selected, disabled, read-only, and error — are driven by reflected boolean attributes so CSS `:host([attr])` selectors handle all visual transitions without JS class manipulation.
+
+<Canvas of={RadioStories.ShowcaseStates} />
+
+### Selected
+
+<Canvas of={RadioStories.Selected} />
+
+### Error
+
+<Canvas of={RadioStories.Error} />
+
+### Disabled
+
+<Canvas of={RadioStories.Disabled} />
+
+### Read-only
+
+<Canvas of={RadioStories.ReadOnly} />
+
+## With description
+
+Pass `description` to render helper text beneath the label.
+
+<Canvas of={RadioStories.ShowcaseWithDescription} />
+
+## Radio Group
+
+`ds-radio-group` wraps a set of `ds-radio` items. It renders a `ds-form-label` at the top and a `ds-form-message` at the bottom.
+
+<Canvas of={RadioGroupStories.Default} />
+
+### Horizontal layout
+
+<Canvas of={RadioGroupStories.Horizontal} />
+
+### Error state
+
+<Canvas of={RadioGroupStories.Error} />
+
+### Disabled
+
+<Canvas of={RadioGroupStories.Disabled} />
+
+### Read-only
+
+<Canvas of={RadioGroupStories.ReadOnly} />
+
+### With helper text
+
+<Canvas of={RadioGroupStories.WithHelperText} />
+
+### Full matrix
+
+<Canvas of={RadioGroupStories.ShowcaseMatrix} />
+
+## API
+
+### ds-radio properties
+
+<ArgTypes of={RadioStories} />
+
+### ds-radio slots
+
+| Slot | Description |
+|------|-------------|
+| *(default)* | Alternative to the `label` prop — use when label needs rich content |
+
+### ds-radio events
+
+| Event | Detail | Description |
+|-------|--------|-------------|
+| `ds-radio-change` | `{ value: string, originalEvent?: Event }` | Fired when this radio becomes selected |
+
+### Attribute mapping
+
+Boolean props use kebab-case attribute names:
+
+```html
+<!-- isChecked → is-checked -->
+<ds-radio is-checked></ds-radio>
+
+<!-- isDisabled → is-disabled -->
+<ds-radio is-disabled></ds-radio>
+
+<!-- hasError → has-error -->
+<ds-radio has-error></ds-radio>
+```
+
+### ds-radio-group properties
+
+<ArgTypes of={RadioGroupStories} />
+
+### ds-radio-group slots
+
+| Slot | Description |
+|------|-------------|
+| *(default)* | `ds-radio` items |
+
+## Accessibility
+
+- Each `ds-radio` renders a native `<input type="radio">` — no `div[role="radio"]` workarounds.
+- `aria-disabled` and `aria-readonly` are set in addition to native attributes so assistive technologies announce the state even when `pointer-events: none` is active.
+- The group container carries `role="radiogroup"` with an `aria-label` mirroring the visible group label.
+- Focus ring uses `--ds-focus-focus` at 2px solid — consistent with all other interactive DS components.
+- Keyboard: arrow keys navigate between radios within the same `name` group natively. `Space` selects the focused radio.
+- Unlike checkboxes, only one radio per `name` group can be selected — enforced by the native `<input type="radio">` behaviour.
+
+## React usage
+
+```tsx
+import { DsRadio, DsRadioGroup } from '@my-ds/react';
+
+function Example() {
+  const [selected, setSelected] = React.useState('option-1');
+
+  return (
+    <DsRadioGroup
+      label="Preferences"
+      isRequired
+      helperText="Select one option"
+      errorText="An option is required"
+    >
+      <DsRadio
+        label="Option 1"
+        value="option-1"
+        isChecked={selected === 'option-1'}
+        onDsRadioChange={(e) => setSelected(e.detail.value)}
+      />
+      <DsRadio
+        label="Option 2"
+        value="option-2"
+        isChecked={selected === 'option-2'}
+        onDsRadioChange={(e) => setSelected(e.detail.value)}
+      />
+    </DsRadioGroup>
+  );
+}
+```

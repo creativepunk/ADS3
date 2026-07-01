@@ -1,0 +1,82 @@
+import { Meta, Canvas, ArgTypes } from '@storybook/blocks';
+import * as StatusMarkerStories from './ds-status-marker.stories';
+
+<Meta of={StatusMarkerStories} name="Overview" />
+
+# Status Marker
+
+A compact inline indicator that communicates the semantic state of an entity (a job, deployment, task, etc.). Use `ds-status-marker` when you need both a recognizable icon and a text label together. For a standalone color-only count indicator, use `ds-badge` instead.
+
+<Canvas of={StatusMarkerStories.Default} />
+
+## Statuses
+
+Seven statuses map to distinct icons and color tokens: `failed`, `success`, `warning`, `in-progress`, `undefined`, `in-active`, and `live`.
+
+<Canvas of={StatusMarkerStories.ShowcaseStatuses} />
+
+## Types
+
+The `type` prop controls visual weight:
+- **subtle** — colored icon with muted gray text; blends with surrounding text
+- **bold** — icon and text adopt the semantic status color
+- **bolder** — adds a colored border around the marker
+- **boldest** — solid filled background with inverse or semantic text
+
+<Canvas of={StatusMarkerStories.ShowcaseTypes} />
+
+## Full Matrix
+
+<Canvas of={StatusMarkerStories.ShowcaseMatrix} />
+
+## API
+
+### Properties
+
+<ArgTypes of={StatusMarkerStories} />
+
+### Slots
+
+| Name | Description |
+|------|-------------|
+| `icon` | Custom icon — defaults to the status-appropriate `ds-icon` |
+| *(default)* | Label text displayed next to the icon |
+
+### Events
+
+This component emits no custom events.
+
+### CSS Parts
+
+None exposed.
+
+### Attribute names
+
+| Prop | Attribute | Type | Default |
+|------|-----------|------|---------|
+| `status` | `status` | `DsStatusMarkerStatus` | `'failed'` |
+| `type` | `type` | `DsStatusMarkerType` | `'subtle'` |
+
+## Accessibility
+
+- The icon wrapper carries `aria-hidden="true"` since the label already conveys the status meaning.
+- The component is not focusable — it is purely presentational. Place it alongside interactive controls when the status must be acted on.
+- Do not rely on color alone: the icon also changes per status so the component remains understandable for color-blind users.
+
+## React usage
+
+```tsx
+import { DsStatusMarker } from '@my-ds/react';
+
+// Subtle (default)
+<DsStatusMarker status="success">Success</DsStatusMarker>
+
+// Bold filled
+<DsStatusMarker status="in-progress" type="boldest">In-progress</DsStatusMarker>
+
+// Custom icon
+<DsStatusMarker status="live">
+  <ds-icon slot="icon" name="circle" size="sm" />
+  Live
+</DsStatusMarker>
+```

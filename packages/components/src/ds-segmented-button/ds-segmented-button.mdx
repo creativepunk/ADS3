@@ -1,0 +1,112 @@
+import { Meta, Canvas, ArgTypes } from '@storybook/blocks';
+import * as SegmentedButtonStories from './ds-segmented-button.stories';
+
+<Meta of={SegmentedButtonStories} name="Overview" />
+
+# SegmentedButton
+
+A navigation control that groups two or more mutually exclusive options in a compact linear strip. Exactly one option is always selected — it cannot be deselected. Use it in place of a tab bar or radio group when the choices are brief and the control sits inline with other UI.
+
+<Canvas of={SegmentedButtonStories.Default} />
+
+## Sizes
+
+Three sizes match the rest of the button family: `sm` (20 px), `md` (28 px), and `lg` (36 px).
+
+<Canvas of={SegmentedButtonStories.ShowcaseSizes} />
+
+## States
+
+Selected items receive a subtle background tint and a `--ds-border-border-selected` inset border. Individual items can be disabled via `is-disabled`; the whole group can be disabled via `is-disabled` on the parent.
+
+<Canvas of={SegmentedButtonStories.ShowcaseStates} />
+
+## Full matrix
+
+<Canvas of={SegmentedButtonStories.ShowcaseMatrix} />
+
+## API
+
+### `ds-segmented-button` properties
+
+<ArgTypes of={SegmentedButtonStories} />
+
+### `ds-segmented-button-item` properties
+
+| Property | Type | Default | Description |
+|---|---|---|---|
+| `value` | `string` | `''` | Value emitted in `ds-segmented-change`. |
+| `is-selected` | `boolean` | `false` | Marks this item as the active selection. |
+| `is-disabled` | `boolean` | `false` | Disables this individual item. |
+| `size` | `'sm' \| 'md' \| 'lg'` | inherited | Set automatically by the parent group. |
+
+### Slots
+
+| Slot | Element | Description |
+|---|---|---|
+| *(default)* | `ds-segmented-button` | `ds-segmented-button-item` children |
+| *(default)* | `ds-segmented-button-item` | Label text |
+
+### Events
+
+| Event | Target | Detail |
+|---|---|---|
+| `ds-segmented-change` | `ds-segmented-button-item` | `{ value: string, selected: true, originalEvent: MouseEvent \| KeyboardEvent }` |
+
+### CSS custom properties
+
+| Property | Default | Description |
+|---|---|---|
+| `--ds-border-border-default` | `rgba(255,255,255,0.08)` | Outer group border |
+| `--ds-border-border-selected` | `#0055bd` | Selected item inset border |
+| `--ds-background-selected-default` | `rgba(255,255,255,0.08)` | Selected item background |
+| `--ds-background-selected-hovered` | `rgba(255,255,255,0.12)` | Selected item hover background |
+| `--ds-background-neutral-subtle-hovered` | `rgba(255,255,255,0.2)` | Unselected item hover background |
+| `--ds-text-text-disabled` | `rgba(255,255,255,0.25)` | Disabled item text color |
+| `--ds-focus-focus` | `#ffffff` | Focus ring color |
+
+## Accessibility
+
+- Each `ds-segmented-button-item` renders a native `<button type="button">` — fully keyboard accessible.
+- `aria-pressed` reflects the current selected state on each item.
+- The group container uses `role="group"` with `aria-disabled` mirroring the `is-disabled` prop.
+- `Enter` and `Space` trigger the same `ds-segmented-change` event as a click.
+- Clicking or pressing the currently-selected item is a no-op — selection cannot be cleared.
+- Focus ring uses `outline-offset: -3px` so it renders inside the item boundary without shifting adjacent items.
+
+## React usage
+
+```tsx
+import { DsSegmentedButton, DsSegmentedButtonItem } from '@my-ds/react';
+import type { DsSegmentedChangeEvent } from '@my-ds/react';
+
+function CalendarToolbar() {
+  const [view, setView] = React.useState('week');
+
+  return (
+    <DsSegmentedButton size="md">
+      <DsSegmentedButtonItem
+        value="day"
+        isSelected={view === 'day'}
+        onDsSegmentedChange={(e: DsSegmentedChangeEvent) => setView(e.detail.value)}
+      >
+        Day
+      </DsSegmentedButtonItem>
+      <DsSegmentedButtonItem
+        value="week"
+        isSelected={view === 'week'}
+        onDsSegmentedChange={(e: DsSegmentedChangeEvent) => setView(e.detail.value)}
+      >
+        Week
+      </DsSegmentedButtonItem>
+      <DsSegmentedButtonItem
+        value="month"
+        isSelected={view === 'month'}
+        onDsSegmentedChange={(e: DsSegmentedChangeEvent) => setView(e.detail.value)}
+      >
+        Month
+      </DsSegmentedButtonItem>
+    </DsSegmentedButton>
+  );
+}
+```

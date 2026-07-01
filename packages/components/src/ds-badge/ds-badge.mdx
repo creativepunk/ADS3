@@ -1,0 +1,79 @@
+import { Meta, Canvas, ArgTypes } from '@storybook/blocks';
+import * as BadgeStories from './ds-badge.stories';
+
+<Meta of={BadgeStories} name="Overview" />
+
+# Badge
+
+A compact, non-interactive label used to surface a count or short status indicator alongside other UI elements — such as notification counts on nav items, message counts on avatars, or status chips in tables. Badges come in 11 color variants and optionally include a leading icon slot.
+
+Use a **Tag** component instead when the label is a longer descriptive keyword or needs to be dismissible/selectable.
+
+<Canvas of={BadgeStories.Default} />
+
+## Colors
+
+11 semantic color variants map to the `--ds-badge-{color}-*` token family.
+
+<Canvas of={BadgeStories.ShowcaseColors} />
+
+## With Icon
+
+Set `has-icon` and project an icon into `slot="icon"`. The icon is sized to 16×16 and inherits the badge's icon color token.
+
+<Canvas of={BadgeStories.ShowcaseWithIcons} />
+
+## Full Matrix
+
+<Canvas of={BadgeStories.ShowcaseMatrix} />
+
+## API
+
+### Properties
+
+<ArgTypes of={BadgeStories} />
+
+### Slots
+
+| Slot | Description |
+|------|-------------|
+| *(default)* | The count or label text displayed inside the badge |
+| `icon` | A 16×16 icon element rendered before the label. Only visible when `has-icon` is set |
+
+### Attribute names
+
+| Property | Attribute | Type | Default |
+|----------|-----------|------|---------|
+| `color` | `color` | `DsBadgeColor` | `'gray'` |
+| `hasIcon` | `has-icon` | `boolean` | `false` |
+
+```html
+<ds-badge color="red" has-icon>
+  <svg slot="icon">...</svg>
+  99
+</ds-badge>
+```
+
+## Accessibility
+
+- The inner `<span>` carries `role="status"` so screen readers announce badge content when it changes dynamically.
+- The icon wrapper is `aria-hidden="true"` — icons in badges are decorative. The count text is the accessible label.
+- For icon-only badges (no text), supply an `aria-label` directly on the `<ds-badge>` element via the `aria-label` attribute, which will pierce through to the host.
+- The component has no interactive behavior and does not require keyboard handling.
+
+## React usage
+
+```tsx
+import { DsBadge } from '@my-ds/react';
+
+// Basic
+<DsBadge color="red">99</DsBadge>
+
+// With icon
+<DsBadge color="green" hasIcon>
+  <svg slot="icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+    <path d="..." />
+  </svg>
+  25
+</DsBadge>
+```

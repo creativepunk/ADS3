@@ -262,7 +262,7 @@ export class DsCheckbox extends LitElement {
       }
 
       .label-text {
-        font-feature-settings: 'cv08' 1, 'zero' 1, 'cv05' 1;
+        font-feature-settings: 'cv06' 1, 'zero' 1, 'cv05' 1;
         color: var(--ds-text-text-default);
         white-space: nowrap;
         max-width: 180px;
@@ -282,7 +282,7 @@ export class DsCheckbox extends LitElement {
       }
 
       .description {
-        font-feature-settings: 'cv08' 1, 'zero' 1, 'cv05' 1;
+        font-feature-settings: 'cv06' 1, 'zero' 1, 'cv05' 1;
         color: var(--ds-text-text-subtlest);
         max-width: 320px;
         white-space: nowrap;

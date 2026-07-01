@@ -1,0 +1,101 @@
+import { Meta, Canvas, ArgTypes } from '@storybook/blocks';
+import * as SpinnerStories from './ds-spinner.stories';
+
+<Meta of={SpinnerStories} name="Overview" />
+
+# Spinner
+
+An indeterminate circular progress indicator that signals a background operation is in progress. Use `ds-spinner` when content is loading and the duration is unknown. For determinate progress, prefer a progress bar instead.
+
+<Canvas of={SpinnerStories.Default} />
+
+## Variants
+
+Three color styles adjust the spinner to different surface contexts.
+
+<Canvas of={SpinnerStories.ShowcaseVariants} />
+
+| Variant   | Use case                                        |
+|-----------|------------------------------------------------|
+| `brand`   | Default; on neutral dark surfaces               |
+| `neutral` | Low-emphasis; blends with surrounding icon color |
+| `inverse` | On brand-colored or dark-filled surfaces        |
+
+## Sizes
+
+<Canvas of={SpinnerStories.ShowcaseSizes} />
+
+| Size | Diameter | Stroke |
+|------|----------|--------|
+| `sm` | 16px     | 1.5px  |
+| `md` | 20px     | 2px    |
+| `lg` | 24px     | 2.5px  |
+
+## States
+
+<Canvas of={SpinnerStories.ShowcaseStates} />
+
+**Default** — continuously spinning arc on a faint track ring.
+
+**Disabled** — arc and track render in disabled tokens; animation still runs so screen readers aren't confused (the spinner is decorative in this state and the surrounding control is what's disabled).
+
+## Full matrix
+
+<Canvas of={SpinnerStories.ShowcaseMatrix} />
+
+## API
+
+### Properties
+
+<ArgTypes of={SpinnerStories} />
+
+### Slots
+
+This component has no slots. All visual content is rendered internally as an SVG.
+
+### Events
+
+This component emits no custom events.
+
+### CSS parts
+
+| Part | Element | Description |
+|------|---------|-------------|
+| —    | —       | No parts exposed — use `variant`/`size` props or override `--_spinner-arc-color` / `--_spinner-track-color` for custom colors. |
+
+### Attribute names
+
+| Property  | Attribute  | Type    | Default  |
+|-----------|------------|---------|---------|
+| `size`    | `size`     | string  | `'md'`  |
+| `variant` | `variant`  | string  | `'brand'` |
+| `disabled`| `disabled` | boolean | `false` |
+| `label`   | `label`    | string  | `'Loading'` |
+
+```html
+<ds-spinner size="lg" variant="brand"></ds-spinner>
+<ds-spinner disabled></ds-spinner>
+```
+
+## Accessibility
+
+- The SVG carries `role="status"` and `aria-label` (defaults to `"Loading"`) so screen readers announce it automatically.
+- Set the `label` property to something contextual when multiple spinners are on the same page: `label="Fetching users"`.
+- `aria-live="polite"` ensures the announcement doesn't interrupt in-progress speech.
+- The spinner is purely decorative when nested inside a button or form element that already communicates its loading state — in that case set `label=""` and add `aria-hidden="true"` on the host.
+- No keyboard interaction is required; this is a non-interactive indicator.
+
+## React usage
+
+```tsx
+import { DsSpinner } from '@my-ds/react';
+
+// Default — brand, md
+<DsSpinner />
+
+// Large neutral spinner with a contextual label
+<DsSpinner size="lg" variant="neutral" label="Fetching results" />
+
+// On a brand surface
+<DsSpinner variant="inverse" />
+```
