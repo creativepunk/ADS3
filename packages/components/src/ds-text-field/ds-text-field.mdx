@@ -1,0 +1,99 @@
+import { Meta, Canvas, ArgTypes } from '@storybook/blocks';
+import * as TextFieldStories from './ds-text-field.stories';
+
+<Meta of={TextFieldStories} name="Overview" />
+
+# Text Field
+
+A single-line text input with an optional label, helper text, and validation messaging. Use `ds-text-field` for any free-form text entry — names, emails, URLs, search terms — where the value is a plain string. Reach for `ds-number-field` when the value must be numeric.
+
+<Canvas of={TextFieldStories.Default} />
+
+## States
+
+The text field supports six states driven entirely by boolean props:
+
+- **Default** — `placeholder` shown, no value set
+- **Filled** — user has typed a value
+- **Invalid** — `invalid` prop set; bottom border turns red, error message appears below
+- **Valid** — `valid` prop set; bottom border turns green, success message appears below
+- **Disabled** — `disabled` prop; input not interactive, all text uses disabled tokens
+- **Read-only** — `readonly` prop; input shows a value but cannot be edited
+
+<Canvas of={TextFieldStories.ShowcaseStates} />
+
+## Layout
+
+Two layout options are available via the `type` prop:
+
+| Value | Behaviour |
+|---|---|
+| `stacked` | Label stacked above the input (default) |
+| `inline` | 180 px label column to the left; input fills remaining space |
+
+<Canvas of={TextFieldStories.ShowcaseInlineLayouts} />
+
+## API
+
+### Properties
+
+<ArgTypes of={TextFieldStories} />
+
+### Slots
+
+This component has no public slots. The inner `<input>` is fully managed.
+
+### Events
+
+| Event | React prop | Detail |
+|---|---|---|
+| `ds-input` | `onDsInput` | `{ value: string, originalEvent: InputEvent }` |
+| `ds-change` | `onDsChange` | `{ value: string }` |
+| `ds-focus` | `onDsFocus` | `{ originalEvent: FocusEvent }` |
+| `ds-blur` | `onDsBlur` | `{ originalEvent: FocusEvent }` |
+
+### CSS Parts
+
+| Part | Description |
+|---|---|
+| `trigger` | The inner container wrapping the `<input>` element |
+
+### Attribute names
+
+| Property | Attribute | Type |
+|---|---|---|
+| `isRequired` | `is-required` | boolean |
+| `helperText` | `helper-text` | string |
+| `errorMessage` | `error-message` | string |
+| `successMessage` | `success-message` | string |
+| `inputType` | `input-type` | string |
+
+## Accessibility
+
+- The inner `<input>` receives `aria-label` from the `label` prop when no visible `<label>` is rendered into the light DOM.
+- `aria-invalid="true"` is set on the input when `invalid` is truthy.
+- `disabled` uses the native `disabled` attribute — the input is removed from the tab order and its value is not submitted.
+- `readonly` uses the native `readonly` attribute — the input stays focusable and tabbable.
+- Focus ring uses `--ds-focus-focus` applied via `:focus-within` on the trigger wrapper, matching the design system focus specification.
+
+## React usage
+
+```tsx
+import { DsTextField } from '@my-ds/react';
+
+function Example() {
+  const [value, setValue] = React.useState('');
+
+  return (
+    <DsTextField
+      label="Email address"
+      isRequired
+      inputType="email"
+      placeholder="you@example.com"
+      value={value}
+      helperText="We'll never share your email."
+      onDsInput={(e) => setValue(e.detail.value)}
+    />
+  );
+}
+```

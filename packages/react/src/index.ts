@@ -121,3 +121,34 @@ export type {
 
 export { DsNumberField } from './ds-number-field.js';
 export type { DsNumberFieldProps, DsNumberFieldType } from './ds-number-field.js';
+
+export { DsTag } from './ds-tag.js';
+export type { DsTagProps, DsTagColor, DsTagSize } from './ds-tag.js';
+
+export { DsTagSelectable } from './ds-tag-selectable.js';
+export type { DsTagSelectableProps, DsTagSelectableSize } from './ds-tag-selectable.js';
+
+export { DsDateInput } from './ds-date-input.js';
+export type { DsDateInputProps, DsDateInputLayoutType } from './ds-date-input.js';
+
+export { DsDatePicker } from './ds-date-picker.js';
+export type { DsDatePickerProps, DsDatePickerLayoutType } from './ds-date-picker.js';
+
+export { DsDateRangePicker } from './ds-date-range-picker.js';
+export type {
+  DsDateRangePickerProps,
+  DsDateRangePickerLayoutType,
+  DsDateRangeChangeEvent,
+} from './ds-date-range-picker.js';
+
+export { DsTextField } from './ds-text-field.js';
+export type { DsTextFieldProps, DsTextFieldType } from './ds-text-field.js';
+
+export { DsTextArea } from './ds-text-area.js';
+export type { DsTextAreaProps, DsTextAreaType, DsTextAreaResize, DsTextAreaElement } from './ds-text-area.js';
+
+export { DsToggle } from './ds-toggle.js';
+export type { DsToggleProps, DsToggleSize, DsToggleChangeEvent } from './ds-toggle.js';
+
+export { DsTabs, DsTab } from './ds-tabs.js';
+export type { DsTabsProps, DsTabProps, DsTabChangeEvent } from './ds-tabs.js';

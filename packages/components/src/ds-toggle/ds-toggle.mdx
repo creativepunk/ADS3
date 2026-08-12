@@ -1,0 +1,106 @@
+import { Meta, Canvas, ArgTypes } from '@storybook/blocks';
+import * as ToggleStories from './ds-toggle.stories';
+
+<Meta of={ToggleStories} name="Overview" />
+
+# Toggle
+
+A toggle (switch) lets users turn a setting on or off with an immediate effect. Use a toggle
+when the change takes effect immediately without a submit action — prefer a checkbox when the
+change requires confirmation inside a form.
+
+<Canvas of={ToggleStories.Default} />
+
+## States
+
+All interactive states are driven by CSS `:host([attr])` selectors with no JavaScript class manipulation.
+
+<Canvas of={ToggleStories.ShowcaseStates} />
+
+| State | Attribute | Track background |
+|---|---|---|
+| Unchecked | — | `--ds-background-neutral-default` |
+| Checked | `is-checked` | `--ds-background-selected-bolder-default` |
+| Hover (unchecked) | — | `--ds-background-neutral-hovered` |
+| Hover (checked) | `is-checked` | `--ds-background-selected-bolder-hovered` |
+| Disabled | `is-disabled` | `--ds-background-disabled` |
+| Disabled + Checked | `is-disabled is-checked` | `--ds-background-selected-bolder-disabled` |
+| Loading | `is-loading` | spinner rendered inside track |
+
+## Sizes
+
+<Canvas of={ToggleStories.ShowcaseSizes} />
+
+| Size | Track | Attribute |
+|---|---|---|
+| `md` (default) | 40×20px | `size="md"` |
+| `sm` | 32×16px | `size="sm"` |
+
+## Full matrix
+
+<Canvas of={ToggleStories.ShowcaseMatrix} />
+
+## API
+
+### Properties
+
+<ArgTypes of={ToggleStories} />
+
+### Events
+
+| Event | React prop | Detail |
+|---|---|---|
+| `ds-toggle-change` | `onDsToggleChange` | `{ checked: boolean, originalEvent?: Event }` |
+
+### CSS parts
+
+This component exposes no CSS parts — all styling is driven by reflected attributes and design tokens.
+
+### Attribute names
+
+Boolean properties use `is-*` / `has-*` attribute naming:
+
+```html
+<!-- isChecked → is-checked -->
+<ds-toggle is-checked label="Notifications"></ds-toggle>
+
+<!-- isDisabled → is-disabled -->
+<ds-toggle is-disabled label="Email alerts"></ds-toggle>
+
+<!-- isLoading → is-loading -->
+<ds-toggle is-loading label="Saving…"></ds-toggle>
+```
+
+## Accessibility
+
+- The hidden `<input type="checkbox" role="switch">` is the interactive element — screen readers announce it as a switch.
+- Always provide either a `label` prop or an `aria-label` attribute. Without one, the switch has no accessible name.
+- `aria-checked` reflects the current state (`true` / `false`).
+- `aria-disabled` is set when `is-disabled` is present; `pointer-events: none` prevents mouse interaction.
+- The focus ring renders on `:focus-visible` inside the track using `--ds-focus-focus` (white).
+- Keyboard: `Space` and `Enter` toggle the switch.
+- Do not use `opacity` to convey disabled — the component applies explicit disabled token colors to thumb and track.
+
+## React usage
+
+```tsx
+import { DsToggle } from '@my-ds/react';
+import type { DsToggleChangeEvent } from '@my-ds/react';
+
+function NotificationSetting() {
+  const [enabled, setEnabled] = React.useState(false);
+
+  const handleChange = (e: DsToggleChangeEvent) => {
+    setEnabled(e.detail.checked);
+  };
+
+  return (
+    <DsToggle
+      isChecked={enabled}
+      label="Enable notifications"
+      description="Receive updates via email"
+      onDsToggleChange={handleChange}
+    />
+  );
+}
+```

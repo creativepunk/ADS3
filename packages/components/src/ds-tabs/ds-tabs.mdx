@@ -1,0 +1,98 @@
+{/* ds-tabs — Overview docs */}
+
+import { Meta, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as TabsStories from './ds-tabs.stories';
+
+<Meta of={TabsStories} name="Overview" />
+
+# Tabs
+
+Tabs organise related content into labelled sections, showing one panel at a time.
+Use `<ds-tabs>` as the container and `<ds-tab>` for each individual tab. Prefer
+`<ds-tabs>` over a custom row of buttons whenever the purpose is switching content
+views — the component handles `role="tablist"` / `role="tab"` semantics and
+arrow-key navigation automatically.
+
+<Canvas of={TabsStories.Default} />
+
+## States
+
+Tabs support default, selected, disabled-per-item, and all-disabled states.
+An optional numeric `count` badge can appear alongside any label.
+
+<Canvas of={TabsStories.ShowcaseStates} />
+
+## Full matrix
+
+<Canvas of={TabsStories.ShowcaseMatrix} />
+
+## API
+
+### Properties — `<ds-tabs>`
+
+| Property     | Attribute      | Type      | Default | Description                              |
+| ------------ | -------------- | --------- | ------- | ---------------------------------------- |
+| `value`      | `value`        | `string`  | `''`    | Value of the currently selected tab      |
+| `isDisabled` | `is-disabled`  | `boolean` | `false` | Disables all tabs in the group           |
+
+### Properties — `<ds-tab>`
+
+| Property     | Attribute      | Type                  | Default     | Description                              |
+| ------------ | -------------- | --------------------- | ----------- | ---------------------------------------- |
+| `value`      | `value`        | `string`              | `''`        | Unique identifier for this tab           |
+| `isSelected` | `is-selected`  | `boolean`             | `false`     | Whether this tab is the active one       |
+| `isDisabled` | `is-disabled`  | `boolean`             | `false`     | Disables this individual tab             |
+| `count`      | —              | `number \| undefined` | `undefined` | When set, renders a badge with this count|
+
+### Slots — `<ds-tabs>`
+
+| Slot      | Description                         |
+| --------- | ----------------------------------- |
+| `default` | One or more `<ds-tab>` elements     |
+
+### Slots — `<ds-tab>`
+
+| Slot      | Description     |
+| --------- | --------------- |
+| `default` | Tab label text  |
+
+### Events
+
+Both `<ds-tabs>` and `<ds-tab>` dispatch `ds-tab-change`. Listen on `<ds-tabs>`
+to receive a single, deduplicated event whenever the active tab changes.
+
+| Event           | Element              | Detail                                             |
+| --------------- | -------------------- | -------------------------------------------------- |
+| `ds-tab-change` | `<ds-tabs>`, `<ds-tab>` | `{ value: string, originalEvent: MouseEvent \| KeyboardEvent }` |
+
+### CSS parts
+
+No public CSS parts are exposed. Customise via CSS custom properties (tokens).
+
+## Accessibility
+
+- `<ds-tabs>` renders with `role="tablist"`; each `<ds-tab>` button has `role="tab"`.
+- `aria-selected` is set on the active tab; `aria-disabled` is set when disabled.
+- Keyboard navigation: `ArrowLeft` / `ArrowRight` move focus between tabs; `Home` / `End`
+  jump to the first / last tab. Focus follows selection automatically.
+- Disabled tabs remain in the tab order via `aria-disabled` but cannot be activated.
+- No `aria-label` is required on `<ds-tabs>` by default; add one when the page
+  contains multiple tablists to disambiguate them for screen readers.
+
+## React usage
+
+```tsx
+import { DsTabs, DsTab } from '@my-ds/react';
+import type { DsTabChangeEvent } from '@my-ds/react';
+
+function Example() {
+  const [tab, setTab] = React.useState('overview');
+  return (
+    <DsTabs value={tab} onDsTabChange={(e: DsTabChangeEvent) => setTab(e.detail.value)}>
+      <DsTab value="overview">Overview</DsTab>
+      <DsTab value="details">Details</DsTab>
+      <DsTab value="history" count={17}>History</DsTab>
+    </DsTabs>
+  );
+}
+```

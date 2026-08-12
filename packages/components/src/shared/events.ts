@@ -27,6 +27,10 @@ export interface DsEventMap {
   'ds-segmented-change': DsSegmentedChangeEvent;
   'ds-search-expand': DsSearchExpandEvent;
   'ds-search-clear': DsSearchClearEvent;
+  'ds-tag-dismiss': DsTagDismissEvent;
+  'ds-date-range-change': DsDateRangeChangeEvent;
+  'ds-toggle-change': DsToggleChangeEvent;
+  'ds-tab-change': DsTabChangeEvent;
 }
 
 export interface DsClickEvent extends CustomEvent {
@@ -127,6 +131,40 @@ export interface DsSearchExpandEvent extends CustomEvent {
 export interface DsSearchClearEvent extends CustomEvent {
   detail: {
     originalEvent: MouseEvent;
+  };
+}
+
+export interface DsTagDismissEvent extends CustomEvent {
+  detail: {
+    originalEvent: MouseEvent;
+  };
+}
+
+/** Fired by `<ds-tabs>` when the active tab changes. */
+export interface DsTabChangeEvent extends CustomEvent {
+  detail: {
+    /** The `value` of the newly selected tab. */
+    value: string;
+    originalEvent: MouseEvent | KeyboardEvent;
+  };
+}
+
+/** Fired by `<ds-toggle>` when the checked state changes. */
+export interface DsToggleChangeEvent extends CustomEvent {
+  detail: {
+    checked: boolean;
+    originalEvent?: Event;
+  };
+}
+
+/** Fired by `<ds-date-range-picker>` when the start or end date changes. */
+export interface DsDateRangeChangeEvent extends CustomEvent {
+  detail: {
+    /** Start date as ISO `YYYY-MM-DD`, or `''` when cleared. */
+    startDate: string;
+    /** End date as ISO `YYYY-MM-DD`, or `''` when cleared. */
+    endDate: string;
+    originalEvent?: Event;
   };
 }
 

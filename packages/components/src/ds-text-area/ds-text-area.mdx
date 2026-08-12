@@ -1,0 +1,115 @@
+import { Meta, Canvas, ArgTypes } from '@storybook/blocks';
+import * as TextAreaStories from './ds-text-area.stories';
+
+<Meta of={TextAreaStories} name="Overview" />
+
+# Text Area
+
+A multi-line text input for free-form content. Use `ds-text-area` when users need to enter longer text that may span multiple lines — descriptions, notes, messages, or comments. For single-line inputs use `ds-text-field` instead.
+
+<Canvas of={TextAreaStories.Default} />
+
+## States
+
+The text area supports the same validation and interaction states as `ds-text-field`: default, hover, focus, invalid, valid, disabled, and read-only. The textarea body grows vertically with its content (min-height 56px, max-height 192px) and scrolls internally once it reaches the maximum height.
+
+<Canvas of={TextAreaStories.ShowcaseStates} />
+
+## With value
+
+<Canvas of={TextAreaStories.WithValue} />
+
+## Invalid
+
+<Canvas of={TextAreaStories.Invalid} />
+
+## Valid
+
+<Canvas of={TextAreaStories.Valid} />
+
+## Disabled
+
+<Canvas of={TextAreaStories.Disabled} />
+
+## Read-only
+
+<Canvas of={TextAreaStories.Readonly} />
+
+## Grow behaviour
+
+The textarea hugs all content until the actual text element. The text element has a minimum height of 56px and a maximum height of 192px — after which it scrolls internally. All content above and below (label, footer) hugs to fit.
+
+<Canvas of={TextAreaStories.ShowcaseGrowBehavior} />
+
+## Inline layout
+
+`type="inline"` places the label in a fixed 180px column to the left, matching the layout convention used in `ds-text-field`.
+
+<Canvas of={TextAreaStories.ShowcaseInlineLayouts} />
+
+## API
+
+### Properties
+
+<ArgTypes of={TextAreaStories} />
+
+### Events
+
+| Event       | React prop    | Detail                                           |
+|-------------|---------------|--------------------------------------------------|
+| `ds-input`  | `onDsInput`   | `{ value: string, originalEvent: InputEvent }`   |
+| `ds-change` | `onDsChange`  | `{ value: string }`                              |
+| `ds-focus`  | `onDsFocus`   | `{ originalEvent: FocusEvent }`                  |
+| `ds-blur`   | `onDsBlur`    | `{ originalEvent: FocusEvent }`                  |
+
+### CSS Parts
+
+| Part      | Element               |
+|-----------|-----------------------|
+| `trigger` | The textarea wrapper div |
+
+### Attribute names
+
+| Property      | Attribute      | Type      |
+|---------------|----------------|-----------|
+| `isRequired`  | `is-required`  | boolean   |
+| `helperText`  | `helper-text`  | string    |
+| `errorMessage`| `error-message`| string    |
+| `successMessage`| `success-message`| string  |
+| `hasCount`    | `has-count`    | boolean   |
+| `maxlength`   | `maxlength`    | number    |
+
+## Accessibility
+
+- The native `<textarea>` element is used directly — full keyboard, screen reader, and form participation is native.
+- `aria-label` is applied from the `label` prop when a label is present; falls back to `"Text area"` for cases without a visible label.
+- `aria-invalid="true"` is applied when `invalid` is set, allowing screen readers to announce the error state.
+- `aria-multiline="true"` is explicit on the element.
+- Focus ring uses `--ds-focus-focus` via `:focus-within` on the trigger wrapper — consistent with `ds-text-field`.
+- Disabled state sets `pointer-events: none` and uses explicit disabled tokens on the textarea and label text — never `opacity`.
+
+## React usage
+
+```tsx
+import { DsTextArea } from '@my-ds/react';
+import type { DsInputEvent, DsChangeEvent } from '@my-ds/components';
+
+function CommentForm() {
+  const [value, setValue] = React.useState('');
+
+  return (
+    <DsTextArea
+      label="Comment"
+      isRequired
+      placeholder="Write your comment..."
+      value={value}
+      helperText="Be respectful."
+      maxlength={500}
+      hasCount
+      onDsInput={(e: DsInputEvent) => setValue(e.detail.value)}
+      onDsChange={(e: DsChangeEvent) => console.log('committed:', e.detail.value)}
+      style={{ width: '100%' }}
+    />
+  );
+}
+```

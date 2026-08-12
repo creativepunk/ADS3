@@ -131,3 +131,30 @@ export type { DsNumberFieldType } from './ds-number-field/ds-number-field.js';
 
 export { DsSearch } from './ds-search/ds-search.js';
 export type { DsSearchVariant } from './ds-search/ds-search.js';
+
+export { DsTag } from './ds-tag/ds-tag.js';
+export type { DsTagColor, DsTagSize } from './ds-tag/ds-tag.js';
+
+export { DsTagSelectable } from './ds-tag-selectable/ds-tag-selectable.js';
+export type { DsTagSelectableSize } from './ds-tag-selectable/ds-tag-selectable.js';
+
+export { DsDateInput } from './ds-date-input/ds-date-input.js';
+export type { DsDateInputLayoutType } from './ds-date-input/ds-date-input.js';
+
+export { DsDatePicker } from './ds-date-picker/ds-date-picker.js';
+export type { DsDatePickerLayoutType } from './ds-date-picker/ds-date-picker.js';
+
+export { DsDateRangePicker } from './ds-date-range-picker/ds-date-range-picker.js';
+export type { DsDateRangePickerLayoutType } from './ds-date-range-picker/ds-date-range-picker.js';
+
+export { DsTextField } from './ds-text-field/ds-text-field.js';
+export type { DsTextFieldType } from './ds-text-field/ds-text-field.js';
+
+export { DsTextArea } from './ds-text-area/ds-text-area.js';
+export type { DsTextAreaType, DsTextAreaResize } from './ds-text-area/ds-text-area.js';
+
+export { DsToggle } from './ds-toggle/ds-toggle.js';
+export type { DsToggleSize } from './ds-toggle/ds-toggle.js';
+
+export { DsTabs, DsTab } from './ds-tabs/ds-tabs.js';
+export type { DsTabChangeEvent } from './ds-tabs/ds-tabs.js';

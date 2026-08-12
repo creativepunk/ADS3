@@ -1,0 +1,100 @@
+import { Meta, Canvas, ArgTypes } from '@storybook/blocks';
+import * as TagSelectableStories from './ds-tag-selectable.stories';
+
+<Meta of={TagSelectableStories} name="Overview" />
+
+# Tag Selectable
+
+A pill-shaped toggle tag that lets users select or deselect a value. Unlike `ds-tag` (which is purely presentational or dismissable), `ds-tag-selectable` is interactive and maintains a toggled `selected` state. Use it for multi-select filter chips or category selectors.
+
+<Canvas of={TagSelectableStories.Default} />
+
+## Sizes
+
+Three sizes are available: `sm` (24px), `md` (32px, default), and `lg` (40px).
+
+<Canvas of={TagSelectableStories.ShowcaseSizes} />
+
+## States
+
+<Canvas of={TagSelectableStories.ShowcaseStates} />
+
+**Default** — unselected, bordered pill with subtle background.
+**Selected** — filled with brand-blue background and blue border.
+**Disabled** — muted background, no interaction; text and icon use disabled tokens.
+
+## Full matrix
+
+<Canvas of={TagSelectableStories.ShowcaseMatrix} />
+
+## API
+
+### Properties
+
+<ArgTypes of={TagSelectableStories} />
+
+### Slots
+
+| Name   | Description                       |
+|--------|-----------------------------------|
+| `icon` | 16×16 icon shown before the label |
+
+### Events
+
+| Event       | React prop    | Detail                                    |
+|-------------|---------------|-------------------------------------------|
+| `ds-change` | `onDsChange`  | `{ value: boolean, originalEvent: Event }` |
+
+### CSS parts
+
+| Part        | Description                       |
+|-------------|-----------------------------------|
+| `inner`     | The pill wrapper element          |
+| `icon-wrap` | Wrapper around the icon slot      |
+| `label`     | The text label element            |
+
+### Attribute names
+
+| Prop        | Attribute     | Type    |
+|-------------|---------------|---------|
+| `selected`  | `selected`    | boolean |
+| `disabled`  | `disabled`    | boolean |
+| `hasIcon`   | `has-icon`    | boolean |
+| `size`      | `size`        | string  |
+
+```html
+<ds-tag-selectable size="md" selected label="Design">
+  <ds-icon slot="icon" name="palette" size="sm"></ds-icon>
+</ds-tag-selectable>
+```
+
+## Accessibility
+
+- The host element carries `role="button"` and `tabindex="0"` automatically.
+- `aria-pressed` reflects the current `selected` state on the inner `.inner` element.
+- `aria-disabled` is set when `disabled` is true.
+- Keyboard: `Enter` and `Space` toggle the selected state.
+- Focus ring uses `--ds-tag-selectable-tag-focus` (resolves to `--ds-focus-focus`, white) at 2px outset.
+- Never rely on color alone to convey selection; the border change also communicates state.
+
+## React usage
+
+```tsx
+import { DsTagSelectable } from '@my-ds/react';
+import { DsIcon } from '@my-ds/react';
+
+function FilterBar() {
+  const [selected, setSelected] = React.useState(false);
+
+  return (
+    <DsTagSelectable
+      label="Design"
+      selected={selected}
+      hasIcon
+      onDsChange={(e) => setSelected(e.detail.value as boolean)}
+    >
+      <DsIcon slot="icon" name="palette" size="sm" />
+    </DsTagSelectable>
+  );
+}
+```

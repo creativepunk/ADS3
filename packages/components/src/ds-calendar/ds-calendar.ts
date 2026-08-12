@@ -191,6 +191,31 @@ export class DsCalendar extends LitElement {
         box-shadow: none;
       }
 
+      /* Range band — days between start and end (or hover preview). */
+      .day.is-in-range {
+        background: var(--ds-color-default-blue-100);
+        border-radius: 0;
+        color: var(--ds-color-default-neutral-white, #fff);
+      }
+      .day.is-in-range:hover {
+        background: var(--ds-color-default-blue-100);
+      }
+      /* Endpoints keep their selected pill with flat edges toward the band */
+      .day.is-range-start {
+        background: var(--ds-background-selected-bold-default);
+        color: var(--ds-color-default-neutral-white, #fff);
+        border-radius: var(--ds-radius-semantic-radius-sm) 0 0 var(--ds-radius-semantic-radius-sm);
+      }
+      .day.is-range-end {
+        background: var(--ds-background-selected-bold-default);
+        color: var(--ds-color-default-neutral-white, #fff);
+        border-radius: 0 var(--ds-radius-semantic-radius-sm) var(--ds-radius-semantic-radius-sm) 0;
+      }
+      .day.is-range-start:hover,
+      .day.is-range-end:hover {
+        background: var(--ds-background-selected-bold-hovered);
+      }
+
       /* Event marker under the number. */
       .marker {
         position: absolute;
@@ -314,6 +339,14 @@ export class DsCalendar extends LitElement {
   @property({ type: Boolean, reflect: true, attribute: 'show-today-button' })
   showTodayButton = true;
 
+  /** Range selection start (ISO YYYY-MM-DD). When set, activates range rendering. */
+  @property({ type: String, attribute: 'range-start' })
+  rangeStart = '';
+
+  /** Range selection end (ISO YYYY-MM-DD). Shows committed band when set alongside rangeStart. */
+  @property({ type: String, attribute: 'range-end' })
+  rangeEnd = '';
+
   // ── A11y labels ──────────────────────────────────────────────────────────
   @property({ type: String, attribute: 'previous-month-label' })
   previousMonthLabel = 'Previous month';
@@ -327,6 +360,7 @@ export class DsCalendar extends LitElement {
   todayLabel = 'Today';
 
   // ── Internal state ─────────────────────────────────────────────────────────
+  @state() private _hoverDate = '';
   @state() private _pickerOpen = false;
   @state() private _pickerYearMin = 0;
   @state() private _pickerYearMax = 0;
@@ -629,6 +663,37 @@ export class DsCalendar extends LitElement {
     const cells = this._gridDates();
     const focusedIso = toISO(this.year, this.month, this.day);
 
+    const rStart = this.rangeStart;
+    // Compute the effective band endpoints for rendering.
+    // - No committed end yet: hover is the provisional end (band anchored at rangeStart).
+    // - Hover extends right beyond rangeEnd: keep rangeStart, stretch end to hover.
+    // - Hover extends left before rangeStart: stretch start to hover, keep rangeEnd pinned.
+    // - Hover inside the committed range: show committed band as-is.
+    let effectiveStart: string;
+    let effectiveEnd: string;
+    if (rStart && this._hoverDate) {
+      if (!this.rangeEnd) {
+        effectiveStart = rStart;
+        effectiveEnd = this._hoverDate;
+      } else if (this._hoverDate > this.rangeEnd) {
+        effectiveStart = rStart;
+        effectiveEnd = this._hoverDate;
+      } else if (this._hoverDate < rStart) {
+        effectiveStart = this._hoverDate;
+        effectiveEnd = this.rangeEnd;
+      } else {
+        effectiveStart = rStart;
+        effectiveEnd = this.rangeEnd;
+      }
+    } else {
+      effectiveStart = rStart;
+      effectiveEnd = this.rangeEnd;
+    }
+    const bandLo = effectiveStart && effectiveEnd
+      ? (effectiveStart < effectiveEnd ? effectiveStart : effectiveEnd) : '';
+    const bandHi = effectiveStart && effectiveEnd
+      ? (effectiveStart < effectiveEnd ? effectiveEnd : effectiveStart) : '';
+
     return html`
       <div class="weekdays" role="row">
         ${labels.map(
@@ -640,6 +705,7 @@ export class DsCalendar extends LitElement {
         role="grid"
         aria-label=${this._monthLabel()}
         @keydown=${this._onGridKeydown}
+        @mouseleave=${() => { this._hoverDate = ''; }}
       >
         ${cells.map((d) => {
           const iso = dateToISO(d);
@@ -649,13 +715,21 @@ export class DsCalendar extends LitElement {
           const isDisabledDay = this._isDisabledDate(iso);
           const isFocusTarget = iso === focusedIso;
           const marker = this.markers[iso];
+
+          const isRangeStart = Boolean(effectiveStart && iso === effectiveStart);
+          const isRangeEnd = Boolean(effectiveEnd && iso === effectiveEnd);
+          const isInRange = Boolean(bandLo && bandHi && iso > bandLo && iso < bandHi);
+
           const classes = {
             day: true,
             'text-regular-body-md': true,
             'is-outside': !inMonth,
-            'is-today': isToday,
-            'is-selected': isSelected,
+            'is-today': isToday && !isRangeStart && !isRangeEnd && !isInRange,
+            'is-selected': isSelected && !isRangeStart && !isRangeEnd,
             'is-day-disabled': isDisabledDay,
+            'is-in-range': isInRange,
+            'is-range-start': isRangeStart,
+            'is-range-end': isRangeEnd,
           };
           return html`
             <button
@@ -673,6 +747,7 @@ export class DsCalendar extends LitElement {
                 year: 'numeric',
               }).format(d)}
               @click=${(e: MouseEvent) => this._selectDate(d, e)}
+              @mouseenter=${() => { if (rStart) this._hoverDate = iso; }}
             >
               ${d.getDate()}
               ${marker

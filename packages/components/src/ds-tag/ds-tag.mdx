@@ -1,0 +1,116 @@
+import { Meta, Canvas, ArgTypes } from '@storybook/blocks';
+import * as TagStories from './ds-tag.stories';
+
+<Meta of={TagStories} name="Overview" />
+
+# Tag
+
+Tags are compact labels used to categorize, classify, or annotate content. Use a Tag when you need
+to display a short piece of metadata inline — e.g. status labels, filter chips, or user-applied
+keywords. For numeric counts prefer `<ds-badge>`.
+
+<Canvas of={TagStories.Default} />
+
+## Colors
+
+Eleven color variants are available. `gray` is the default and works on dark backgrounds.
+`high-contrast` renders dark text on a light background for situations requiring maximum legibility.
+
+<Canvas of={TagStories.ShowcaseColors} />
+
+## Sizes
+
+Three sizes — `xs` (20 px), `sm` (24 px), and `md` (32 px, default).
+
+<Canvas of={TagStories.ShowcaseSizes} />
+
+## States
+
+<Canvas of={TagStories.ShowcaseStates} />
+
+**Disabled** — `disabled` removes pointer events and applies muted icon/text colors.
+The dismiss button also becomes non-interactive; it is rendered with `?disabled` so it is removed
+from the tab order.
+
+## Full matrix
+
+<Canvas of={TagStories.ShowcaseMatrix} />
+
+## API
+
+### Properties
+
+<ArgTypes of={TagStories} />
+
+### Slots
+
+| Name   | Description                                         |
+|--------|-----------------------------------------------------|
+| `icon` | Icon placed before the label. Use `<ds-icon>`.      |
+
+### Events
+
+| Event            | React prop        | Detail                        |
+|------------------|-------------------|-------------------------------|
+| `ds-tag-dismiss` | `onDsTagDismiss`  | `{ originalEvent: MouseEvent }` |
+
+### CSS parts
+
+| Part          | Element                         |
+|---------------|---------------------------------|
+| `inner`       | The outer container `<span>`    |
+| `icon-wrap`   | Icon slot wrapper               |
+| `label`       | Text label `<span>`             |
+| `dismiss-btn` | The dismiss `<button>`          |
+
+### Attribute names
+
+Boolean props map to kebab-case HTML attributes:
+
+```html
+<!-- isDismissable → is-dismissable -->
+<ds-tag label="Tag" is-dismissable></ds-tag>
+
+<!-- hasIcon → has-icon -->
+<ds-tag label="Tag" has-icon>
+  <ds-icon slot="icon" name="info" size="sm"></ds-icon>
+</ds-tag>
+
+<!-- disabled -->
+<ds-tag label="Tag" disabled></ds-tag>
+```
+
+## Accessibility
+
+- The dismiss button has an `aria-label` of `"Remove {label} tag"` — always set `label` when
+  `isDismissable` is true so screen readers announce the correct target.
+- The dismiss button uses a native `<button>` element and receives focus via Tab. It is excluded
+  from the tab order when `disabled` is set (`?disabled` on the native element).
+- The tag container itself is not interactive; only the dismiss button is focusable.
+- Focus ring uses `--ds-focus-focus` — consistent with all other components.
+
+## React usage
+
+```tsx
+import { DsTag } from '@my-ds/react';
+import type { DsTagDismissEvent } from '@my-ds/components';
+
+function MyComponent() {
+  const handleDismiss = (e: DsTagDismissEvent) => {
+    console.log('dismissed', e.detail.originalEvent);
+  };
+
+  return (
+    <DsTag
+      color="blue"
+      size="md"
+      label="React"
+      isDismissable
+      hasIcon
+      onDsTagDismiss={handleDismiss}
+    >
+      <ds-icon slot="icon" name="info" size="sm" />
+    </DsTag>
+  );
+}
+```
