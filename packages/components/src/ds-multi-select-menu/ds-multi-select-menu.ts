@@ -13,6 +13,8 @@ import './ds-multi-select-menu-group.js';
 export { DsMultiSelectMenuItem } from './ds-multi-select-menu-item.js';
 export type { DsMultiSelectMenuItemSize } from './ds-multi-select-menu-item.js';
 export { DsMultiSelectMenuGroup } from './ds-multi-select-menu-group.js';
+
+export type DsSelectionFeedback = 'top' | 'fixed' | 'top-after-reopen';
 import '../ds-menu-category/ds-menu-category.js';
 
 /** @tagname ds-multi-select-menu */
@@ -109,6 +111,15 @@ export class DsMultiSelectMenu extends LitElement {
   /** Text shown when there are no items. */
   @property({ type: String, attribute: 'empty-text' }) emptyText = 'No options';
 
+  /**
+   * Controls how selected items are surfaced in the list.
+   * - `top`: selected items move to the top immediately on each toggle.
+   * - `fixed`: items never reorder.
+   * - `top-after-reopen`: items reorder when the menu is next opened (call `handleMenuOpen()`).
+   */
+  @property({ type: String, attribute: 'selection-feedback' })
+  selectionFeedback: DsSelectionFeedback = 'top-after-reopen';
+
   @state() private _hasItems = false;
   @state() private _hasHeader = false;
   @state() private _hasFooter = false;
@@ -143,6 +154,48 @@ export class DsMultiSelectMenu extends LitElement {
 
     const values = items.filter((i) => i.selected).map((i) => i.value);
     dispatch(this, 'ds-select-menu-change', { values, originalEvent });
+
+    if (this.selectionFeedback === 'top') {
+      this._reorderItems();
+    }
+  }
+
+  /**
+   * Moves selected items to the top of the list (within each group).
+   * Relative order within selected and unselected sets is preserved.
+   */
+  private _reorderItems() {
+    const directItems = Array.from(this.children).filter(
+      (el) => el.tagName.toLowerCase() === 'ds-multi-select-menu-item',
+    ) as DsMultiSelectMenuItem[];
+
+    if (directItems.length > 0) {
+      const selected = directItems.filter((i) => i.selected);
+      const unselected = directItems.filter((i) => !i.selected);
+      [...selected, ...unselected].forEach((item) => this.appendChild(item));
+    }
+
+    this._groups().forEach((group) => {
+      const groupItems = Array.from(group.children).filter(
+        (el) => el.tagName.toLowerCase() === 'ds-multi-select-menu-item',
+      ) as DsMultiSelectMenuItem[];
+
+      if (groupItems.length > 0) {
+        const selected = groupItems.filter((i) => i.selected);
+        const unselected = groupItems.filter((i) => !i.selected);
+        [...selected, ...unselected].forEach((item) => group.appendChild(item));
+      }
+    });
+  }
+
+  /**
+   * Call this when the menu panel becomes visible.
+   * Required for `selectionFeedback="top-after-reopen"` to take effect.
+   */
+  handleMenuOpen() {
+    if (this.selectionFeedback === 'top-after-reopen') {
+      this._reorderItems();
+    }
   }
 
   private _items(): DsMultiSelectMenuItem[] {

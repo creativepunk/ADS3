@@ -1,15 +1,16 @@
 import * as React from 'react';
 import { createComponent, type EventName } from '@lit/react';
 import { DsSelect as LitDsSelect } from '@my-ds/components/src/ds-select/ds-select.js';
-import type { DsSelectSelection, DsSelectType } from '@my-ds/components/src/ds-select/ds-select.js';
+import type { DsSelectSelection, DsSelectType, DsSelectionFeedback } from '@my-ds/components/src/ds-select/ds-select.js';
 import type { DsSelectChangeEvent } from '@my-ds/components/src/shared/events.js';
 
-export type { DsSelectSelection, DsSelectType };
+export type { DsSelectSelection, DsSelectType, DsSelectionFeedback };
 export type DsSelectElement = LitDsSelect;
 
 export interface DsSelectProps {
   selection?: DsSelectSelection;
   type?: DsSelectType;
+  selectionFeedback?: DsSelectionFeedback;
   label?: string;
   placeholder?: string;
   helperText?: string;

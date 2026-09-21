@@ -10,9 +10,11 @@ import type { DsSelectMenuChangeEvent } from '../shared/events.js';
 import '../ds-field-input/ds-field-input.js';
 import '../ds-icon-button/ds-icon-button.js';
 import '../ds-icon/ds-icon.js';
+import type { DsSelectionFeedback } from '../ds-multi-select-menu/ds-multi-select-menu.js';
 
 export type DsSelectSelection = 'single' | 'multi';
 export type DsSelectType = 'default' | 'inline';
+export type { DsSelectionFeedback };
 
 const CHEVRON_DOWN = html`<svg
   width="16"
@@ -311,6 +313,16 @@ export class DsSelect extends LitElement {
   @property({ type: Array })
   values: string[] = [];
 
+  /**
+   * Controls how selected items are surfaced when the menu reopens.
+   * Only applies when `selection="multi"`.
+   * - `top`: selected items move to the top immediately on each toggle.
+   * - `fixed`: items never reorder.
+   * - `top-after-reopen`: selected items move to the top when the menu reopens (default).
+   */
+  @property({ type: String, attribute: 'selection-feedback' })
+  selectionFeedback: DsSelectionFeedback = 'top-after-reopen';
+
   @state() private _open = false;
   @state() private _focusedIndex = -1;
 
@@ -587,10 +599,29 @@ export class DsSelect extends LitElement {
     `;
   }
 
-  // ─── After render: sync data-focused onto menu items ─────────────────────────
+  // ─── After render: sync focused attr + selection-feedback ───────────────────
 
-  protected updated() {
+  protected updated(changed: Map<string, unknown>) {
     this._syncFocusedAttr();
+
+    if (changed.has('_open') && this._open) {
+      this._multiSelectMenu()?.handleMenuOpen();
+    }
+
+    if (changed.has('selectionFeedback')) {
+      this._syncMenuSelectionFeedback();
+    }
+  }
+
+  private _multiSelectMenu() {
+    return this.querySelector('ds-multi-select-menu') as
+      | (HTMLElement & { handleMenuOpen(): void; selectionFeedback: DsSelectionFeedback })
+      | null;
+  }
+
+  private _syncMenuSelectionFeedback() {
+    const menu = this._multiSelectMenu();
+    if (menu) menu.selectionFeedback = this.selectionFeedback;
   }
 
   // ─── Slot change ─────────────────────────────────────────────────────────────
@@ -609,6 +640,7 @@ export class DsSelect extends LitElement {
     if (selected.length > 0 && this.values.length === 0) {
       this.values = selected;
     }
+    this._syncMenuSelectionFeedback();
   }
 }
 

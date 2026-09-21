@@ -3,11 +3,12 @@ import { html } from 'lit';
 import './ds-select.js';
 import '../ds-single-select-menu/ds-single-select-menu.js';
 import '../ds-multi-select-menu/ds-multi-select-menu.js';
-import type { DsSelectSelection, DsSelectType } from './ds-select.js';
+import type { DsSelectSelection, DsSelectType, DsSelectionFeedback } from './ds-select.js';
 
 interface SelectArgs {
   selection: DsSelectSelection;
   type: DsSelectType;
+  selectionFeedback: DsSelectionFeedback;
   label: string;
   placeholder: string;
   helperText: string;
@@ -52,6 +53,17 @@ const meta: Meta<SelectArgs> = {
       table: {
         type: { summary: "'single' | 'multi'" },
         defaultValue: { summary: 'single' },
+        category: 'Props',
+      },
+    },
+    selectionFeedback: {
+      control: { type: 'inline-radio' },
+      options: ['top', 'fixed', 'top-after-reopen'],
+      description: 'Controls how selected items are surfaced in the list. Only applies when `selection="multi"`.',
+      if: { arg: 'selection', eq: 'multi' },
+      table: {
+        type: { summary: "'top' | 'fixed' | 'top-after-reopen'" },
+        defaultValue: { summary: 'top-after-reopen' },
         category: 'Props',
       },
     },
@@ -168,6 +180,7 @@ const meta: Meta<SelectArgs> = {
   args: {
     selection: 'single',
     type: 'default',
+    selectionFeedback: 'top-after-reopen',
     label: 'Fruit',
     placeholder: 'Select a fruit',
     helperText: 'Pick your favourite',
@@ -200,6 +213,7 @@ const render = (args: SelectArgs) => html`
     ?readonly=${args.readonly}
     ?invalid=${args.invalid}
     ?valid=${args.valid}
+    selection-feedback=${args.selectionFeedback}
     style="width: 320px;"
   >
     ${args.selection === 'multi' ? multiOptions : singleOptions}
