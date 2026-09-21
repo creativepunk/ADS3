@@ -57,9 +57,20 @@ export class DsMultiSelectMenu extends LitElement {
       }
 
       .body {
+        display: flex;
+        flex-direction: column;
         padding: var(--ds-spacing-spacing-04) 0;
         overflow-y: auto;
         max-height: var(--ds-menu-body-max-height, 320px);
+      }
+
+      :host([selection-feedback="top"]) ::slotted(ds-multi-select-menu-item[selected]) {
+        order: -1;
+      }
+
+      :host([selection-feedback="top"]) ::slotted(ds-multi-select-menu-item[data-pinned]),
+      :host([selection-feedback="top-after-reopen"]) ::slotted(ds-multi-select-menu-item[data-pinned]) {
+        order: -1;
       }
 
       .state-panel {
@@ -140,6 +151,9 @@ export class DsMultiSelectMenu extends LitElement {
     if (changed.has('size')) {
       this._items().forEach((item) => { item.size = this.size; });
     }
+    if (changed.has('selectionFeedback')) {
+      this._syncGroupsFeedback();
+    }
   }
 
   // ─── Selection management ───────────────────────────────────
@@ -154,48 +168,26 @@ export class DsMultiSelectMenu extends LitElement {
 
     const values = items.filter((i) => i.selected).map((i) => i.value);
     dispatch(this, 'ds-select-menu-change', { values, originalEvent });
-
-    if (this.selectionFeedback === 'top') {
-      this._reorderItems();
-    }
-  }
-
-  /**
-   * Moves selected items to the top of the list (within each group).
-   * Relative order within selected and unselected sets is preserved.
-   */
-  private _reorderItems() {
-    const directItems = Array.from(this.children).filter(
-      (el) => el.tagName.toLowerCase() === 'ds-multi-select-menu-item',
-    ) as DsMultiSelectMenuItem[];
-
-    if (directItems.length > 0) {
-      const selected = directItems.filter((i) => i.selected);
-      const unselected = directItems.filter((i) => !i.selected);
-      [...selected, ...unselected].forEach((item) => this.appendChild(item));
-    }
-
-    this._groups().forEach((group) => {
-      const groupItems = Array.from(group.children).filter(
-        (el) => el.tagName.toLowerCase() === 'ds-multi-select-menu-item',
-      ) as DsMultiSelectMenuItem[];
-
-      if (groupItems.length > 0) {
-        const selected = groupItems.filter((i) => i.selected);
-        const unselected = groupItems.filter((i) => !i.selected);
-        [...selected, ...unselected].forEach((item) => group.appendChild(item));
-      }
-    });
   }
 
   /**
    * Call this when the menu panel becomes visible.
    * Required for `selectionFeedback="top-after-reopen"` to take effect.
+   * Safe to call with React-owned children — uses CSS `order` via attributes,
+   * never moves DOM nodes.
    */
   handleMenuOpen() {
+    const items = this._items();
+    items.forEach((i) => i.removeAttribute('data-pinned'));
     if (this.selectionFeedback === 'top-after-reopen') {
-      this._reorderItems();
+      items.filter((i) => i.selected).forEach((i) => i.setAttribute('data-pinned', ''));
     }
+  }
+
+  private _syncGroupsFeedback() {
+    this._groups().forEach((group) => {
+      group.setAttribute('selection-feedback', this.selectionFeedback);
+    });
   }
 
   private _items(): DsMultiSelectMenuItem[] {
@@ -225,6 +217,7 @@ export class DsMultiSelectMenu extends LitElement {
     this._hasItems = items.length > 0;
     items.forEach((item) => { item.size = this.size; });
     this._configureGroups();
+    this._syncGroupsFeedback();
   }
 
   private _onHeaderSlotChange(e: Event) {
