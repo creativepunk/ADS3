@@ -46,7 +46,6 @@ export class DsButton extends LitElement {
         align-items: center;
         justify-content: center;
         gap: var(--ds-spacing-spacing-04);
-        padding: 0 var(--ds-spacing-spacing-05);
         border-radius: var(--ds-radius-semantic-radius-sm);
         font-feature-settings: 'cv08' 1;
         color: var(--ds-text-text-default);
@@ -63,13 +62,16 @@ export class DsButton extends LitElement {
       /* ── Size ─────────────────────────────────────────────────────────── */
       :host([size='sm']) button {
         height: var(--ds-type-scale-y4); /* 24px */
+        padding: 0 var(--ds-spacing-spacing-04); /* 8px */
       }
       :host([size='md']) button,
       :host(:not([size])) button {
         height: var(--ds-type-scale-y6); /* 32px */
+        padding: 0 var(--ds-spacing-spacing-05); /* 12px */
       }
       :host([size='lg']) button {
         height: var(--ds-type-scale-y7); /* 40px */
+        padding: 0 var(--ds-spacing-spacing-06); /* 16px */
       }
 
       /* Interactive states only apply when the button is enabled. Chaining
