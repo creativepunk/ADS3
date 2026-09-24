@@ -146,9 +146,12 @@ export class DsTag extends LitElement {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        max-width: 180px;
         flex-shrink: 1;
         font-feature-settings: 'cv05' 1, 'cv08' 1, 'zero' 1;
+      }
+
+      :host([truncate]) .label {
+        max-width: 180px;
       }
 
       /* ── Dismiss button (ds-icon-button ghost, size matches tag) ──────── */
@@ -238,6 +241,7 @@ export class DsTag extends LitElement {
   @property({ type: Boolean, reflect: true }) disabled = false;
   @property({ type: Boolean, reflect: true, attribute: 'is-dismissable' }) isDismissable = false;
   @property({ type: Boolean, reflect: true, attribute: 'has-icon' }) hasIcon = false;
+  @property({ type: Boolean, reflect: true }) truncate = true;
   @property({ type: String }) label = '';
 
   private _handleDismiss(e: CustomEvent) {

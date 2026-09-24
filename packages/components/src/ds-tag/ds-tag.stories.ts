@@ -11,6 +11,7 @@ interface TagArgs {
   disabled: boolean;
   isDismissable: boolean;
   hasIcon: boolean;
+  truncate: boolean;
   label: string;
 }
 
@@ -74,6 +75,15 @@ const meta: Meta<TagArgs> = {
         category: 'Props',
       },
     },
+    truncate: {
+      control: 'boolean',
+      description: 'When true, clamps the label to a max width of 180px with ellipsis overflow.',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'true' },
+        category: 'Props',
+      },
+    },
     label: {
       control: 'text',
       description: 'Text label rendered inside the tag.',
@@ -90,15 +100,17 @@ const meta: Meta<TagArgs> = {
     disabled: false,
     isDismissable: false,
     hasIcon: false,
+    truncate: true,
     label: 'Tag',
   },
-  render: ({ color, size, disabled, isDismissable, hasIcon, label }) => html`
+  render: ({ color, size, disabled, isDismissable, hasIcon, truncate, label }) => html`
     <ds-tag
       color=${ifDefined(color)}
       size=${ifDefined(size)}
       ?disabled=${disabled}
       ?is-dismissable=${isDismissable}
       ?has-icon=${hasIcon}
+      ?truncate=${truncate}
       label=${ifDefined(label)}
     >
       ${hasIcon ? ICON : null}
