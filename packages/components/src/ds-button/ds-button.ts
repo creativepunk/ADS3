@@ -186,14 +186,7 @@ export class DsButton extends LitElement {
         flex-shrink: 0;
       }
 
-      /* Built-in icon-after (shown when iconAfter=true) */
-      .icon-after {
-        color: var(--ds-icon-icon-default);
-        flex-shrink: 0;
-      }
-
-      :host([is-disabled]) .icon-slot,
-      :host([is-disabled]) .icon-after {
+      :host([is-disabled]) .icon-slot {
         color: var(--ds-icon-icon-disabled);
       }
 
@@ -202,8 +195,7 @@ export class DsButton extends LitElement {
          so the button shrinks to fit just the spinner — matching the Figma
          loading width (40px regardless of label length). */
       :host([is-loading]) .label,
-      :host([is-loading]) .icon-slot,
-      :host([is-loading]) .icon-after {
+      :host([is-loading]) .icon-slot {
         display: none;
       }
       .spinner {
@@ -256,10 +248,6 @@ export class DsButton extends LitElement {
   @property({ type: String, reflect: true })
   type: DsButtonType = 'button';
 
-  /** Show the built-in keyboard_arrow_down icon after the label. */
-  @property({ type: Boolean, reflect: true })
-  iconAfter = false;
-
   @property({ type: String, attribute: 'aria-label' })
   override ariaLabel: string | null = null;
 
@@ -272,10 +260,17 @@ export class DsButton extends LitElement {
   }
 
   private _hasIconBefore = false;
+  private _hasIconAfter = false;
 
   private _onIconBeforeSlotChange = (e: Event) => {
     const slot = e.target as HTMLSlotElement;
     this._hasIconBefore = slot.assignedNodes({ flatten: true }).length > 0;
+    this.requestUpdate();
+  };
+
+  private _onIconAfterSlotChange = (e: Event) => {
+    const slot = e.target as HTMLSlotElement;
+    this._hasIconAfter = slot.assignedNodes({ flatten: true }).length > 0;
     this.requestUpdate();
   };
 
@@ -312,9 +307,12 @@ export class DsButton extends LitElement {
           <slot name="iconBefore" @slotchange=${this._onIconBeforeSlotChange}></slot>
         </span>
         <span class="label"><slot></slot></span>
-        ${this.iconAfter
-          ? html`<ds-icon class="icon-after" name="keyboard_arrow_down" size="sm" aria-hidden="true"></ds-icon>`
-          : nothing}
+        <span
+          class="icon-slot ${this._hasIconAfter ? '' : 'empty'}"
+          aria-hidden="true"
+        >
+          <slot name="iconAfter" @slotchange=${this._onIconAfterSlotChange}></slot>
+        </span>
         <span class="spinner" aria-hidden="true">
           <span class="spinner-ring"></span>
         </span>

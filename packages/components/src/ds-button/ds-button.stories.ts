@@ -19,10 +19,11 @@ interface ButtonArgs {
   ariaLabel?: string;
   label: string;
   showIconBefore: boolean;
-  iconAfter: boolean;
+  showIconAfter: boolean;
 }
 
 const PLUS_ICON = html`<ds-icon slot="iconBefore" name="add" size="sm"></ds-icon>`;
+const CHEVRON_ICON = html`<ds-icon slot="iconAfter" name="keyboard_arrow_down" size="sm"></ds-icon>`;
 
 const meta: Meta<ButtonArgs> = {
   title: 'Components/Button',
@@ -106,14 +107,11 @@ const meta: Meta<ButtonArgs> = {
       description: 'Toggle a sample icon in the iconBefore slot.',
       table: { category: 'Slot content' },
     },
-    iconAfter: {
+    showIconAfter: {
       control: 'boolean',
-      description: 'Show the built-in keyboard_arrow_down iconAfter after the label.',
-      table: {
-        type: { summary: 'boolean' },
-        defaultValue: { summary: 'false' },
-        category: 'Props',
-      },
+      name: 'iconAfter',
+      description: 'Toggle a sample icon in the iconAfter slot.',
+      table: { category: 'Slot content' },
     },
   },
   args: {
@@ -125,7 +123,7 @@ const meta: Meta<ButtonArgs> = {
     isSelected: false,
     label: 'Button',
     showIconBefore: false,
-    iconAfter: false,
+    showIconAfter: false,
   },
   parameters: {
     options: { showPanel: true },
@@ -138,12 +136,12 @@ const meta: Meta<ButtonArgs> = {
       ?is-disabled=${args.isDisabled}
       ?is-loading=${args.isLoading}
       ?is-selected=${args.isSelected}
-      ?iconAfter=${args.iconAfter}
       aria-label=${ifDefined(args.ariaLabel || undefined)}
       @ds-click=${(e: CustomEvent) => console.log('ds-click', e.detail)}
     >
       ${args.showIconBefore ? PLUS_ICON : nothing}
       ${args.label}
+      ${args.showIconAfter ? CHEVRON_ICON : nothing}
     </ds-button>
   `,
 };
@@ -314,8 +312,8 @@ export const ShowcaseWithIcons: Story = {
   render: () => html`
     <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
       <ds-button>${PLUS_ICON}Add item</ds-button>
-      <ds-button variant="secondary" iconAfter>Open</ds-button>
-      <ds-button variant="tertiary" iconAfter>${PLUS_ICON}New</ds-button>
+      <ds-button variant="secondary">Open${CHEVRON_ICON}</ds-button>
+      <ds-button variant="tertiary">${PLUS_ICON}New${CHEVRON_ICON}</ds-button>
     </div>
   `,
 };

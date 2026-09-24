@@ -18,8 +18,6 @@ export interface DsButtonProps {
   isDisabled?: boolean;
   isLoading?: boolean;
   isSelected?: boolean;
-  /** Show the built-in keyboard_arrow_down icon after the label. */
-  iconAfter?: boolean;
   className?: string;
   children?: React.ReactNode;
   onDsClick?: (event: DsClickEvent) => void;
