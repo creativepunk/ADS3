@@ -227,7 +227,8 @@ export const SingleVariant: Story = {
 };
 
 export const MultiVariant: Story = {
-  render: (args) => render({ ...args, selection: 'multi', label: 'Multi select' }),
+  args: { selection: 'multi', label: 'Multi select' },
+  render,
 };
 
 export const InlineType: Story = {
