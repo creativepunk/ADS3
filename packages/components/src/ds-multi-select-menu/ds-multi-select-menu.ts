@@ -68,11 +68,6 @@ export class DsMultiSelectMenu extends LitElement {
         order: -1;
       }
 
-      :host([selection-feedback="top"]) ::slotted(ds-multi-select-menu-item[data-pinned]),
-      :host([selection-feedback="top-after-reopen"]) ::slotted(ds-multi-select-menu-item[data-pinned]) {
-        order: -1;
-      }
-
       .state-panel {
         display: flex;
         align-items: center;
@@ -128,7 +123,7 @@ export class DsMultiSelectMenu extends LitElement {
    * - `fixed`: items never reorder.
    * - `top-after-reopen`: items reorder when the menu is next opened (call `handleMenuOpen()`).
    */
-  @property({ type: String, attribute: 'selection-feedback' })
+  @property({ type: String, attribute: 'selection-feedback', reflect: true })
   selectionFeedback: DsSelectionFeedback = 'top-after-reopen';
 
   @state() private _hasItems = false;
@@ -166,6 +161,11 @@ export class DsMultiSelectMenu extends LitElement {
     const target = items.find((item) => item.value === value);
     if (target) target.selected = selected;
 
+    // For 'top' mode, reorder immediately on each selection change.
+    if (this.selectionFeedback === 'top') {
+      this._applyOrder(items);
+    }
+
     const values = items.filter((i) => i.selected).map((i) => i.value);
     dispatch(this, 'ds-select-menu-change', { values, originalEvent });
   }
@@ -173,15 +173,21 @@ export class DsMultiSelectMenu extends LitElement {
   /**
    * Call this when the menu panel becomes visible.
    * Required for `selectionFeedback="top-after-reopen"` to take effect.
-   * Safe to call with React-owned children — uses CSS `order` via attributes,
+   * Safe to call with React-owned children — sets inline `style.order`,
    * never moves DOM nodes.
    */
   handleMenuOpen() {
     const items = this._items();
-    items.forEach((i) => i.removeAttribute('data-pinned'));
+    items.forEach((i) => { i.style.order = ''; });
     if (this.selectionFeedback === 'top-after-reopen') {
-      items.filter((i) => i.selected).forEach((i) => i.setAttribute('data-pinned', ''));
+      this._applyOrder(items);
     }
+  }
+
+  private _applyOrder(items: DsMultiSelectMenuItem[]) {
+    items.forEach((i) => {
+      i.style.order = i.selected ? '-1' : '';
+    });
   }
 
   private _syncGroupsFeedback() {
