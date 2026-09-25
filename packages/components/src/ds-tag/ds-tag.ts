@@ -32,6 +32,7 @@ export class DsTag extends LitElement {
         display: inline-flex;
         align-items: center;
         vertical-align: middle;
+        --ds-tag-dismiss-bg: var(--ds-tag-bg);
       }
 
       /* ── Color custom properties — set per :host([color]) ──────────────── */
@@ -41,6 +42,7 @@ export class DsTag extends LitElement {
         --ds-tag-text: var(--ds-tag-gray-tag-color);
         --ds-tag-icon: var(--ds-tag-gray-tag-icon);
         --ds-tag-bg-disabled: var(--ds-tag-gray-tag-background-disabled);
+        --ds-tag-dismiss-bg: var(--ds-color-default-gray-120);
       }
       :host([color='blue']) {
         --ds-tag-bg: var(--ds-tag-blue-tag-background);
@@ -119,6 +121,7 @@ export class DsTag extends LitElement {
         display: inline-flex;
         align-items: center;
         height: 100%;
+        position: relative;
       }
 
       /* ── Icon slot ─────────────────────────────────────────────────────── */
@@ -154,16 +157,29 @@ export class DsTag extends LitElement {
         max-width: 180px;
       }
 
-      /* ── Dismiss button (ds-icon-button ghost, size matches tag) ──────── */
-      .dismiss-btn {
-        margin-left: -8px;
-        flex-shrink: 0;
-        --ds-icon-icon-default: var(--ds-tag-icon);
+      /* ── Dismiss wrapper — hidden until tag is hovered ────────────────── */
+      .dismiss-wrap {
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        background: var(--ds-tag-dismiss-bg);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.1s ease;
       }
 
-      :host([size='sm']) .dismiss-btn,
-      :host([size='xs']) .dismiss-btn {
-        margin-left: -4px;
+      :host(:hover) .dismiss-wrap {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      /* ── Dismiss button (ds-icon-button ghost, size matches tag) ──────── */
+      .dismiss-btn {
+        flex-shrink: 0;
+        --ds-icon-icon-default: var(--ds-tag-icon);
       }
 
       /* ── Sizes ─────────────────────────────────────────────────────────── */
@@ -259,17 +275,19 @@ export class DsTag extends LitElement {
         <span class="tag-content">
           <span class="label" part="label">${this.label}</span>
           ${this.isDismissable
-            ? html`<ds-icon-button
-                class="dismiss-btn"
-                part="dismiss-btn"
-                variant="ghost"
-                size=${this.size}
-                shape="default"
-                aria-label="Remove ${this.label} tag"
-                @ds-click=${this._handleDismiss}
-              >
-                <ds-icon name="close" size="sm"></ds-icon>
-              </ds-icon-button>`
+            ? html`<span class="dismiss-wrap" part="dismiss-wrap">
+                <ds-icon-button
+                  class="dismiss-btn"
+                  part="dismiss-btn"
+                  variant="ghost"
+                  size=${this.size}
+                  shape="default"
+                  aria-label="Remove ${this.label} tag"
+                  @ds-click=${this._handleDismiss}
+                >
+                  <ds-icon name="close" size="sm"></ds-icon>
+                </ds-icon-button>
+              </span>`
             : nothing}
         </span>
       </span>
